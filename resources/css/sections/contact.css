@@ -1,0 +1,25 @@
+/* CONTACT */
+.contact-bg{background:var(--bg2)}
+.contact-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;margin-top:3rem}
+.ci h3{font-family:'Tajawal','Space Grotesk',sans-serif;font-size:22px;font-weight:900;color:var(--txt);margin-bottom:.75rem}
+.ci p{font-size:14px;color:var(--mu);line-height:1.9;margin-bottom:1.5rem}
+.citem{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--brd);font-size:14px;color:var(--mu);transition:all var(--tr)}
+.citem:last-child{border-bottom:none}.citem:hover{color:var(--or)}
+.citem-ico{width:36px;height:36px;border-radius:var(--rs);background:var(--or-pale);border:1px solid var(--or-border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.citem-ico svg{width:15px;height:15px;stroke:var(--or);fill:none}
+.citem a{color:inherit;transition:color var(--tr)}
+.cfree{margin-top:1.5rem;padding:1.25rem;background:var(--or-pale);border:1px solid var(--or-border);border-radius:var(--r)}
+.cfree strong{font-size:16px;display:block;margin-bottom:5px;color:var(--or)}
+.cfree p{font-size:13px;color:var(--or);margin:0}
+.social-row{display:flex;gap:10px;margin-top:1.5rem}
+.sbtn{width:38px;height:38px;border-radius:var(--rs);background:var(--sur);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;color:var(--mu);transition:all var(--tr)}
+.sbtn svg{width:15px;height:15px;stroke:currentColor;fill:none}
+.sbtn:hover{background:var(--or);border-color:var(--or);color:#fff}.sbtn:hover svg{stroke:#fff}
+.cform{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:2rem;box-shadow:var(--sh)}
+.cform-title{font-size:16px;font-weight:700;color:var(--txt);margin-bottom:1.25rem}
+.fg{margin-bottom:14px}.fg label{font-size:12px;font-weight:700;color:var(--mu);display:block;margin-bottom:6px}
+.fg input,.fg select,.fg textarea{width:100%;padding:9px 14px;border-radius:var(--rs);border:1px solid var(--brd);background:var(--bg3);color:var(--txt);font-family:'Cairo','Space Grotesk',sans-serif;font-size:13px;outline:none;transition:border-color var(--tr)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--or)}
+.fg select option{background:var(--bg3);color:var(--txt)}.fg textarea{height:90px;resize:none}
+.csubmit{width:100%;padding:12px;border-radius:var(--rs);border:none;background:var(--or);color:#fff;font-family:'Cairo','Space Grotesk',sans-serif;font-size:15px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity var(--tr)}
+.csubmit svg{width:16px;height:16px;stroke:#fff;fill:none}.csubmit:hover{opacity:.88}

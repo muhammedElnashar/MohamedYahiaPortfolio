@@ -1,0 +1,98 @@
+
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://www.mohamedyahia-seo.com/#person",
+            "name": "Mohamed Yahia Abdellatif",
+            "alternateName": "محمد يحيى عبداللطيف",
+            "jobTitle": "Senior SEO Manager & AI Search Expert",
+            "description": "خبير SEO وAI Search Optimization بخبرة أكثر من 6 سنوات. متخصص في تحسين محركات البحث للمواقع والمتاجر الإلكترونية في السوق السعودي والخليجي والعربي.",
+            "url": "https://www.mohamedyahia-seo.com",
+            "sameAs": [
+                "https://www.linkedin.com/in/mohamed-yahia-249265134/",
+                "https://mostaql.com/u/Mohamed_Yahia7"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Mansoura",
+                "addressRegion": "Dakahlia",
+                "addressCountry": "EG"
+            },
+            "telephone": "+201123269452",
+            "email": "mohamedyahia702@gmail.com",
+            "knowsAbout": ["SEO","AEO","GEO","AI Search Optimization","Technical SEO","Ecommerce SEO","Programmatic SEO","YouTube SEO","International SEO","Entity SEO","Semantic SEO","SEM","Google Ads","CRO","Local SEO","Link Building","SEO Automation"],
+            "hasCredential": {
+                "@type": "EducationalOccupationalCredential",
+                "name": "Senior SEO Specialist",
+                "description": "100% Completion Rate on Mostaql — 25 Projects — 5.0 Rating"
+            }
+        },
+        {
+            "@type": "ProfessionalService",
+            "@id": "https://www.mohamedyahia-seo.com/#service",
+            "name": "Mohamed Yahia SEO Services",
+            "alternateName": "خدمات SEO محمد يحيى",
+            "description": "خدمات تحسين محركات البحث الشاملة للمواقع والمتاجر الإلكترونية — SEO وAEO وGEO وAI Search وProgrammatic SEO وYouTube SEO والمزيد",
+            "url": "https://www.mohamedyahia-seo.com",
+            "provider": {"@id": "https://www.mohamedyahia-seo.com/#person"},
+            "areaServed": [
+                {"@type": "Country","name": "Saudi Arabia"},
+                {"@type": "Country","name": "Egypt"},
+                {"@type": "Country","name": "United Arab Emirates"},
+                {"@type": "Country","name": "Kuwait"},
+                {"@type": "AdministrativeArea","name": "Arab World"}
+            ],
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "SEO Services",
+                "itemListElement": [
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"تدقيق SEO الشامل","description":"تحليل كامل للموقع: الأخطاء التقنية، البنية، الكلمات المفتاحية، والمنافسين"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"السيو التقني - Technical SEO","description":"Schema Markup، Crawl Budget، Core Web Vitals، Canonical، وحل مشاكل الأرشفة"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"سيو المتاجر الإلكترونية","description":"متخصص في سلة وزد وShopify وWordPress"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Search Optimization - AEO - GEO","description":"تحسين الظهور في ChatGPT وGoogle AI وGemini وPerplexity"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Programmatic SEO","description":"إنشاء آلاف الصفحات المحسّنة تلقائياً لاستهداف كلمات مفتاحية طويلة الذيل"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"يوتيوب SEO","description":"تحسين ترتيب الفيديوهات في YouTube وGoogle Video"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Entity & Semantic SEO","description":"بناء Topical Authority قوية من خلال Entity SEO وSemantic SEO"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"السيو الدولي - International SEO","description":"تحسين الظهور في أسواق متعددة مع hreflang واستهداف دول محددة"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"SEM وإعلانات Google Ads","description":"حملات Google Ads مدمجة مع SEO لأعلى عائد استثماري"}},
+                    {"@type":"Offer","itemOffered":{"@type":"Service","name":"CRO تحسين معدل التحويل","description":"تحليل سلوك الزوار وA/B Testing لتحويلهم إلى عملاء"}}
+                ]
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "reviewCount": "25",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "كم تكلفة خدمات SEO مع محمد يحيى؟",
+                    "acceptedAnswer": {"@type": "Answer","text": "تبدأ أسعار خدمات SEO من 500 جنيه مصري للخدمات الأساسية وتتدرج حسب حجم المشروع والخدمة المطلوبة. للحصول على سعر مخصص لمشروعك تواصل عبر واتساب."}
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل محمد يحيى خبير سيو في السوق السعودي؟",
+                    "acceptedAnswer": {"@type": "Answer","text": "نعم، محمد يحيى خبير SEO متخصص في السوق السعودي والخليجي بخبرة أكثر من 6 سنوات وأكثر من 300 موقع ومتجر إلكتروني."}
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هي خدمات AI Search Optimization التي يقدمها؟",
+                    "acceptedAnswer": {"@type": "Answer","text": "يقدم محمد يحيى خدمات AEO وGEO وAI Search Optimization لتحسين ظهور المواقع في ChatGPT وGoogle AI Overviews وGemini وPerplexity."}
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل يعمل على منصة سلة وزد؟",
+                    "acceptedAnswer": {"@type": "Answer","text": "نعم، محمد يحيى متخصص في SEO منصة سلة وسيو منصة زد وShopify وWordPress WooCommerce والمواقع المبرمجة على Laravel و.Net و React."}
+                }
+            ]
+        }
+    ]
+}
+

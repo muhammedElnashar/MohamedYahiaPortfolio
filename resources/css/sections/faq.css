@@ -1,0 +1,9 @@
+/* WHY */
+.why-bg{background:var(--bg2)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:3rem}
+.why{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:1.5rem;display:flex;gap:14px;align-items:flex-start;transition:all var(--tr)}
+.why:hover{border-color:var(--or-border);box-shadow:var(--sh)}
+.why-ico{width:40px;height:40px;border-radius:var(--rs);background:var(--or-pale);border:1px solid var(--or-border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-ico svg{width:17px;height:17px;stroke:var(--or);fill:none}
+.why-t{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:4px}
+.why-d{font-size:12px;color:var(--mu);line-height:1.65}

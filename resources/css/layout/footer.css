@@ -1,0 +1,8 @@
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--brd);padding:2rem 1.75rem}
+.foot-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.foot-logo{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--txt)}
+.foot-logo em{color:var(--or);font-style:normal}
+.foot-links{display:flex;gap:20px}
+.foot-links a{font-size:13px;color:var(--mu);transition:color var(--tr)}.foot-links a:hover{color:var(--or)}
+.foot-copy{font-size:12px;color:var(--dim)}
