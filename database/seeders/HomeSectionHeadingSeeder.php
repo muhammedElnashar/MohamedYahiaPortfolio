@@ -80,6 +80,22 @@ class HomeSectionHeadingSeeder extends Seeder
                 ],
             ],
             [
+                'section_key' => HomeSectionKey::PLATFORM,
+
+                'title' => [
+                    'en' => 'Platform Specializations',
+                    'ar' => 'تخصص حسب المنصة'
+                ],
+            ],
+            [
+                'section_key' => HomeSectionKey::SEO_TOOLS,
+
+                'title' => [
+                    'en' => 'Seo Tools',
+                    'ar' => 'أدوات SEO'
+                ],
+            ],
+            [
                 'section_key' => HomeSectionKey::CERTIFICATIONS,
                 'eyebrow' => [
                     'en' => 'My Certifications',
@@ -95,7 +111,7 @@ class HomeSectionHeadingSeeder extends Seeder
                 ],
             ],
             [
-                'section_key' => HomeSectionKey::VISION,
+                'section_key' => HomeSectionKey::PHILOSOPHY,
                 'eyebrow' => [
                     'en' => 'My Philosophy & Vision',
                     'ar' => 'فلسفتي ورؤيتي'
@@ -140,6 +156,17 @@ class HomeSectionHeadingSeeder extends Seeder
                 'title' => [
                     'en' => 'Questions Every Client Asks Before Working Together',
                     'ar' => 'أسئلة يسألها كل عميل قبل التعاون'
+                ],
+            ],
+            [
+                'section_key' => HomeSectionKey::CONTACT,
+                'eyebrow' => [
+                    'en' => 'Get In Touch',
+                    'ar' => 'تواصل معي'
+                ],
+                'title' => [
+                    'en' => 'Ready to Improve Your Visibility on Google & AI Search',
+                    'ar' => 'جاهز لتحسين ظهورك في جوجل والذكاء الاصطناعي'
                 ],
             ],
         ];

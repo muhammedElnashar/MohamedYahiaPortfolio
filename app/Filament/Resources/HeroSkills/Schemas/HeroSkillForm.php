@@ -19,6 +19,7 @@ class HeroSkillForm
                     ->numeric()
                     ->default(0),
                 Toggle::make('is_highlighted')
+                    ->label('Highlighted')
                     ->default(false),
             ]);
     }

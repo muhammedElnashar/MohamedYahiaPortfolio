@@ -8,7 +8,6 @@
 
     @include('sections.hero')
 
-    @include('sections.stats')
     @include('sections.facts')
 
     @include('sections.services')
@@ -16,6 +15,12 @@
     @livewire('case-studies')
 
     @include('sections.tools')
+    @include('sections.certification')
+    @include('sections.philosophy')
+    @include('sections.review')
+    @include('sections.message')
+
+
 
     @include('sections.faq')
 

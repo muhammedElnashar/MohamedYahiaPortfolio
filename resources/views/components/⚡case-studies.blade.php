@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\CaseStudy;
+use App\Models\CaseStudySectionSetting;
+use App\Models\HomeSection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,18 +14,22 @@ new class extends Component {
     public bool $showModal = false;
 
 
-       public function render()
-       {
-           // نجلب البيانات هنا لكي تعمل الـ Pagination بشكل صحيح
-           $caseStudies = CaseStudy::with([
-               'growths' => fn($q) => $q->orderBy('sort_order'),
-               'improvements' => fn($q) => $q->orderBy('sort_order'),
-           ])
-               ->where('is_active', true)
-               ->orderBy('sort_order')
-               ->paginate(8);
-           return view('components.⚡case-studies',compact('caseStudies'));
+    public function render()
+    {
 
+        // نجلب البيانات هنا لكي تعمل الـ Pagination بشكل صحيح
+        $caseStudies = CaseStudy::with([
+            'growths' => fn($q) => $q->orderBy('sort_order'),
+            'improvements' => fn($q) => $q->orderBy('sort_order'),
+        ])
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->paginate(8);
+            $setting= CaseStudySectionSetting::query()
+        ->where('is_active', true)->first();
+        $heading = HomeSection::where('section_key', \App\Enums\HomeSectionKey::RESULTS)->first();
+
+        return view('components.⚡case-studies', compact('caseStudies', 'heading','setting'));
        }
 
     public function open(int $id)
@@ -45,156 +51,164 @@ new class extends Component {
     }
 };
 ?>
+
+
 <section id="cases" style="padding:5rem 0;background:var(--bg2)">
     <div style="max-width:1160px;margin:0 auto;padding:0 1.75rem">
 
         <!-- Header -->
         <div style="text-align:center;margin-bottom:3rem">
             <div class="eye" style="justify-content:center;margin-bottom:1rem">
-                <span class="ari">نتائج حقيقية موثقة</span><span class="eni">Real Documented Results</span>
+                <span class="">{{$heading?->eyebrow}}</span>
             </div>
             <h2 class="sh" style="margin-bottom:.75rem">
-                <span class="ar">نتائج من <span class="or">مشاريع حقيقية</span></span>
-                <span class="en">Results From <span class="or">Real Projects</span></span>
+                {{$heading?->title}}
             </h2>
-            <p style="color:var(--mu);font-size:15px;max-width:620px;margin:0 auto;line-height:1.9">
-                <span class="ari">لقطات شاشة حقيقية من Google Search Console وGoogle Analytics وBing Webmaster — نتائج موثقة عبر قطاعات متنوعة. اضغط على أي بطاقة لعرض التفاصيل الكاملة.</span>
-                <span class="eni">Real screenshots from Google Search Console, Google Analytics & Bing Webmaster — documented results across multiple industries. Click any card to view full details.</span>
-            </p>
+            <p style="color:var(--mu);font-size:15px;max-width:620px;margin:0 auto;line-height:1.9">{{$heading?->subtitle}}</p>
             <!-- Trust bar -->
-            <div
-                style="display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:1.5rem;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:1.5rem;flex-wrap:wrap">
+
+            @if($setting)
+
                 <div style="display:flex;align-items:center;gap:.45rem;font-size:13px;color:var(--mu)">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2">
                         <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
                         <polyline points="22 4 12 14.01 9 11.01"/>
                     </svg>
-                    <span class="ari">نتائج حقيقية لا مفبركة</span><span class="eni">Real, unaltered results</span>
+                    <span class="">{{$setting?->text_1}}</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:.45rem;font-size:13px;color:var(--mu)">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M12 8v4l3 3"/>
                     </svg>
-                    <span class="ari">فترات زمنية مختلفة</span><span class="eni">Various timeframes</span></div>
+                    <span class="">{{$setting?->text_2}}</span></div>
                 <div style="display:flex;align-items:center;gap:.45rem;font-size:13px;color:var(--mu)">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--or)" stroke-width="2">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
                         <circle cx="12" cy="10" r="3"/>
                     </svg>
-                    <span class="ari">قطاعات متعددة</span><span class="eni">Multiple industries</span></div>
+                    <span class="">{{$setting?->text_3}}</span></div>
+                @endif
+
             </div>
         </div>
+        @if($caseStudies->isNotEmpty())
+            <div id="cs2-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:2.5rem">
+                @foreach($caseStudies as $case)
+                    <div
+                        class="cs2-card"
+                        wire:click="open({{ $case->id }})"
+                        style="cursor:pointer"
+                    >
+                        <div class="cs2-img-wrap">
+                            <img src="{{\Illuminate\Support\Facades\Storage::url($case->image)}}" alt="اسم النيتش">
+                            <div class="cs2-hover-overlay"><span>View Details </span></div>
+                        </div>
 
-        <div id="cs2-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:2.5rem">
-            @foreach($caseStudies as $case)
-                <div
-                    class="cs2-card"
-                    wire:click="open({{ $case->id }})"
-                    style="cursor:pointer"
-                >
-                    <div class="cs2-img-wrap">
-                        <img src="{{\Illuminate\Support\Facades\Storage::url($case->image)}}" alt="اسم النيتش">
-                        <div class="cs2-hover-overlay"><span>View Details </span></div>
+                        <div class="cs2-gsc-boxes">
+                            <div class="cs2-gsc-box"
+                                 style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25)">
+                                <div class="cs2-gsc-lbl" style="color:#93c5fd">CLicks</div>
+                                <div class="cs2-gsc-val" style="color:#3B82F6">{{$case->clicks}}K</div>
+                            </div>
+                            <div class="cs2-gsc-box"
+                                 style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25)">
+                                <div class="cs2-gsc-lbl" style="color:#c4b5fd">Impressions</div>
+                                <div class="cs2-gsc-val" style="color:#8B5CF6">{{$case->impressions}}K</div>
+                            </div>
+                            <div class="cs2-gsc-box"
+                                 style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25)">
+                                <div class="cs2-gsc-lbl" style="color:#6ee7b7">CTR</div>
+                                <div class="cs2-gsc-val" style="color:#10B981">{{$case->ctr}}%</div>
+                            </div>
+                            <div class="cs2-gsc-box"
+                                 style="background:rgba(232,106,26,.1);border:1px solid rgba(232,106,26,.25)">
+                                <div class="cs2-gsc-lbl" style="color:#fdba74">Avg. Position</div>
+                                <div class="cs2-gsc-val" style="color:var(--or)">{{$case->position}}</div>
+                            </div>
+                        </div>
+
+                        <div class="cs2-card-body">
+                            <div class="cs2-card-metric" style="color:#3B82F6"> {{$case->metric}}</div>
+                            <div class="cs2-card-mlabel">{{$case->title}}</div>
+                            <div class="cs2-card-niche">{{$case->niche}}</div>
+                            <div class="cs2-card-tags">
+                                <span class="cs2-card-tag"> 📅 {{$case->period}} </span>
+                                <span class="cs2-card-tag">🌐 {{$case->industry}}</span>
+                                <span class="cs2-card-tag">📈 {{$case->focus}}</span>
+                            </div>
+                            <button class="cs2-vd-btn">View Details ←</button>
+                        </div>
                     </div>
-
-                    <div class="cs2-gsc-boxes">
-                        <div class="cs2-gsc-box"
-                             style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25)">
-                            <div class="cs2-gsc-lbl" style="color:#93c5fd">CLicks</div>
-                            <div class="cs2-gsc-val" style="color:#3B82F6">{{$case->clicks}}K</div>
-                        </div>
-                        <div class="cs2-gsc-box"
-                             style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25)">
-                            <div class="cs2-gsc-lbl" style="color:#c4b5fd">Impressions</div>
-                            <div class="cs2-gsc-val" style="color:#8B5CF6">{{$case->impressions}}K</div>
-                        </div>
-                        <div class="cs2-gsc-box"
-                             style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25)">
-                            <div class="cs2-gsc-lbl" style="color:#6ee7b7">CTR</div>
-                            <div class="cs2-gsc-val" style="color:#10B981">{{$case->ctr}}%</div>
-                        </div>
-                        <div class="cs2-gsc-box"
-                             style="background:rgba(232,106,26,.1);border:1px solid rgba(232,106,26,.25)">
-                            <div class="cs2-gsc-lbl" style="color:#fdba74">Avg. Position</div>
-                            <div class="cs2-gsc-val" style="color:var(--or)">{{$case->position}}</div>
-                        </div>
-                    </div>
-
-                    <div class="cs2-card-body">
-                        <div class="cs2-card-metric" style="color:#3B82F6"> {{$case->metric}}</div>
-                        <div class="cs2-card-mlabel">{{$case->title}}</div>
-                        <div class="cs2-card-niche">{{$case->niche}}</div>
-                        <div class="cs2-card-tags">
-                            <span class="cs2-card-tag"> 📅 {{$case->period}} </span>
-                            <span class="cs2-card-tag">🌐 {{$case->industry}}</span>
-                            <span class="cs2-card-tag">📈 {{$case->focus}}</span>
-                        </div>
-                        <button class="cs2-vd-btn">View Details ←</button>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <!-- Pagination Controls -->
-        <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:3rem">
-            <!-- زر السابق -->
-            <button wire:click="previousPage" class="cs2-navbtn" {{ $caseStudies->onFirstPage() ? 'disabled' : '' }}>&#8249;</button>
-
-            <!-- النقاط (Dots) -->
-            <div id="cs2-dots" style="display:flex;gap:8px;align-items:center">
-                @for ($i = 1; $i <= $caseStudies->lastPage(); $i++)
-                    <button
-                        wire:click="gotoPage({{ $i }})"
-                        style="width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;background:{{ $caseStudies->currentPage() == $i ? '#3B82F6' : '#444' }};transition:all .3s"
-                    ></button>
-                @endfor
+                @endforeach
             </div>
 
-            <!-- زر التالي -->
-            <button wire:click="nextPage" class="cs2-navbtn" {{ $caseStudies->hasMorePages() ? '' : 'disabled' }}>&#8250;</button>
-        </div>
+            <!-- Pagination Controls -->
+            <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:3rem">
+                <!-- زر السابق -->
+                <button wire:click="previousPage"
+                        class="cs2-navbtn" {{ $caseStudies->onFirstPage() ? 'disabled' : '' }}>
+                    &#8249;
+                </button>
 
-        <!-- CTA Strip -->
-        <div
-            style="background:linear-gradient(135deg,rgba(232,106,26,.12),rgba(232,106,26,.05));border:1.5px solid rgba(232,106,26,.35);border-radius:20px;padding:2.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
-            <div style="display:flex;align-items:flex-start;gap:1.25rem">
-                <div
-                    style="width:52px;height:52px;background:rgba(232,106,26,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--or)" stroke-width="2">
-                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                        <polyline points="17 6 23 6 23 12"/>
-                    </svg>
+                <!-- النقاط (Dots) -->
+                <div id="cs2-dots" style="display:flex;gap:8px;align-items:center">
+                    @for ($i = 1; $i <= $caseStudies->lastPage(); $i++)
+                        <button
+                            wire:click="gotoPage({{ $i }})"
+                            style="width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;background:{{ $caseStudies->currentPage() == $i ? '#3B82F6' : '#444' }};transition:all .3s"
+                        ></button>
+                    @endfor
                 </div>
-                <div>
-                    <div style="font-size:1.2rem;font-weight:900;color:var(--txt);margin-bottom:.35rem"><span
-                            class="ari">تريد نتائج مشابهة لموقعك؟</span><span class="eni">Want Similar Results for Your Website?</span>
+
+                <!-- زر التالي -->
+                <button wire:click="nextPage" class="cs2-navbtn" {{ $caseStudies->hasMorePages() ? '' : 'disabled' }}>
+                    &#8250;
+                </button>
+            </div>
+        @endif
+
+        @if($setting)
+            <!-- CTA Strip -->
+            <div
+                style="background:linear-gradient(135deg,rgba(232,106,26,.12),rgba(232,106,26,.05));border:1.5px solid rgba(232,106,26,.35);border-radius:20px;padding:2.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
+                <div style="display:flex;align-items:flex-start;gap:1.25rem">
+                    <div
+                        style="width:52px;height:52px;background:rgba(232,106,26,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--or)" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
                     </div>
-                    <div style="font-size:14px;color:var(--mu);line-height:1.7"><span class="ari">هذه ليست مصادفة — هي منهجية مثبتة تعمل عبر قطاعات مختلفة. نبني قصة نموك سوياً بخطة واضحة وشفافة.</span><span
-                            class="eni">This isn't coincidence — it's a proven methodology that works across industries. Let's build your growth story with a clear, transparent plan.</span>
-                    </div>
-                    <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem">
+                    <div>
+                        <div style="font-size:1.2rem;font-weight:900;color:var(--txt);margin-bottom:.35rem"><span class="">{{$setting->title}}</span>
+                        </div>
+                        <div style="font-size:14px;color:var(--mu);line-height:1.7">
+                        <span
+                            class="">{{$setting->description}}</span>
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem">
                         <span
                             style="font-size:11px;background:rgba(16,185,129,.12);color:#10B981;border:1px solid rgba(16,185,129,.3);padding:3px 10px;border-radius:20px"><span
-                                class="ari">✓ بدون عقود ملزمة</span><span
-                                class="eni">✓ No binding contracts</span></span>
-                        <span
-                            style="font-size:11px;background:rgba(59,130,246,.12);color:#3B82F6;border:1px solid rgba(59,130,246,.3);padding:3px 10px;border-radius:20px"><span
-                                class="ari">✓ تقارير شفافة</span><span class="eni">✓ Transparent reports</span></span>
-                        <span
-                            style="font-size:11px;background:rgba(232,106,26,.12);color:var(--or);border:1px solid rgba(232,106,26,.3);padding:3px 10px;border-radius:20px"><span
-                                class="ari">✓ نتائج قابلة للقياس</span><span
-                                class="eni">✓ Measurable results</span></span>
+                                class="">✓{{$setting->text_4}}</span></span>
+                            <span
+                                style="font-size:11px;background:rgba(59,130,246,.12);color:#3B82F6;border:1px solid rgba(59,130,246,.3);padding:3px 10px;border-radius:20px"><span class="">✓ {{$setting->text_5}}</span></span>
+                            <span
+                                style="font-size:11px;background:rgba(232,106,26,.12);color:var(--or);border:1px solid rgba(232,106,26,.3);padding:3px 10px;border-radius:20px"><span
+                                    class="">✓ {{$setting->text_6}}</span></span>
+                        </div>
                     </div>
                 </div>
+                <button onclick="sc('contact')"
+                        style="background:var(--or);color:#fff;border:none;border-radius:12px;padding:1rem 2.25rem;font-size:15px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .2s;box-shadow:0 8px 25px rgba(232,106,26,.4)"
+                        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 35px rgba(232,106,26,.55)'"
+                        onmouseout="this.style.transform='';this.style.boxShadow='0 8px 25px rgba(232,106,26,.4)'">
+                    <span class="eni">{{$setting->button_text}}</span>
+                </button>
             </div>
-            <button onclick="sc('contact')"
-                    style="background:var(--or);color:#fff;border:none;border-radius:12px;padding:1rem 2.25rem;font-size:15px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .2s;box-shadow:0 8px 25px rgba(232,106,26,.4)"
-                    onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 35px rgba(232,106,26,.55)'"
-                    onmouseout="this.style.transform='';this.style.boxShadow='0 8px 25px rgba(232,106,26,.4)'">
-                <span class="ari">ابدأ معي الآن ←</span><span class="eni">Start Working With Me →</span>
-            </button>
-        </div>
+        @endif
+
     </div>
 
     @if($showModal && $selected)
@@ -241,7 +255,7 @@ new class extends Component {
                             {{$selected->industry}}</div>
 
                         <button wire:click="close"
-                            style="background:var(--bg3);border:1px solid var(--brd);color:var(--mu);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:inherit">
+                                style="background:var(--bg3);border:1px solid var(--brd);color:var(--mu);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:inherit">
                             &times;
                         </button>
                     </div>
@@ -260,7 +274,8 @@ new class extends Component {
                             <div class="cs2-gsc-lbl" style="color:#93c5fd;font-size:10px;margin-bottom:6px">Total
                                 Clicks
                             </div>
-                            <div class="cs2-gsc-val" style="color:#3B82F6;font-size:1.15rem">{{$selected->clicks}}K</div>
+                            <div class="cs2-gsc-val" style="color:#3B82F6;font-size:1.15rem">{{$selected->clicks}}K
+                            </div>
                         </div>
                         <div class="cs2-gsc-box"
                              style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;padding:12px">
@@ -282,7 +297,8 @@ new class extends Component {
                             <div class="cs2-gsc-lbl" style="color:#fdba74;font-size:10px;margin-bottom:6px">Avg.
                                 Position
                             </div>
-                            <div class="cs2-gsc-val" style="color:var(--or);font-size:1.15rem">{{$selected->position}}</div>
+                            <div class="cs2-gsc-val"
+                                 style="color:var(--or);font-size:1.15rem">{{$selected->position}}</div>
                         </div>
                     </div>
 

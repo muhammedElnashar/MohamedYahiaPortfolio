@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\HeroSections\Schemas;
 
+use App\Support\Translation\Translation;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
@@ -21,44 +22,23 @@ class HeroSectionForm
                 Tabs::make('Hero Sections')
                     ->tabs([
                         Tab::make('General')->schema([
-                            TextInput::make('badge')
-                                ->required(),
-
-                            TextInput::make('first_name')
-                                ->required(),
-
-                            TextInput::make('last_name')
-                                ->required(),
-
-                            TextInput::make('position')
-                                ->required(),
-
-                            TextInput::make('title')
-                                ->required(),
-                            Textarea::make('hero_role')
-                                ->required(),
-                            Textarea::make('description')
-                                ->required()->rows(1),
-
-                            TextInput::make('whatsapp_url')
-                                ->url()
-                                ->required(),
-
-                            TextInput::make('portfolio_url')
-                                ->url()
-                                ->required(),
-
+                            Translation::text('badge','Badge',required: true)->columnSpanFull(),
+                            Translation::text('first_name','First Name',required: true)->columnSpanFull(),
+                            Translation::text('last_name','Last Name',required: true)->columnSpanFull(),
+                            Translation::text('position','Position',required: true)->columnSpanFull(),
+                            Translation::text('title','Title',required: true)->columnSpanFull(),
+                            Translation::text('hero_role','Role',required: true)->columnSpanFull(),
+                            Translation::textarea('description','Description')->columnSpanFull(),
+                            TextInput::make('whatsapp_url')->url()->required(),
+                            TextInput::make('portfolio_url')->url()->required(),
                             FileUpload::make('avatar')
                                 ->image()
                                 ->disk('public')
                                 ->directory('hero')
                                 ->imageEditor()
                                 ->required()->columnSpanFull(),
-                            TextInput::make('card_name')
-                                ->required(),
-                            TextInput::make('card_role')
-                                ->required(),
-
+                            Translation::text('card_name','Card Name',required: true)->columnSpanFull(),
+                            Translation::text('card_role','Card Role',required: true)->columnSpanFull(),
                             TextInput::make('projects_count')
                                 ->numeric()
                                 ->required(),
@@ -75,31 +55,10 @@ class HeroSectionForm
                                 ->numeric()
                                 ->step(0.1)
                                 ->required(),
+                            Translation::text('mostaql_projects','Projects',required: true)->columnSpanFull(),
 
-                            TextInput::make('mostaql_projects')
-                                ->numeric()
-                                ->required(),
+
                         ]),
-/*                        Tab::make('Skills')->schema([
-                            Repeater::make('skills')
-                                ->relationship()
-                                ->schema([
-
-                                    TextInput::make('name')
-                                        ->required(),
-
-
-                                    TextInput::make('sort_order')
-                                        ->numeric()
-                                        ->default(0),
-                                    Toggle::make('is_highlighted')
-                                        ->default(false),
-
-                                ])
-                                ->collapsible()
-                                ->reorderable()
-                                ->columnSpanFull(),
-                        ]),*/
 
                     ])->columnSpanFull(),
 

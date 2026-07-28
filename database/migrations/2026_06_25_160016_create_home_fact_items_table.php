@@ -18,9 +18,9 @@ return new class extends Migration
 
             $table->string('value');
 
-            $table->string('label');
+            $table->json('label');
 
-            $table->text('description');
+            $table->json('description');
 
             $table->string('source')
                 ->nullable();

@@ -23,15 +23,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-       User::factory()->create([
+        User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('Admin@123'),
         ]);
         $this->call([
-            HeroSkillSeeder::class,
+
             HeroSectionSeeder::class,
+            HeroSkillSeeder::class,
             HomeFactItemSeeder::class,
+            HomeSectionHeadingSeeder::class,
             ServiceCategorySeeder::class,
             FullSeoAuditSeeder::class,
             TechnicalSeoSeeder::class,
@@ -42,9 +44,19 @@ class DatabaseSeeder extends Seeder
             SkillsSeeder::class,
             SeoTools::class,
             PlatformSeeder::class,
-            HomeSectionHeadingSeeder::class,
             CaseStudiesSeeder::class,
+            SeoSpecialtySeeder::class,
+            CertificateSectionSeeder::class,
+            HomeBeliefSeeder::class,
 
+            ClientMessageSeeder::class,
+            ClientReviewSeeder::class,
+
+
+            HomeFaqSeeder::class,
+            ContactSettingSeeder::class,
+            ServiceProcessSeeder::class,
+            BlogSeeder::class
         ]);
     }
 }

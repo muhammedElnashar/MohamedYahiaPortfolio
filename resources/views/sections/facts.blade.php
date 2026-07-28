@@ -1,18 +1,20 @@
 @php
-    $heading = $sections['why_seo'] ?? null;
+    $heading = $sections->get(\App\Enums\HomeSectionKey::WHY_SEO->value);
+
 @endphp
-@if($heading && $facts->isNotEmpty())
 <section class="home-facts">
     <div class="home-facts-inner">
         <div class="home-facts-head">
-            <div class="home-facts-eyebrow"><span class="">{{$heading->eyebrow}}</span></div>
+            <div class="home-facts-eyebrow"><span class="">{{$heading?->eyebrow}}</span></div>
             <h2 class="home-facts-title">
-                {{$heading->title}}
+                {{$heading?->title}}
             </h2>
             <p class="home-facts-sub ">
-                {{$heading->subtitle}}
+                {{$heading?->subtitle}}
             </p>
         </div>
+        @if( $facts->isNotEmpty())
+
         <div class="home-facts-grid">
             @foreach($facts as $fact)
 
@@ -49,6 +51,7 @@
              <span class="">Start Free Now</span>
             </a>
         </div>
+        @endif
+
     </div>
 </section>
-@endif

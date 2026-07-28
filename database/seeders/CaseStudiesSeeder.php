@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\CaseStudies\AcademicPlatformCaseStudySeeder;
 use Database\Seeders\CaseStudies\B2BServicesCaseStudySeeder;
+use Database\Seeders\CaseStudies\CaseStudySectionSettingSeeder;
 use Database\Seeders\CaseStudies\ConstructionServicesCaseStudySeeder;
 use Database\Seeders\CaseStudies\ConsultingServicesCaseStudySeeder;
 use Database\Seeders\CaseStudies\DigitalMarketingAgencyCaseStudySeeder;
@@ -61,7 +62,9 @@ class CaseStudiesSeeder extends Seeder
             DigitalServicesCaseStudySeeder::class,
             DigitalMarketingAgencyCaseStudySeeder::class,
             OnlineRetailCaseStudySeeder::class,
-            HealthWellnessCaseStudySeeder::class
+            HealthWellnessCaseStudySeeder::class,
+            CaseStudySectionSettingSeeder::class,
+
         ]);
     }
 }

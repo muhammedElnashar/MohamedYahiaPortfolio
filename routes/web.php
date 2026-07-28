@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
@@ -11,11 +12,20 @@ Route::prefix('{locale}')
     ->middleware('frontend-locale')
     ->group(function () {
 
+        Route::get('/test',function (){
+            return view('pages.test');
+        })->name('test');
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
         Route::get('/services/{service:slug}', [ServiceController::class, 'show'])
             ->name('services.show');
         Route::get('/skills/{skill:slug}', [SkillController::class, 'show'])
             ->name('skills.show');
+        Route::get('/platforms/{platform:slug}', [\App\Http\Controllers\PlatformController::class, 'show'])
+            ->name('platforms.show');
+
+        Route::post('/contact', [ContactMessageController::class, 'store'])
+            ->name('contact.store');
+
     });
 Route::get('/language/{locale}', function ($locale) {
 

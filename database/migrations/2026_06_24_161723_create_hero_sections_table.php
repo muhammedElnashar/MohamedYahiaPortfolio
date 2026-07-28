@@ -15,26 +15,26 @@ return new class extends Migration
 
             $table->id();
 
-            $table->string('badge');
+            $table->json('badge');
 
-            $table->string('first_name');
+            $table->json('first_name');
 
-            $table->string('last_name');
+            $table->json('last_name');
 
-            $table->string('position');
+            $table->json('position');
 
-            $table->string('title');
-            $table->text('hero_role');
-            $table->text('description');
+            $table->json('title');
+            $table->json('hero_role');
+            $table->json('description');
 
             $table->string('whatsapp_url');
 
             $table->string('portfolio_url');
 
             $table->string('avatar')->nullable();
-            $table->string('card_name');
+            $table->json('card_name');
 
-            $table->string('card_role');
+            $table->json('card_role');
 
 
             $table->unsignedInteger('projects_count');
@@ -45,7 +45,7 @@ return new class extends Migration
 
             $table->decimal('rating_count', 3, 1);
 
-            $table->string('mostaql_projects');
+            $table->json('mostaql_projects');
 
 
             $table->timestamps();

@@ -50,7 +50,7 @@ class HeroSectionResource extends Resource
     {
         return [
             'index' => ListHeroSections::route('/'),
-            'create' => CreateHeroSection::route('/create'),
+/*            'create' => CreateHeroSection::route('/create'),*/
             'edit' => EditHeroSection::route('/{record}/edit'),
         ];
     }

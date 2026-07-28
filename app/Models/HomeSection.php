@@ -24,7 +24,8 @@ class HomeSection extends Model
         'subtitle',
         'eyebrow',
         'badge',
-        'button_text',    ];
+        'button_text',
+        ];
 
     protected $casts = [
         'section_key' => HomeSectionKey::class,

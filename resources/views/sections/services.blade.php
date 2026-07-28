@@ -1,26 +1,31 @@
 @php
-    $heading = $sections['services'] ?? null;
+    $heading = $sections->get(\App\Enums\HomeSectionKey::SERVICES->value);
 @endphp
-@if($heading && $categories->isNotEmpty())
+@if($categories->isNotEmpty())
 
 <section id="services" class="svc-bg">
     <div class="si">
-        <div class="eye"><span class="">{{$heading->eyebrow}}</span></div>
-        <h2 class="sh"><span class="">{{$heading->title}}</span></h2>
+        <div class="eye"><span class="">{{$heading?->eyebrow}}</span></div>
+        <h2 class="sh"><span class="">{{$heading?->title}}</span></h2>
         <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:30px;border:1px solid var(--or-border);background:var(--or-pale);font-size:12px;font-weight:700;color:var(--or);margin-bottom:.5rem">
             <i data-lucide="layers"></i>
-            <span class="">{{$heading->badge}}</span>
+            <span class="">{{$heading?->badge}}</span>
         </div>
         <p class="ssub">
-            <span class="">{{$heading->subtitle}}</span>
+            <span class="">{{$heading?->subtitle}}</span>
         </p>
+        @if($homeServicesProcess)
+
         <div class="proc-bar">
-            <div class="pb-step"><span class="pb-num">01</span><div class="pb-label ar">تحليل</div><div class="pb-label en">Audit</div></div>
-            <div class="pb-step"><span class="pb-num">02</span><div class="pb-label ar">استراتيجية</div><div class="pb-label en">Strategy</div></div>
-            <div class="pb-step"><span class="pb-num">03</span><div class="pb-label ar">تنفيذ</div><div class="pb-label en">Execute</div></div>
-            <div class="pb-step"><span class="pb-num">04</span><div class="pb-label ar">قياس</div><div class="pb-label en">Measure</div></div>
-            <div class="pb-step"><span class="pb-num">05</span><div class="pb-label ar">تحسين مستمر</div><div class="pb-label en">Optimize</div></div>
-        </div>
+                @foreach($homeServicesProcess as $index => $process)
+                    <div class="pb-step"><span class="pb-num">{{$index+1}}</span>
+                        <div class="pb-label ">{{$process->title}}</div></div>
+
+                @endforeach
+
+           </div>
+        @endif
+
         <div class="svc-filter">
             <button
                 class="sf-btn on"
@@ -92,6 +97,9 @@
 
             @endforeach
 
-        </div>    </div>
+        </div>
+
+    </div>
+
 </section>
 @endif

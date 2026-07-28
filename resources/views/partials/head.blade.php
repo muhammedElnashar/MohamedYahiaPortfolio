@@ -48,4 +48,5 @@
 ])
     @yield('schema')
     @stack('head')
+    @stack('js')
 </head>

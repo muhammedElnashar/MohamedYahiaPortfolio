@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\HomeFactItems\Schemas;
 
+use App\Support\Translation\Translation;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -21,12 +22,8 @@ class HomeFactItemForm
                 TextInput::make('value')
                     ->required()
                     ->maxLength(50),
-
-                TextInput::make('label')
-                    ->required(),
-
-        TextInput::make('description')
-            ->required(),
+                    Translation::text('label','Label',required: true)->columnSpanFull(),
+                    Translation::text('description','Description')->columnSpanFull(),
 
                 TextInput::make('source')
                     ->maxLength(255),

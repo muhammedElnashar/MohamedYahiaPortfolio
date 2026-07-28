@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class ContactMessage extends Model
+{
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'website',
+        'service_id',
+        'message',
+        'source',
+        'is_read',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_read' => 'boolean',
+        ];
+    }
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
+    }
+}

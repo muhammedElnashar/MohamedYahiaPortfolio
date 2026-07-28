@@ -12,7 +12,11 @@ class Service extends Model
         'slug',
         'icon',
         'category_id',
-
+        'process_text_1',
+        'process_text_2',
+        'process_text_3',
+        'process_text_4',
+        'process_text_5',
         'short_description',
 
         'hero_title',
@@ -38,6 +42,7 @@ class Service extends Model
         'hero_description',
         'meta_title',
         'meta_description',
+
     ];
     public function getRouteKeyName(): string
     {

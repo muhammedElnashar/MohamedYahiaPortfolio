@@ -7,16 +7,13 @@ use Spatie\Translatable\HasTranslations;
 
 class ServiceCategory extends Model
 {
-    use HasTranslations;
 
     protected $fillable = [
         'name',
         'slug',
         'sort_order',
     ];
-    public array $translatable = [
-        'name'
-    ];
+
 
 /*    protected $casts = [
         'is_active' => 'boolean',
