@@ -21,7 +21,9 @@ class HomeBeliefResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLightBulb;
 
     protected static ?string $recordTitleAttribute = 'number';
+    protected static string|\UnitEnum|null $navigationGroup = 'Home Page';
 
+    protected static ?int $navigationSort = 7;
     public static function form(Schema $schema): Schema
     {
         return HomeBeliefForm::configure($schema);

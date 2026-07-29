@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ServiceCategories\Schemas;
 
+use App\Models\ServiceCategory;
+use App\Support\Filament\SortOrder;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
@@ -27,9 +29,7 @@ class ServiceCategoryForm
                     ->required()
                     ->unique(ignoreRecord: true),
 
-                TextInput::make('sort_order')
-                    ->numeric()
-                    ->default(0),
+                SortOrder::make(ServiceCategory::class),
 
 
 

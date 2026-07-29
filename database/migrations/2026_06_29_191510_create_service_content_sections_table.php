@@ -26,7 +26,10 @@ return new class extends Migration
 
             $table->json('content')->nullable();
             $table->integer('sort_order')->default(0);
-
+            $table->unique([
+                'service_id',
+                'section_key',
+            ]);
             $table->timestamps();
         });
     }

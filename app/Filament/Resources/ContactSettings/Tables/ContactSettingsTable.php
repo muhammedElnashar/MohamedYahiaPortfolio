@@ -48,7 +48,6 @@ class ContactSettingsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

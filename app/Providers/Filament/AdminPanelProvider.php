@@ -19,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -28,6 +29,28 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Homepage')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Pages')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Services')
+                    ->collapsed(),
+
+                NavigationGroup::make()
+                    ->label('Case Studies')
+                    ->collapsed(),
+
+                NavigationGroup::make()
+                    ->label('Reviews')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Blogs')
+                    ->collapsed(),
+            ])
             ->login()
             ->renderHook(
                 PanelsRenderHook::TOPBAR_END,

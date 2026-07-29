@@ -12,9 +12,11 @@ class SeoToolForm
     {
         return $schema
             ->components([
-                Section::make('Seo Data')
+
+                Section::make('Seo Data')->columnSpanFull()
                 ->schema([
-                    Translation::text('title','Title',required: true)
+                    Translation::text('title','Title',required: true)->columnSpanFull(),
+
                 ])
             ]);
     }

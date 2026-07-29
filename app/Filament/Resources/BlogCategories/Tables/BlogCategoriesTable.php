@@ -35,7 +35,8 @@ class BlogCategoriesTable
                     ->label('Active')
                     ->boolean(),
 
-            ])
+            ])             ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->recordActions([
                 EditAction::make(),
             ])

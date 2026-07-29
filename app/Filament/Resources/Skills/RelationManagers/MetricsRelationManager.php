@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Skills\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
@@ -31,9 +32,9 @@ class MetricsRelationManager extends RelationManager
                     ->label('Value')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('sort_order')
-                    ->numeric()
-                    ->default(0),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->metrics()
+                ),
             ]);
     }
 

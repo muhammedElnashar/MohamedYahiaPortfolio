@@ -21,7 +21,9 @@ class HomeFaqResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedQuestionMarkCircle;
 
     protected static ?string $recordTitleAttribute = 'question';
+    protected static string|\UnitEnum|null $navigationGroup = 'Home Page';
 
+    protected static ?int $navigationSort = 6;
     public static function form(Schema $schema): Schema
     {
         return HomeFaqForm::configure($schema);

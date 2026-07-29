@@ -21,7 +21,13 @@ class Skill extends Model
         'title',
     ];
 
-
+    protected function casts(): array
+    {
+        return [
+            'has_page' => 'boolean',
+            'sort_order' => 'integer',
+        ];
+    }
 
     public function metrics()
     {

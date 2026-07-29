@@ -56,7 +56,8 @@ class DatabaseSeeder extends Seeder
             HomeFaqSeeder::class,
             ContactSettingSeeder::class,
             ServiceProcessSeeder::class,
-            BlogSeeder::class
+            BlogSeeder::class,
+            ProfilePageSeeder::class,
         ]);
     }
 }

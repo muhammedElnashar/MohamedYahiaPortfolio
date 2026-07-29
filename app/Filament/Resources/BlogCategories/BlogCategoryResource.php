@@ -21,7 +21,9 @@ class BlogCategoryResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
+    protected static string|\UnitEnum|null $navigationGroup = 'Blogs';
 
+    protected static ?int $navigationSort = 2;
     public static function form(Schema $schema): Schema
     {
         return BlogCategoryForm::configure($schema);

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Skills\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
@@ -30,9 +31,9 @@ class ToolsRelationManager extends RelationManager
                 Translation::textarea('description','Description')->columnSpanFull(),
                 TextInput::make('icon')
                     ->required(),
-                TextInput::make('sort_order')
-                    ->numeric()
-                    ->default(0),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->tools()
+                ),
             ]);
     }
 

@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Translatable\HasTranslations;
+
+class ProfileStat extends Model
+{
+    use HasTranslations;
+
+    protected $fillable = [
+        'profile_page_id',
+        'value',
+        'label',
+        'icon',
+        'sort_order',
+        'is_active',
+    ];
+
+    public array $translatable = [
+        'label',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'sort_order' => 'integer',
+            'is_active' => 'boolean',
+        ];
+    }
+
+    public function profilePage(): BelongsTo
+    {
+        return $this->belongsTo(ProfilePage::class);
+    }
+}

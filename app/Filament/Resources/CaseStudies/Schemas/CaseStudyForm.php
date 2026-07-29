@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\CaseStudies\Schemas;
 
+use App\Models\CaseStudy;
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
@@ -92,9 +94,7 @@ class CaseStudyForm
                             Grid::make(2)
                                 ->schema([
 
-                                    TextInput::make('sort_order')
-                                        ->numeric()
-                                        ->default(0),
+                                   SortOrder::make(CaseStudy::class),
 
                                     Toggle::make('is_active')
                                         ->default(true),

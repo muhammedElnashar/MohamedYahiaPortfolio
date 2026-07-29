@@ -33,7 +33,6 @@ return new class extends Migration
             // SEO
             $table->json('meta_title')->nullable();
             $table->json('meta_description')->nullable();
-
             // Status
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);

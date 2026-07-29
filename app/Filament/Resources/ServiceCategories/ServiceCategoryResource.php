@@ -21,7 +21,9 @@ class ServiceCategoryResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
+    protected static string|\UnitEnum|null $navigationGroup = 'Services';
 
+    protected static ?int $navigationSort = 2;
     public static function form(Schema $schema): Schema
     {
         return ServiceCategoryForm::configure($schema);
@@ -43,8 +45,6 @@ class ServiceCategoryResource extends Resource
     {
         return [
             'index' => ListServiceCategories::route('/'),
-            'create' => CreateServiceCategory::route('/create'),
-            'edit' => EditServiceCategory::route('/{record}/edit'),
         ];
     }
 }

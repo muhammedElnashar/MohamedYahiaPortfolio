@@ -59,7 +59,6 @@ class HeroSectionsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

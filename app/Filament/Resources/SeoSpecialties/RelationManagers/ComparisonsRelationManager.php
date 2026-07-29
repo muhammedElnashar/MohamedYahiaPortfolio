@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SeoSpecialties\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -27,11 +28,9 @@ class ComparisonsRelationManager extends RelationManager
                 Translation::text('specialist_value', 'Specialist',required: true)->columnSpanFull(),
                 Translation::text('competitor_value', 'Competitor',required: true)->columnSpanFull(),
 
-                TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->required(),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->comparisons()
+                ),
             ])
             ->columns(2);
     }

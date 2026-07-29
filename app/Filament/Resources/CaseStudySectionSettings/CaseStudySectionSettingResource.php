@@ -21,7 +21,9 @@ class CaseStudySectionSettingResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
+    protected static string|\UnitEnum|null $navigationGroup = 'Case Studies';
 
+    protected static ?int $navigationSort = 2;
     public static function form(Schema $schema): Schema
     {
         return CaseStudySectionSettingForm::configure($schema);

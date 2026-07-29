@@ -35,10 +35,7 @@ class FaqsTab
                                         Translation::richEditor('answer','Answer',required: true)->columnSpanFull(),
 
 
-                                        TextInput::make('sort_order')
-                                            ->label('Sort Order')
-                                            ->numeric()
-                                            ->default(0),
+
 
                                     ]),
 

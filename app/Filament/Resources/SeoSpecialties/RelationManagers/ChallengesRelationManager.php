@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SeoSpecialties\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -30,11 +31,9 @@ class ChallengesRelationManager extends RelationManager
                 TextInput::make('icon')
                     ->label('Icon')
                     ->maxLength(255),
-                TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->required(),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->challenges()
+                ),
             ])
             ->columns(2);
     }

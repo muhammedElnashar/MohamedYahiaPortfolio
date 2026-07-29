@@ -14,6 +14,8 @@ class ClientReviewsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
 
                 TextColumn::make('client_name')

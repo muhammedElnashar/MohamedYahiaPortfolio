@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SkillController;
@@ -22,9 +23,15 @@ Route::prefix('{locale}')
             ->name('skills.show');
         Route::get('/platforms/{platform:slug}', [\App\Http\Controllers\PlatformController::class, 'show'])
             ->name('platforms.show');
+        Route::get('/blog', [BlogController::class, 'index'])
+            ->name('blogs.index');
+
+        Route::get('/blog/{slug}', [BlogController::class, 'show'])
+            ->name('blogs.show');
 
         Route::post('/contact', [ContactMessageController::class, 'store'])
             ->name('contact.store');
+        Route::get('about',[\App\Http\Controllers\HomeController::class,'about'])->name('about');
 
     });
 Route::get('/language/{locale}', function ($locale) {

@@ -3,18 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Skill;
+use App\Services\SchemaService;
 use Illuminate\Http\Request;
 
 class SkillController extends Controller
 {
-    public function show(string $locale, Skill $skill)
+    public function show(string $locale, Skill $skill,  SchemaService $schemaService)
     {
+        abort_unless(
+            $skill->has_page,
+            404
+        );
         $skill->load([
+            'page',
             'features',
             'metrics',
             'tools'
         ]);
-
-        return view('pages.skills.show', compact('skill'));
+        $schemas = $schemaService->skill(
+            $skill
+        );
+        return view('pages.skills.show', compact('skill', 'schemas'));
     }
 }

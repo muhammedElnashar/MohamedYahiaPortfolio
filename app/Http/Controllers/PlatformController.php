@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\SeoSpecialty;
+use App\Services\SchemaService;
 use Illuminate\Http\Request;
 
 class PlatformController extends Controller
 {
-    public function show(string $locale, SeoSpecialty $platform)
+    public function show(string $locale, SeoSpecialty $platform, SchemaService $schemaService)
     {
         $platform->load([
            'advantages',
@@ -20,6 +21,9 @@ class PlatformController extends Controller
            'services',
            'statistics',
         ]);
-        return view('pages.platform.show', compact('platform'));
+        $schemas = $schemaService->platform(
+            $platform
+        );
+        return view('pages.platform.show', compact('platform','schemas'));
     }
 }

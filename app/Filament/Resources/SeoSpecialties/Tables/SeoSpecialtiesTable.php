@@ -15,7 +15,7 @@ class SeoSpecialtiesTable
     {
         return $table
             ->columns([
-                TextColumn::make('name.ar')
+                TextColumn::make('name')
                     ->label('Name')
                     ->searchable()
                     ->sortable(),
@@ -25,7 +25,7 @@ class SeoSpecialtiesTable
                     ->searchable()
                     ->copyable(),
 
-                TextColumn::make('title.ar')
+                TextColumn::make('title')
                     ->label('Page Title')
                     ->limit(45)
                     ->tooltip(fn ($record) => $record->title['ar'] ?? null),

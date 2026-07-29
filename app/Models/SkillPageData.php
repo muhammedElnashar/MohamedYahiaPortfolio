@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Translatable\HasTranslations;
 
 class SkillPageData extends Model
@@ -16,9 +17,11 @@ class SkillPageData extends Model
         'cta_button_text',
         'feature_title',
         'metric_title',
+
+        'meta_title',
+        'meta_description',
     ];
     public array $translatable = [
-        'title',
         'hero_title',
         'hero_description',
         'feature_title',
@@ -26,5 +29,13 @@ class SkillPageData extends Model
         'cta_title',
         'cta_description',
         'cta_button_text',
+
+        'meta_title',
+        'meta_description',
     ];
+
+    public function skill(): BelongsTo
+    {
+        return $this->belongsTo(Skill::class);
+    }
 }

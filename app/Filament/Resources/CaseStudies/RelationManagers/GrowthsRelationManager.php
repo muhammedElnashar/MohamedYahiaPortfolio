@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CaseStudies\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -38,11 +39,9 @@ class GrowthsRelationManager extends RelationManager
                     required: true,
                 ),
 
-                TextInput::make('sort_order')
-                    ->label('Order')
-                    ->numeric()
-                    ->default(0),
-
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->growths()
+                ),
             ]);
     }
 

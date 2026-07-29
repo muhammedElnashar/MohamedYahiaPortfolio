@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\CertificateSections\Schemas;
 
+use App\Models\CertificateSection;
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -30,11 +32,7 @@ class CertificateSectionForm
                             ->label('LinkedIn URL')
                             ->url()
                             ->maxLength(2048),
-                        TextInput::make('sort_order')
-                            ->label('Sort Order')
-                            ->numeric()
-                            ->default(0)
-                            ->required(),
+                        SortOrder::make(CertificateSection::class),
 
                         Toggle::make('is_active')
                             ->label('Active')

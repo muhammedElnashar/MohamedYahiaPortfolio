@@ -5,6 +5,13 @@ namespace App\Filament\Resources\Services;
 use App\Filament\Resources\Services\Pages\CreateService;
 use App\Filament\Resources\Services\Pages\EditService;
 use App\Filament\Resources\Services\Pages\ListServices;
+use App\Filament\Resources\Services\RelationManagers\BenefitsRelationManager;
+use App\Filament\Resources\Services\RelationManagers\CardSectionsRelationManager;
+use App\Filament\Resources\Services\RelationManagers\DeliverablesRelationManager;
+use App\Filament\Resources\Services\RelationManagers\KeywordsRelationManager;
+use App\Filament\Resources\Services\RelationManagers\PainPointsRelationManager;
+use App\Filament\Resources\Services\RelationManagers\ProcessSectionsRelationManager;
+use App\Filament\Resources\Services\RelationManagers\StatisticsSectionsRelationManager;
 use App\Filament\Resources\Services\RelationManagers\StatsRelationManager;
 use App\Filament\Resources\Services\Schemas\ServiceForm;
 use App\Filament\Resources\Services\Tables\ServicesTable;
@@ -22,12 +29,26 @@ class ServiceResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
+    protected static string|\UnitEnum|null $navigationGroup = 'Services';
 
+    protected static ?int $navigationSort = 1;
     public static function form(Schema $schema): Schema
     {
         return ServiceForm::configure($schema);
     }
+    public static function getRelations(): array
+    {
+        return [
+            CardSectionsRelationManager::class,
+            StatisticsSectionsRelationManager::class,
+            PainPointsRelationManager::class,
+            BenefitsRelationManager::class,
+            DeliverablesRelationManager::class,
+            ProcessSectionsRelationManager::class,
+            KeywordsRelationManager::class,
 
+        ];
+    }
     public static function table(Table $table): Table
     {
         return ServicesTable::configure($table);

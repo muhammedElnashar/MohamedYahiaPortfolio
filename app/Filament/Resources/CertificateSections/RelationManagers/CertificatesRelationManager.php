@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CertificateSections\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -40,11 +41,9 @@ class CertificatesRelationManager extends RelationManager
                     ->label('Certificate URL')
                     ->url()
                     ->maxLength(2048),
-                TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->required(),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->certificates()
+                ),
 
                 Toggle::make('is_active')
                     ->label('Active')
@@ -57,7 +56,8 @@ class CertificatesRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('image')
-
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
 
                 ImageColumn::make('image')

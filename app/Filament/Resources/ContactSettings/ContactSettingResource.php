@@ -21,7 +21,9 @@ class ContactSettingResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'email';
+    protected static string|\UnitEnum|null $navigationGroup = 'Home Page';
 
+    protected static ?int $navigationSort = 9;
     public static function form(Schema $schema): Schema
     {
         return ContactSettingForm::configure($schema);

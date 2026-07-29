@@ -37,14 +37,7 @@ class ServiceForm
                 Tabs::make('ServiceTabs')
                     ->tabs([
                         GeneralTab::make(),
-                        StatisticsTab::make(),
-                        PainPointsTab::make(),
                         HeadingTab::make(),
-                        BenefitsTab::make(),
-                        DeliverablesTab::make(),
-                        CardsTab::make(),
-                        ProcessTab::make(),
-                        KeywordsTab::make(),
                         RelatedServicesTab::make(),
                         ProblemsTab::make(),
                         ComparisonTab::make(),

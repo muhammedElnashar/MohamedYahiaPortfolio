@@ -21,7 +21,9 @@ class ServiceProcessResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
+    protected static string|\UnitEnum|null $navigationGroup = 'Services';
 
+    protected static ?int $navigationSort = 4;
     public static function form(Schema $schema): Schema
     {
         return ServiceProcessForm::configure($schema);

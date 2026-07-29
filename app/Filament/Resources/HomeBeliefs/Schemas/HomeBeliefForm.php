@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\HomeBeliefs\Schemas;
 
+use App\Models\HomeBelief;
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -26,11 +28,7 @@ class HomeBeliefForm
                             ->required()
                             ->minValue(1),
 
-                        TextInput::make('sort_order')
-                            ->label('Sort Order')
-                            ->numeric()
-                            ->required()
-                            ->default(0),
+                        SortOrder::make(HomeBelief::class),
 
                         Toggle::make('is_active')
                             ->label('Active')

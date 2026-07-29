@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Blogs;
 use App\Filament\Resources\Blogs\Pages\CreateBlog;
 use App\Filament\Resources\Blogs\Pages\EditBlog;
 use App\Filament\Resources\Blogs\Pages\ListBlogs;
+use App\Filament\Resources\Blogs\RelationManagers\FaqsRelationManager;
 use App\Filament\Resources\Blogs\Schemas\BlogForm;
 use App\Filament\Resources\Blogs\Tables\BlogsTable;
 use App\Models\Blog;
@@ -21,7 +22,9 @@ class BlogResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
+    protected static string|\UnitEnum|null $navigationGroup = 'Blogs';
 
+    protected static ?int $navigationSort = 1;
     public static function form(Schema $schema): Schema
     {
         return BlogForm::configure($schema);
@@ -35,7 +38,8 @@ class BlogResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            FaqsRelationManager::class,
+
         ];
     }
 

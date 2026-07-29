@@ -21,7 +21,9 @@ class ServiceSectionResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
+    protected static string|\UnitEnum|null $navigationGroup = 'Services';
 
+    protected static ?int $navigationSort = 3;
     public static function form(Schema $schema): Schema
     {
         return ServiceSectionForm::configure($schema);
@@ -35,10 +37,7 @@ class ServiceSectionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CardsRelationManager::class,
-            StatsRelationManager::class,
-            ProcessStepsRelationManager::class,
-            ContentRelationManager::class,
+
         ];
     }
 

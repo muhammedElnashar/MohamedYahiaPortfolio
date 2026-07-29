@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Blogs\Schemas;
 
+use App\Support\Translation\Translation;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -53,14 +54,9 @@ class BlogForm
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Translation::textarea('excerpt','Excerpt')->columnSpanFull(),
 
-                        Textarea::make('excerpt.ar')
-                            ->label('Excerpt Arabic')
-                            ->rows(4),
 
-                        Textarea::make('excerpt.en')
-                            ->label('Excerpt English')
-                            ->rows(4),
 
                     ])
                     ->columns(2)
@@ -85,17 +81,7 @@ class BlogForm
 
                 Section::make('Article Content')
                     ->schema([
-
-                        RichEditor::make('content.ar')
-                            ->label('Content Arabic')
-                            ->required()
-                            ->columnSpanFull(),
-
-                        RichEditor::make('content.en')
-                            ->label('Content English')
-                            ->required()
-                            ->columnSpanFull(),
-
+                        Translation::richEditor('content','Content')->columnSpanFull(),
                     ])
                     ->columnSpanFull(),
 
@@ -142,28 +128,17 @@ class BlogForm
                     ->columns(2)
                     ->columnSpanFull(),
 
+
                 Section::make('SEO')
                     ->schema([
+                        Translation::text('meta_title', 'Meta Title'),
+                        Translation::textarea('meta_description', 'Meta Description'),
 
-                        TextInput::make('meta_title.ar')
-                            ->label('Meta Title Arabic')
-                            ->maxLength(255),
-
-                        TextInput::make('meta_title.en')
-                            ->label('Meta Title English')
-                            ->maxLength(255),
-
-                        Textarea::make('meta_description.ar')
-                            ->label('Meta Description Arabic')
-                            ->rows(3),
-
-                        Textarea::make('meta_description.en')
-                            ->label('Meta Description English')
-                            ->rows(3),
 
                     ])
                     ->columns(2)
                     ->columnSpanFull(),
+
 
             ]);
     }

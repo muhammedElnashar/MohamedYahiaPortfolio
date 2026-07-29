@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\ServiceSections\Schemas;
 
 use App\Enums\ServiceSectionType;
+use App\Models\ServiceSection;
+use App\Support\Filament\SortOrder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -33,9 +35,8 @@ class ServiceSectionForm
                     ->required()
                     ->native(false),
 
-                TextInput::make('sort_order')
-                    ->numeric()
-                    ->default(0),
+                SortOrder::make(ServiceSection::class),
+
 
             ])
             ->columns(2);

@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ServiceProcesses\Schemas;
 
+use App\Models\ServiceProcessStep;
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -20,12 +22,7 @@ class ServiceProcessForm
                         Translation::text('title','Title',required: true)->columnSpanFull(),
 
 
-                        TextInput::make('sort_order')
-                            ->label('Order')
-                            ->numeric()
-                            ->required()
-                            ->default(0)
-                            ->minValue(0),
+                    SortOrder::make(ServiceProcessStep::class),
 
                         Toggle::make('is_active')
                             ->label('Active')

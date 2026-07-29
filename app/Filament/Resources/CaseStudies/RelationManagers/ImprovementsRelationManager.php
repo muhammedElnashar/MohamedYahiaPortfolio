@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CaseStudies\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
@@ -28,10 +29,9 @@ class ImprovementsRelationManager extends RelationManager
                 Translation::text('title','Title',required: true)->columnSpanFull(),
                 Translation::textarea('description','Description')->columnSpanFull(),
                 TextInput::make('icon')->label('Icon'),
-                TextInput::make('sort_order')
-                    ->label('Order')
-                    ->numeric()
-                    ->default(0),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->improvements()
+                ),
                 ]);
     }
 

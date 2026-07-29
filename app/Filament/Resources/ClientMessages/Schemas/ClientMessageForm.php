@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ClientMessages\Schemas;
 
+use App\Models\ClientMessage;
+use App\Support\Filament\SortOrder;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -33,10 +35,7 @@ class ClientMessageForm
                 Section::make('Settings')
                     ->schema([
 
-                        TextInput::make('sort_order')
-                            ->numeric()
-                            ->default(0)
-                            ->required(),
+                        SortOrder::make(ClientMessage::class),
 
                         Toggle::make('is_active')
                             ->default(true),

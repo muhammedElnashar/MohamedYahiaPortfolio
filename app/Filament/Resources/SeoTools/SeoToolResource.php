@@ -22,7 +22,9 @@ class SeoToolResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
+    protected static string|\UnitEnum|null $navigationGroup = 'Home Page';
 
+    protected static ?int $navigationSort = 8;
     public static function form(Schema $schema): Schema
     {
         return SeoToolForm::configure($schema);
@@ -44,8 +46,6 @@ class SeoToolResource extends Resource
     {
         return [
             'index' => ListSeoTools::route('/'),
-            'create' => CreateSeoTool::route('/create'),
-            'edit' => EditSeoTool::route('/{record}/edit'),
         ];
     }
 }

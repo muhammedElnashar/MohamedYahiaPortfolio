@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SeoSpecialties\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -32,11 +33,9 @@ class ProcessesRelationManager extends RelationManager
                     ->numeric()
                     ->required(),
 
-                TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->required(),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->processes()
+                ),
             ])
             ->columns(2);
     }

@@ -18,9 +18,10 @@ class PlatformForm
                 Section::make('Platforms')
 
                 ->schema([
+                    Translation::text('name','Name',required: true),
+
                     Grid::make(2)
             ->schema([
-                Translation::text('name','Name',required: true),
                 TextInput::make('icon')
                     ->label('Icon'),
                 ColorPicker::make('background_color')

@@ -35,10 +35,7 @@ class ComparisonTab
 
 
 
-                                        TextInput::make('sort_order')
-                                            ->label('Sort Order')
-                                            ->numeric()
-                                            ->default(0),
+
                                         Toggle::make('expert_value')
                                             ->label('With Me')
                                             ->default(true)

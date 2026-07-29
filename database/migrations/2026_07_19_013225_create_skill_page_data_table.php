@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('cta_button_url');
             $table->json('feature_title');
             $table->json('metric_title');
+            $table->json('meta_title')->nullable();
+            $table->json('meta_description')->nullable();
             $table->timestamps();
         });
     }

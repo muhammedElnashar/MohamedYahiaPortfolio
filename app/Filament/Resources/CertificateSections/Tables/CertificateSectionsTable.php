@@ -52,7 +52,6 @@ class CertificateSectionsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
 class Blog extends Model
@@ -38,6 +39,7 @@ class Blog extends Model
         'content',
         'meta_title',
         'meta_description',
+
     ];
 
     protected function casts(): array
@@ -61,5 +63,11 @@ class Blog extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(BlogTag::class);
+    }
+
+    public function faqs(): HasMany
+    {
+        return $this->hasMany(BlogFaq::class)
+            ->orderBy('sort_order');
     }
 }

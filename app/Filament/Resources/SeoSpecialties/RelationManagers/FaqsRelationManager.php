@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SeoSpecialties\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -28,11 +29,9 @@ class FaqsRelationManager extends RelationManager
                 Translation::text('answer', 'Answer',required: true)->columnSpanFull(),
 
 
-                TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->required(),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->faqs()
+                ),
             ])
             ->columns(2);
     }

@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\BlogCategories\Schemas;
 
+use App\Models\BlogCategory;
+use App\Support\Filament\SortOrder;
+use App\Support\Translation\Translation;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -36,18 +39,8 @@ class BlogCategoryForm
                             ->required()
                             ->unique(ignoreRecord: true),
 
-                        TextInput::make('sort_order')
-                            ->label('Order')
-                            ->numeric()
-                            ->default(0),
-
-                        Textarea::make('description.ar')
-                            ->label('Description Arabic')
-                            ->rows(3),
-
-                        Textarea::make('description.en')
-                            ->label('Description English')
-                            ->rows(3),
+                        SortOrder::make(BlogCategory::class),
+                            Translation::textarea('description','Description')->columnSpanFull(),
 
                         Toggle::make('is_active')
                             ->label('Active')

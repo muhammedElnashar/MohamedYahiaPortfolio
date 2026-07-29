@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProfilePage;
 use App\Services\HomePageService;
 
 class HomeController extends Controller
@@ -18,5 +19,18 @@ class HomeController extends Controller
             $this->homePageService->getData()
 
         );
+    }
+
+    public function about(ProfilePage $profilePage)
+    {
+        $profilePage->
+        load([
+            'stats',
+            'careerItems',
+            'educationItems',
+            'methodologyItems',
+
+        ])->get();
+        return view('pages.about', compact('profilePage'));
     }
 }

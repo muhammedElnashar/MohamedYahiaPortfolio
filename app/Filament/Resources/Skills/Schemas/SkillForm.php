@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Skills\Schemas;
 
+use App\Models\Skill;
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
@@ -9,6 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 class SkillForm
@@ -21,6 +24,7 @@ class SkillForm
                     ->schema([
                         Translation::text('title', 'Title', required: true),
 
+
                         TextInput::make('slug')
                             ->required()
                             ->unique(ignoreRecord: true),
@@ -32,13 +36,30 @@ class SkillForm
 
 
 
-                        TextInput::make('sort_order')
-                            ->numeric()
-                            ->default(0),
+                       SortOrder::make(Skill::class)
                     ]),
+                Section::make('Seo Data')
 
+                    ->visible(
+                        fn (Get $get): bool =>
+                        (bool) $get('has_page')
+                    )
+                    ->schema([
+                        Group::make()
+                            ->relationship('page')
+                            ->schema([
+
+                                Translation::text('meta_title', 'Meta Title'),
+                                Translation::textarea('meta_description', 'Meta Description'),
+
+                            ]),
+                    ]),
                 Section::make('Page Data')
 
+                    ->visible(
+                        fn (Get $get): bool =>
+                        (bool) $get('has_page')
+                    )
                     ->schema([
                         Group::make()
                             ->relationship('page')
@@ -46,6 +67,8 @@ class SkillForm
 
                 Translation::text('hero_title', 'Hero Title',required: true)->columnSpanFull(),
                 Translation::textarea('hero_description', 'Hero Description')->columnSpanFull(),
+                Translation::text('meta_title', 'Meta Title'),
+                Translation::textarea('meta_description', 'Meta Description'),
                 Translation::text('feature_title', 'Feature Title',required: true)->columnSpanFull(),
                 Translation::text('metric_title', 'Metric Title',required: true)->columnSpanFull(),
                 Translation::text('cta_title', 'CTA Title',required: true)->columnSpanFull(),
@@ -56,7 +79,8 @@ class SkillForm
                 TextInput::make('cta_button_url'),
 
             ]),
-                    ]),
+                    ])->columnSpanFull(),
+
 
 
             ]);

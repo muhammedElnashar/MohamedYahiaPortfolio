@@ -21,7 +21,9 @@ class PlatformResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
+    protected static string|\UnitEnum|null $navigationGroup = 'Home Page';
 
+    protected static ?int $navigationSort = 6;
     public static function form(Schema $schema): Schema
     {
         return PlatformForm::configure($schema);
@@ -43,8 +45,6 @@ class PlatformResource extends Resource
     {
         return [
             'index' => ListPlatforms::route('/'),
-            'create' => CreatePlatform::route('/create'),
-            'edit' => EditPlatform::route('/{record}/edit'),
         ];
     }
 }

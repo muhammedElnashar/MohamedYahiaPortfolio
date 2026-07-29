@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\SeoSpecialties\Schemas;
 
+use App\Models\SeoSpecialty;
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -28,24 +30,13 @@ class SeoSpecialtyForm
                         Translation::text('name', 'Name',required: true)->columnSpanFull(),
                         Translation::textarea('card_description', 'Card Description ')->columnSpanFull(),
 
-                        TextInput::make('name.ar')
-                            ->label('Arabic Name')
-                            ->required(),
-
-                        TextInput::make('name.en')
-                            ->label('English Name')
-                            ->required(),
                         TextInput::make('slug')
                             ->label('Slug')
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255),
 
-                        TextInput::make('sort_order')
-                            ->label('Sort Order')
-                            ->numeric()
-                            ->default(0)
-                            ->required(),
+                        SortOrder::make(SeoSpecialty::class),
 
                         Toggle::make('is_active')
                             ->label('Active')

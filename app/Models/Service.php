@@ -144,22 +144,19 @@ class Service extends Model
     public function cardSections()
     {
         return $this->hasMany(ServiceSection::class)
-            ->where('type', 'card')
-            ->orderBy('sort_order');
+            ->where('type', 'card');
     }
 
     public function statisticsSections()
     {
         return $this->hasMany(ServiceSection::class)
-            ->where('type', 'stat')
-            ->orderBy('sort_order');
+            ->where('type', 'stat');
     }
 
     public function processSections()
     {
         return $this->hasMany(ServiceSection::class)
-            ->where('type', 'process')
-            ->orderBy('sort_order');
+            ->where('type', 'process');
     }
 
     public function section(string $key): ?ServiceSection

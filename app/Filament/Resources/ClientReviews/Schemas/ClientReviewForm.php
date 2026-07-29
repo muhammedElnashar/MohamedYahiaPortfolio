@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ClientReviews\Schemas;
 
+use App\Models\ClientReview;
+use App\Support\Filament\SortOrder;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -61,10 +63,7 @@ class ClientReviewForm
                 Section::make('Settings')
                     ->schema([
 
-                        TextInput::make('sort_order')
-                            ->numeric()
-                            ->default(0)
-                            ->required(),
+                       SortOrder::make(ClientReview::class),
 
                         Toggle::make('is_active')
                             ->label('Active')

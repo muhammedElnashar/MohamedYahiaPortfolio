@@ -14,11 +14,12 @@ class ServiceProcessesTable
 {
     public static function configure(Table $table): Table
     {
-        return $table
+        return $table  ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
 
                 TextColumn::make('sort_order')
-                    ->label('#')
+                    ->label('Sort Order')
                     ->sortable(),
 
                 TextColumn::make('title')

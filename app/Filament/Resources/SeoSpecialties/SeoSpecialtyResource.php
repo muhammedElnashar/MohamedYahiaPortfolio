@@ -5,6 +5,7 @@ namespace App\Filament\Resources\SeoSpecialties;
 use App\Filament\Resources\SeoSpecialties\Pages\CreateSeoSpecialty;
 use App\Filament\Resources\SeoSpecialties\Pages\EditSeoSpecialty;
 use App\Filament\Resources\SeoSpecialties\Pages\ListSeoSpecialties;
+use App\Filament\Resources\SeoSpecialties\RelationManagers\PhilosophyRelationManager;
 use App\Filament\Resources\SeoSpecialties\Schemas\SeoSpecialtyForm;
 use App\Filament\Resources\SeoSpecialties\Tables\SeoSpecialtiesTable;
 use App\Models\SeoSpecialty;
@@ -21,7 +22,9 @@ class SeoSpecialtyResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
+    protected static string|\UnitEnum|null $navigationGroup = 'Pages';
 
+    protected static ?int $navigationSort = 3;
     public static function form(Schema $schema): Schema
     {
         return SeoSpecialtyForm::configure($schema);
@@ -43,6 +46,7 @@ class SeoSpecialtyResource extends Resource
             RelationManagers\StatisticsRelationManager::class,
             RelationManagers\ComparisonsRelationManager::class,
             RelationManagers\FaqsRelationManager::class,
+            PhilosophyRelationManager::class,
         ];
     }
 

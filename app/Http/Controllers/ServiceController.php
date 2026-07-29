@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Services\SchemaService;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function show(string $locale, Service $service)
+    public function show(string $locale, Service $service,  SchemaService $schemaService)
     {
         $service->load([
             'category',
@@ -27,8 +28,10 @@ class ServiceController extends Controller
             'ctas',
             'relatedServices',
         ]);
-
-        return view('pages.services.show', compact('service'));
+        $schemas = $schemaService->service(
+            $service
+        );
+        return view('pages.services.show', compact('service','schemas'));
     }
 
 }

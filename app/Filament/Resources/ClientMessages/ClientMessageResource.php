@@ -21,7 +21,9 @@ class ClientMessageResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
     protected static ?string $recordTitleAttribute = 'client_name';
+    protected static string|\UnitEnum|null $navigationGroup = 'Reviews';
 
+    protected static ?int $navigationSort = 1;
     public static function form(Schema $schema): Schema
     {
         return ClientMessageForm::configure($schema);

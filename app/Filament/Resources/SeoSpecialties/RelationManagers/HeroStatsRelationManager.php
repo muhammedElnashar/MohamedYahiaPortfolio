@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SeoSpecialties\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
@@ -30,11 +31,9 @@ class HeroStatsRelationManager extends RelationManager
                     ->label('Value')
                     ->required()
                     ->maxLength(50),
-                TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->required(),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->heroStats()
+                ),
             ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CertificateSections\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
@@ -45,11 +46,10 @@ class HighlightRelationManager extends RelationManager
                 Translation::text('title', 'Title',required: true)->columnSpanFull(),
                 Translation::text('subtitle', 'Subtitle',required: true)->columnSpanFull(),
 
-                TextInput::make('sort_order')
-                    ->label('Sort Order')
-                    ->numeric()
-                    ->default(0)
-                    ->required(),
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->highlights()
+                ),
+
 
                 Toggle::make('is_active')
                     ->label('Active')
@@ -62,7 +62,8 @@ class HighlightRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('platform')
-
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
 
                 TextColumn::make('platform')

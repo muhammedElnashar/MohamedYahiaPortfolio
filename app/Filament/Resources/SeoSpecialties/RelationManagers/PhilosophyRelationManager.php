@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SeoSpecialties\RelationManagers;
 
+use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
@@ -32,18 +33,15 @@ class PhilosophyRelationManager extends RelationManager
                     ->schema([
                         Translation::text('title','Title',required: true)->columnSpanFull(),
                         Translation::text('description','Description')->columnSpanFull(),
-
-                        TextInput::make('sort_order')
-                            ->label('Sort Order')
-                            ->numeric()
-                            ->default(0)
-                            ->required(),
+                        SortOrder::relationship(
+                            fn () => $this->getOwnerRecord()->philosophy()
+                        ),
 
                         Toggle::make('is_active')
                             ->label('Active')
                             ->default(true),
                     ])
-                    ->columns(2),
+                    ->columnSpanFull(),
             ]);
     }
 
