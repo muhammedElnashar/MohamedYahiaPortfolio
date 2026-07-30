@@ -9,8 +9,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/css/sections/blogs',
-                'resources/css/sections/blog-page',
+                'resources/css/sections/blogs.css',
+                'resources/css/sections/blog-page.css',
             ],
             refresh: true,
             fonts: [
