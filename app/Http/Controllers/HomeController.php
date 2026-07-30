@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HeroSkill;
 use App\Models\ProfilePage;
+use App\Models\Skill;
 use App\Services\HomePageService;
 
 class HomeController extends Controller
@@ -23,14 +25,14 @@ class HomeController extends Controller
 
     public function about(ProfilePage $profilePage)
     {
-        $profilePage->
-        load([
+        $profilePage= ProfilePage::
+        with([
             'stats',
             'careerItems',
             'educationItems',
             'methodologyItems',
-
-        ])->get();
-        return view('pages.about', compact('profilePage'));
+        ])->first();
+        $skills = HeroSkill::all();
+        return view('pages.about', compact('profilePage','skills'));
     }
 }
