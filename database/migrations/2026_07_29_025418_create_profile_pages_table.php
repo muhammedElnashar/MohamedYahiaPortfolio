@@ -37,6 +37,7 @@ return new class extends Migration
             // SEO
             $table->json('meta_title')->nullable();
             $table->json('meta_description')->nullable();
+            $table->string('canonical_url')->nullable();
 
             $table->boolean('is_active')->default(true);
 

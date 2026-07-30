@@ -26,6 +26,7 @@ return new class extends Migration
             $table->json('metric_title');
             $table->json('meta_title')->nullable();
             $table->json('meta_description')->nullable();
+            $table->string('canonical_url')->nullable();
             $table->timestamps();
         });
     }

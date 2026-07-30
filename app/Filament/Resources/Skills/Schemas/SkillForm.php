@@ -48,9 +48,10 @@ class SkillForm
                         Group::make()
                             ->relationship('page')
                             ->schema([
+                                Translation::text('meta_title', 'Meta Title',required: true)->columnSpanFull(),
+                                Translation::textarea('meta_description', 'Meta Description',required: true)->columnSpanFull(),
+                                TextInput::make('canonical_url')->url()->required(),
 
-                                Translation::text('meta_title', 'Meta Title'),
-                                Translation::textarea('meta_description', 'Meta Description'),
 
                             ]),
                     ]),
@@ -67,8 +68,6 @@ class SkillForm
 
                 Translation::text('hero_title', 'Hero Title',required: true)->columnSpanFull(),
                 Translation::textarea('hero_description', 'Hero Description')->columnSpanFull(),
-                Translation::text('meta_title', 'Meta Title'),
-                Translation::textarea('meta_description', 'Meta Description'),
                 Translation::text('feature_title', 'Feature Title',required: true)->columnSpanFull(),
                 Translation::text('metric_title', 'Metric Title',required: true)->columnSpanFull(),
                 Translation::text('cta_title', 'CTA Title',required: true)->columnSpanFull(),

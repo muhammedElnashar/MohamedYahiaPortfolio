@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProfilePages\RelationManagers;
 
 use App\Support\Filament\SortOrder;
+use App\Support\Translation\Translation;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -23,20 +24,14 @@ class StatsRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema->components([
-
+            Translation::text('label','Label')->columnSpanFull(),
             TextInput::make('value')
                 ->required(),
 
-            TextInput::make('label.ar')
-                ->label('Label Arabic')
-                ->required(),
-
-            TextInput::make('label.en')
-                ->label('Label English')
-                ->required(),
 
             TextInput::make('icon')
                 ->label('Icon'),
+
             SortOrder::relationship(
                 fn () => $this->getOwnerRecord()->stats()
             ),

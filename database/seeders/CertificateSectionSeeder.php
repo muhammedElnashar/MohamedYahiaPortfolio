@@ -25,7 +25,7 @@ class CertificateSectionSeeder extends Seeder
                     'en' => 'View All 40+ Certificates on LinkedIn',
                 ],
 
-                'linkedin_url' => null,
+                'linkedin_url' => 'https://www.linkedin.com/in/mohamed-yahia-249265134/',
 
                 'gallery_hint' => [
                     'ar' => 'اضغط على الشهادة لعرضها بالحجم الكامل',

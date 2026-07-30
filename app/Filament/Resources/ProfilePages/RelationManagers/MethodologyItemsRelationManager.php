@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProfilePages\RelationManagers;
 
 use App\Support\Filament\SortOrder;
+use App\Support\Translation\Translation;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -24,20 +25,9 @@ class MethodologyItemsRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema->components([
+            Translation::text('title','Title')->columnSpanFull(),
+            Translation::text('subtitle','Subtitle')->columnSpanFull(),
 
-            TextInput::make('title.ar')
-                ->label('Title Arabic')
-                ->required(),
-
-            TextInput::make('title.en')
-                ->label('Title English')
-                ->required(),
-
-            Textarea::make('description.ar')
-                ->label('Description Arabic'),
-
-            Textarea::make('description.en')
-                ->label('Description English'),
 
             TextInput::make('icon'),
 

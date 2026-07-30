@@ -131,9 +131,9 @@ class BlogForm
 
                 Section::make('SEO')
                     ->schema([
-                        Translation::text('meta_title', 'Meta Title'),
-                        Translation::textarea('meta_description', 'Meta Description'),
-
+                        Translation::text('meta_title', 'Meta Title',required: true)->columnSpanFull(),
+                        Translation::textarea('meta_description', 'Meta Description',required: true)->columnSpanFull(),
+                        TextInput::make('canonical_url')->url()->required(),
 
                     ])
                     ->columns(2)

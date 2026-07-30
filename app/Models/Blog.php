@@ -28,6 +28,7 @@ class Blog extends Model
 
         'meta_title',
         'meta_description',
+        'canonical_url',
 
         'is_featured',
         'is_active',

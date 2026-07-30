@@ -75,7 +75,7 @@ return new class extends Migration
             // SEO
             $table->json('meta_title')->nullable();
             $table->json('meta_description')->nullable();
-
+            $table->string('canonical_url')->nullable();
             $table->unsignedInteger('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
 

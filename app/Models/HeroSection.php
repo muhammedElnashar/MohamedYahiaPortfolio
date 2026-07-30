@@ -26,6 +26,9 @@ class HeroSection extends Model
         'completion_count',
         'rating_count',
         'mostaql_projects',
+        'meta_title',
+        'meta_description',
+        'canonical_url',
     ];
     public array $translatable = [
         'badge',
@@ -38,6 +41,8 @@ class HeroSection extends Model
         'card_name',
         'card_role',
         'mostaql_projects',
+        'meta_title',
+        'meta_description',
 
     ];
     public function skills()

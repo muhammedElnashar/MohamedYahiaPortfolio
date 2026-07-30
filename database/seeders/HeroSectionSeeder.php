@@ -73,6 +73,9 @@ class HeroSectionSeeder extends Seeder
                    'en'=>  '300+ Projects',
                    'ar'=>  '300+ مشروع',
                     ],
+                'meta_title' =>['en'=>'meta'],
+                'meta_description' => ['en'=>'meta'],
+                'canonical_url' => 'meta@meta.com',
             ]
         );
     }

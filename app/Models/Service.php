@@ -24,6 +24,7 @@ class Service extends Model
 
         'meta_title',
         'meta_description',
+        'canonical_url',
 
         'schema',
         'badge',

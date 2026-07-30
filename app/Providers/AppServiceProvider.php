@@ -23,16 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('*', function ($view) {
 
-            $seo = SeoData::where(
-                'slug',
-                Route::currentRouteName()
-            )->first();
-
-            $view->with('seo', $seo);
-
-        });
         app()->setLocale(
             session('locale', SiteSettings::defaultLocale())
         );

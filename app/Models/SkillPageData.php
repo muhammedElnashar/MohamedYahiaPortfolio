@@ -20,6 +20,7 @@ class SkillPageData extends Model
 
         'meta_title',
         'meta_description',
+        'canonical_url',
     ];
     public array $translatable = [
         'hero_title',

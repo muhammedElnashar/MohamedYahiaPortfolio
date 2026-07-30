@@ -32,6 +32,7 @@ class ProfilePage extends Model
 
         'meta_title',
         'meta_description',
+        'canonical_url',
 
         'is_active',
     ];

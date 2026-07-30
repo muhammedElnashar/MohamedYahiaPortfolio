@@ -31,14 +31,14 @@ class ContactSettingSeeder extends Seeder
 
                 'whatsapp' => '201123269452',
 
-                'linkedin_url' => null,
+                'linkedin_url' => 'https://www.linkedin.com/in/mohamed-yahia-249265134/',
 
                 'linkedin_label' => [
                     'ar' => 'Mohamed Yahia — SEO Specialist',
                     'en' => 'Mohamed Yahia — SEO Specialist',
                 ],
 
-                'mostaql_url' => null,
+                'mostaql_url' => 'https://mostaql.com/u/Mohamed_Yahia7',
 
                 'mostaql_label' => [
                     'ar' => 'Mohamed_Yahia7 — تقييم 100%',

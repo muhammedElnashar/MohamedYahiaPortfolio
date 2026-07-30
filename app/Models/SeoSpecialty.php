@@ -57,6 +57,7 @@ class SeoSpecialty extends Model
 
         'meta_title',
         'meta_description',
+        'canonical_url',
 
         'sort_order',
         'is_active',

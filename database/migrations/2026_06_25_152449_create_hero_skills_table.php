@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-
             $table->boolean('is_highlighted')
                 ->default(false);
-
             $table->integer('sort_order')
                 ->default(0);
 
