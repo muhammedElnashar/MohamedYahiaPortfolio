@@ -1,0 +1,196 @@
+/* =====================================================
+   HOME TOOLS
+===================================================== */
+
+/* =====================================================
+   PLATFORMS
+===================================================== */
+
+.plt-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(105px,1fr));
+    gap:10px;
+    margin-top:2rem;
+}
+
+.plt{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    padding:1.25rem 1rem;
+
+    background:var(--sur);
+    border:1px solid var(--brd);
+    border-radius:var(--rs);
+
+    text-align:center;
+
+    transition:
+        background var(--tr),
+        border-color var(--tr),
+        transform var(--tr),
+        box-shadow var(--tr);
+}
+
+.plt:hover{
+    background:var(--or-pale);
+    border-color:var(--or-border);
+    transform:translateY(-3px);
+    box-shadow:var(--sh);
+}
+
+.plt svg{
+    width:22px;
+    height:22px;
+    margin-bottom:8px;
+
+    stroke:var(--or);
+    fill:none;
+}
+
+.plt-n{
+    font-size:12px;
+    font-weight:600;
+    color:var(--mu);
+    line-height:1.4;
+}
+
+/* =====================================================
+   TOOLS
+===================================================== */
+
+.tool-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:10px;
+    margin-top:2rem;
+}
+
+.tool{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:1rem 1.25rem;
+
+    background:var(--sur);
+    border:1px solid var(--brd);
+    border-radius:var(--rs);
+
+    transition:
+        background var(--tr),
+        border-color var(--tr),
+        transform var(--tr),
+        box-shadow var(--tr);
+}
+
+.tool:hover{
+    background:var(--or-pale);
+    border-color:var(--or-border);
+    transform:translateY(-2px);
+    box-shadow:var(--sh);
+}
+
+.tool-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--or);
+    flex-shrink:0;
+}
+
+.tool-n{
+    font-size:13px;
+    font-weight:600;
+    color:var(--txt);
+    line-height:1.45;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:1024px){
+
+    .plt-grid{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .tool-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:768px){
+
+    .plt-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:12px;
+    }
+
+    .plt{
+        padding:1rem .75rem;
+    }
+
+    .plt svg{
+        width:20px;
+        height:20px;
+    }
+
+    .plt-n{
+        font-size:11px;
+    }
+
+    .tool-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+    }
+
+    .tool{
+        padding:.9rem;
+    }
+
+    .tool-n{
+        font-size:12px;
+    }
+
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width:480px){
+
+    .plt-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .tool-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* =====================================================
+   TOUCH DEVICES
+===================================================== */
+
+@media (hover:none){
+
+    .plt:hover,
+    .tool:hover{
+        transform:none;
+        box-shadow:none;
+        background:var(--sur);
+        border-color:var(--brd);
+    }
+
+}

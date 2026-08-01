@@ -36,3 +36,7 @@ html[lang="en"] .hero-role{border-right:none;border-left:2px solid var(--or);pad
 .hcsl{font-size:10px;color:var(--mu);margin-top:2px}
 .mostaql-b{margin-top:8px;padding:7px;border-radius:var(--rs);background:var(--or-pale);border:1px solid var(--or-border);font-size:11px;font-weight:700;color:var(--or);display:flex;align-items:center;justify-content:center;gap:5px}
 .mostaql-b svg{width:12px;height:12px;stroke:var(--or);fill:none}
+/* RESP */
+@media(max-width:1000px){.hero-wrap{grid-template-columns:1fr}.hcard{display:none}.svc-grid{grid-template-columns:repeat(2,1fr)}.sband-row{grid-template-columns:repeat(3,1fr)}.stt:nth-child(4),.stt:nth-child(5){display:none}.contact-wrap{grid-template-columns:1fr}.spage-2col{grid-template-columns:1fr}.spage-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.nav-links,.ncta{display:none}.hamburger{display:flex}.svc-grid{grid-template-columns:1fr}.proc-bar{grid-template-columns:repeat(3,1fr)}.pb-step:nth-child(4),.pb-step:nth-child(5){display:none}h1.ht{font-size:30px}.pkg-grid{grid-template-columns:1fr}section{padding:60px 1.25rem}.spage-body{padding:40px 1.25rem}.spage-hero{padding:60px 1.25rem 40px}}
+@media(max-width:480px){.sband-row{grid-template-columns:repeat(2,1fr)}.stt:nth-child(3){display:none}}

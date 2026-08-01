@@ -1,5 +1,4 @@
 @if($section = $service->section('hero'))
-    <div class="spage-stats">
 
         <div class="spage-stats">
 
@@ -19,7 +18,6 @@
 
             @endforeach
 
-        </div>
 
 </div>
 @endif

@@ -1,0 +1,417 @@
+/* =========================================================
+   PHILOSOPHY SECTION
+========================================================= */
+
+.philosophy-section{
+    position:relative;
+
+    padding:80px 0;
+
+    background:var(--bg);
+
+    border-top:1px solid var(--brd);
+
+    overflow:hidden;
+}
+
+
+/* subtle background */
+
+.philosophy-section::before{
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    top:50%;
+    right:-350px;
+
+    transform:translateY(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(232,106,26,.055),
+            transparent 70%
+        );
+
+    pointer-events:none;
+}
+
+
+.philosophy-container{
+    position:relative;
+    z-index:1;
+
+    width:min(100% - 40px, 800px);
+
+    margin-inline:auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.philosophy-header{
+    margin-bottom:38px;
+}
+
+
+.philosophy-header .eye{
+    margin-bottom:10px;
+}
+
+
+.philosophy-header .sh{
+    margin-bottom:0;
+}
+
+
+/* =========================================================
+   BELIEFS LIST
+========================================================= */
+
+.beliefs-list{
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:16px;
+}
+
+
+/* =========================================================
+   BELIEF CARD
+========================================================= */
+
+.belief-card{
+    position:relative;
+
+    padding:24px 26px;
+
+    background:var(--sur);
+
+    border:1px solid var(--brd);
+    border-inline-end:4px solid var(--or);
+
+    border-radius:14px;
+
+    text-align:start;
+
+    overflow:hidden;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+
+/* subtle orange glow */
+
+.belief-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    inset-inline-end:0;
+
+    width:110px;
+    height:100%;
+
+    background:
+        linear-gradient(
+            to inline-start,
+            rgba(232,106,26,.045),
+            transparent
+        );
+
+    pointer-events:none;
+}
+
+
+.belief-card:hover{
+    transform:translateY(-3px);
+
+    border-color:rgba(232,106,26,.35);
+
+    border-inline-end-color:var(--or);
+
+    box-shadow:
+        0 12px 32px rgba(0,0,0,.06);
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.belief-number{
+    position:relative;
+    z-index:1;
+
+    display:flex;
+    align-items:center;
+
+    gap:7px;
+
+    margin-bottom:10px;
+
+    color:var(--or);
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:10px;
+    line-height:1.2;
+    font-weight:800;
+
+    letter-spacing:1.6px;
+}
+
+
+.belief-number-dot{
+    width:5px;
+    height:5px;
+
+    flex:0 0 5px;
+
+    background:var(--or);
+
+    border-radius:50%;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.belief-title{
+    position:relative;
+    z-index:1;
+
+    margin:0 0 8px;
+
+    color:var(--txt);
+
+    font-size:17px;
+    line-height:1.45;
+    font-weight:800;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.belief-description{
+    position:relative;
+    z-index:1;
+
+    max-width:680px;
+
+    margin:0;
+
+    color:var(--mu);
+
+    font-size:13.5px;
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   LARGE SCREEN
+========================================================= */
+
+@media(min-width:1440px){
+
+    .philosophy-section{
+        padding:96px 0;
+    }
+
+
+    .philosophy-container{
+        max-width:850px;
+    }
+
+
+    .philosophy-header{
+        margin-bottom:42px;
+    }
+
+
+    .beliefs-list{
+        gap:18px;
+    }
+
+
+    .belief-card{
+        padding:28px 30px;
+    }
+
+
+    .belief-title{
+        font-size:18px;
+    }
+
+
+    .belief-description{
+        font-size:14px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:900px){
+
+    .philosophy-section{
+        padding:64px 0;
+    }
+
+
+    .philosophy-container{
+        width:min(100% - 32px, 800px);
+    }
+
+
+    .philosophy-header{
+        margin-bottom:32px;
+    }
+
+
+    .belief-card{
+        padding:22px 23px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    .philosophy-section{
+        padding:50px 0;
+    }
+
+
+    .philosophy-container{
+        width:100%;
+
+        padding-inline:16px;
+    }
+
+
+    /* Header */
+
+    .philosophy-header{
+        margin-bottom:26px;
+    }
+
+
+    .philosophy-header .eye{
+        margin-bottom:8px;
+    }
+
+
+    /* Cards */
+
+    .beliefs-list{
+        gap:11px;
+    }
+
+
+    .belief-card{
+        padding:17px 16px;
+
+        border-radius:11px;
+
+        border-inline-end-width:3px;
+    }
+
+
+    /* Disable hover effects on mobile */
+
+    .belief-card:hover{
+        transform:none;
+
+        box-shadow:none;
+    }
+
+
+    /* Number */
+
+    .belief-number{
+        gap:6px;
+
+        margin-bottom:8px;
+
+        font-size:9px;
+
+        letter-spacing:1.2px;
+    }
+
+
+    .belief-number-dot{
+        width:4px;
+        height:4px;
+
+        flex-basis:4px;
+    }
+
+
+    /* Title */
+
+    .belief-title{
+        margin-bottom:6px;
+
+        font-size:14px;
+        line-height:1.45;
+    }
+
+
+    /* Description */
+
+    .belief-description{
+        font-size:11.5px;
+        line-height:1.7;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width:380px){
+
+    .philosophy-container{
+        padding-inline:13px;
+    }
+
+
+    .belief-card{
+        padding:15px 14px;
+    }
+
+
+    .belief-title{
+        font-size:13.5px;
+    }
+
+
+    .belief-description{
+        font-size:11px;
+    }
+
+}

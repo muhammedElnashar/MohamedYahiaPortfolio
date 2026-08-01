@@ -1,37 +1,104 @@
 @php
-        $heading = $sections->get(\App\Enums\HomeSectionKey::FAQ->value);
+    $heading = $sections->get(
+        \App\Enums\HomeSectionKey::FAQ->value
+    );
 @endphp
-@if($faqs->isNotEmpty())
-    <section id="section-faq" style="padding:5rem 0;background:var(--bg);border-top:1px solid var(--brd)">
-        <div class="si">
-            <p style="text-align:center;font-size:.75rem;letter-spacing:.13em;font-weight:700;color:var(--or);text-transform:uppercase;margin-bottom:.5rem">
-                {{$heading?->eyebrow}}</p>
-            <h2 class="sh">{{$heading?->title}}</h2>
 
-            <div style="max-width:780px;margin:2.5rem auto 0">
+
+@if($faqs->isNotEmpty())
+
+    <section id="section-faq" class="faq-section">
+
+        <div class="si faq-container">
+
+
+            {{-- Header --}}
+            <header class="faq-header">
+
+                @if($heading?->eyebrow)
+                    <div class="eye">
+                        <span>{{ $heading->eyebrow }}</span>
+                    </div>
+                @endif
+
+
+                @if($heading?->title)
+                    <h2 class="sh">
+                        {{ $heading->title }}
+                    </h2>
+                @endif
+
+            </header>
+
+
+            {{-- FAQs --}}
+            <div class="faq-list">
+
                 @foreach($faqs as $faq)
-                    <details>
-                        <summary>
-                            <span class="">{{$faq->question}}</span>
+
+                    <details class="faq-item">
+
+                        <summary class="faq-question">
+
+                            <span class="faq-question-text">
+                                {{ $faq->question }}
+                            </span>
+
+                            <span
+                                class="faq-icon"
+                                aria-hidden="true"
+                            ></span>
+
                         </summary>
-                        <div class="faq-ans">
-                            <span class="">{{$faq->answer}}</span></div>
+
+
+                        <div class="faq-answer">
+
+                            <div class="faq-answer-inner">
+                                {{ $faq->answer }}
+                            </div>
+
+                        </div>
+
                     </details>
 
                 @endforeach
 
-
-
-
             </div>
 
-            <div style="text-align:center;margin-top:2.5rem">
-                <a href="#contact" onclick="setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),100)" style="display:inline-block;background:var(--or);color:#fff;font-weight:700;font-size:.9rem;padding:.85rem 2.2rem;border-radius:var(--r);text-decoration:none">
-                    <span class="">Have another question? Contact me ←</span>
+
+            {{-- Contact CTA --}}
+            <div class="faq-footer">
+
+                <a
+                    href="#contact"
+                    class="faq-contact-btn"
+                >
+
+                    <span class="ari">
+                        لديك سؤال آخر؟ تواصل معي
+                    </span>
+
+                    <span class="eni">
+                        Have another question? Contact me
+                    </span>
+
+                    <svg
+                        class="faq-contact-arrow"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path d="M5 12h14"/>
+                        <path d="m13 6 6 6-6 6"/>
+                    </svg>
+
                 </a>
+
             </div>
+
+
         </div>
+
     </section>
 
 @endif
-

@@ -1,0 +1,144 @@
+
+
+
+/* ==========================================
+   COMPARISON
+========================================== */
+
+.comp-grid{
+    display:block;
+    margin-top:1.75rem;
+    overflow:hidden;
+
+    border:1px solid var(--brd);
+    border-radius:var(--r);
+
+    background:var(--sur);
+}
+
+.comp-card{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);
+
+    border-bottom:1px solid var(--brd);
+}
+
+.comp-card:last-child{
+    border-bottom:none;
+}
+
+.comp-expert,
+.comp-regular{
+    padding:1.35rem 1.5rem;
+}
+
+.comp-expert{
+    background:rgba(232,106,26,.05);
+    border-inline-end:1px solid var(--brd);
+}
+
+.comp-regular{
+    background:var(--sur2);
+}
+
+.comp-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    margin-bottom:.85rem;
+    padding:4px 10px;
+
+    border-radius:20px;
+
+    font-size:11px;
+    font-weight:700;
+}
+
+.comp-card:not(:first-child) .comp-badge{
+    display:none;
+}
+
+.comp-badge svg{
+    width:11px;
+    height:11px;
+    stroke:currentColor;
+    fill:none;
+}
+
+.expert-badge{
+    color:var(--or);
+    background:var(--or-pale);
+    border:1px solid var(--or-border);
+}
+
+.reg-badge{
+    color:var(--mu);
+    background:var(--bg3);
+    border:1px solid var(--brd);
+}
+
+.comp-ico{
+    margin-bottom:.75rem;
+}
+
+.comp-ico svg{
+    width:20px;
+    height:20px;
+
+    stroke:var(--or);
+    fill:none;
+}
+
+.comp-expert p,
+.comp-regular p{
+    margin:0;
+
+    color:var(--mu);
+    font-size:13px;
+    line-height:1.85;
+}
+
+.comp-vs{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--bg);
+
+    border-inline:1px solid var(--brd);
+
+    color:var(--mu);
+
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+
+    writing-mode:vertical-rl;
+
+}
+
+@media(max-width:768px){
+
+    .comp-card{
+        grid-template-columns:1fr;
+    }
+
+    .comp-vs{
+
+        writing-mode:horizontal-tb;
+
+        padding:.6rem;
+
+        border-inline:none;
+        border-block:1px solid var(--brd);
+
+    }
+
+    .comp-expert{
+
+        border-inline-end:none;
+
+    }
+}

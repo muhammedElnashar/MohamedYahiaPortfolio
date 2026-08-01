@@ -18,9 +18,168 @@ nav{position:fixed;top:0;right:0;left:0;z-index:950;height:66px;display:flex;ali
 .ncta{padding:7px 18px;border-radius:var(--rs);border:1.5px solid var(--or);background:transparent;color:var(--or);font-size:13px;font-weight:700;font-family:'Cairo','Space Grotesk',sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all var(--tr)}
 .ncta svg{width:14px;height:14px;stroke:currentColor;fill:none}
 .ncta:hover{background:var(--or);color:#fff}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.hamburger span{display:block;width:22px;height:2px;background:var(--txt);border-radius:2px}
-.mobile-menu{display:none;position:fixed;top:66px;right:0;left:0;z-index:949;background:var(--nav);backdrop-filter:blur(24px);padding:1rem 1.75rem 1.5rem;border-bottom:1px solid var(--brd);flex-direction:column;gap:4px}
-.mobile-menu.open{display:flex}
-.mnl{padding:10px 0;border:none;background:none;color:var(--mu);font-size:14px;font-weight:600;font-family:'Cairo','Space Grotesk',sans-serif;cursor:pointer;text-align:right;width:100%;border-bottom:1px solid var(--brd);transition:color var(--tr)}
-html[lang="en"] .mnl{text-align:left}.mnl:last-child{border-bottom:none}.mnl:hover{color:var(--or)}
+/* ========================================
+   MOBILE NAV
+======================================== */
+
+.mobile-nav{
+    display:none;
+}
+
+/* remove default details arrow */
+.mobile-nav > summary{
+    list-style:none;
+}
+
+.mobile-nav > summary::-webkit-details-marker{
+    display:none;
+}
+
+
+/* ========================================
+   HAMBURGER
+======================================== */
+
+.hamburger{
+    width:38px;
+    height:38px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:5px;
+
+    padding:0;
+
+    border:1px solid var(--brd);
+    border-radius:9px;
+
+    background:var(--sur2);
+
+    cursor:pointer;
+}
+
+.hamburger span{
+    display:block;
+
+    width:20px;
+    height:2px;
+
+    background:var(--txt);
+    border-radius:5px;
+
+    transition:
+        transform .25s ease,
+        opacity .2s ease;
+}
+
+
+/* ========================================
+   HAMBURGER → X
+======================================== */
+
+.mobile-nav[open] .hamburger span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.mobile-nav[open] .hamburger span:nth-child(2){
+    opacity:0;
+}
+
+.mobile-nav[open] .hamburger span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
+
+
+/* ========================================
+   MENU
+======================================== */
+
+.mobile-menu{
+    position:fixed;
+
+    top:66px;
+    left:0;
+    right:0;
+
+    z-index:949;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:12px 20px 18px;
+
+    background:var(--nav);
+
+    border-bottom:1px solid var(--brd);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+}
+
+
+/* ========================================
+   LINKS
+======================================== */
+
+.mnl{
+    display:block;
+
+    width:100%;
+
+    padding:13px 4px;
+
+    color:var(--mu);
+
+    border-bottom:1px solid var(--brd);
+
+    font-family:'Cairo','Space Grotesk',sans-serif;
+    font-size:14px;
+    font-weight:600;
+
+    text-align:right;
+    text-decoration:none;
+
+    transition:color .2s ease;
+}
+
+.mnl:last-child{
+    border-bottom:none;
+}
+
+.mnl:hover{
+    color:var(--or);
+}
+
+html[lang="en"] .mnl{
+    text-align:left;
+}
+
+
+/* ========================================
+   MOBILE ONLY
+======================================== */
+
+@media(max-width:900px){
+
+    .nav-links , .ncta{
+        display:none;
+    }
+
+    .mobile-nav{
+        display:block;
+    }
+
+}
+
+@media(min-width:901px){
+
+    .mobile-nav{
+        display:none;
+    }
+
+}

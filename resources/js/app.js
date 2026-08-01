@@ -1,7 +1,9 @@
 import { initIcons } from './modules/icons';
 import { toggleTheme } from './modules/theme';
 import { setLang } from './modules/language';
+/*
 import { toggleMenu } from './modules/menu';
+*/
 import { scrollToSection } from './modules/navigation';
 import { filterSvc, filterCS } from './modules/filters';
 import { initFAQ } from './modules/faq';

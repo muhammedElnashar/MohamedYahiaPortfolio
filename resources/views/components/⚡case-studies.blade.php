@@ -171,41 +171,75 @@ new class extends Component {
 
         @if($setting)
             <!-- CTA Strip -->
-            <div
-                style="background:linear-gradient(135deg,rgba(232,106,26,.12),rgba(232,106,26,.05));border:1.5px solid rgba(232,106,26,.35);border-radius:20px;padding:2.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
-                <div style="display:flex;align-items:flex-start;gap:1.25rem">
-                    <div
-                        style="width:52px;height:52px;background:rgba(232,106,26,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--or)" stroke-width="2">
+            <div class="result-cta">
+
+                <div class="result-cta-content">
+
+                    <div class="result-cta-icon">
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round">
                             <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
                             <polyline points="17 6 23 6 23 12"/>
                         </svg>
                     </div>
-                    <div>
-                        <div style="font-size:1.2rem;font-weight:900;color:var(--txt);margin-bottom:.35rem"><span class="">{{$setting->title}}</span>
+
+                    <div class="result-cta-info">
+
+                        <div class="result-cta-title">
+                            {{$setting->title}}
                         </div>
-                        <div style="font-size:14px;color:var(--mu);line-height:1.7">
-                        <span
-                            class="">{{$setting->description}}</span>
+
+                        <div class="result-cta-description">
+                            {{$setting->description}}
                         </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem">
-                        <span
-                            style="font-size:11px;background:rgba(16,185,129,.12);color:#10B981;border:1px solid rgba(16,185,129,.3);padding:3px 10px;border-radius:20px"><span
-                                class="">✓{{$setting->text_4}}</span></span>
-                            <span
-                                style="font-size:11px;background:rgba(59,130,246,.12);color:#3B82F6;border:1px solid rgba(59,130,246,.3);padding:3px 10px;border-radius:20px"><span class="">✓ {{$setting->text_5}}</span></span>
-                            <span
-                                style="font-size:11px;background:rgba(232,106,26,.12);color:var(--or);border:1px solid rgba(232,106,26,.3);padding:3px 10px;border-radius:20px"><span
-                                    class="">✓ {{$setting->text_6}}</span></span>
+
+                        <div class="result-cta-tags">
+
+                <span class="result-cta-tag result-cta-tag--green">
+                    <span class="result-cta-check">✓</span>
+                    {{$setting->text_4}}
+                </span>
+
+                            <span class="result-cta-tag result-cta-tag--blue">
+                    <span class="result-cta-check">✓</span>
+                    {{$setting->text_5}}
+                </span>
+
+                            <span class="result-cta-tag result-cta-tag--orange">
+                    <span class="result-cta-check">✓</span>
+                    {{$setting->text_6}}
+                </span>
+
                         </div>
+
                     </div>
+
                 </div>
-                <button onclick="sc('contact')"
-                        style="background:var(--or);color:#fff;border:none;border-radius:12px;padding:1rem 2.25rem;font-size:15px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .2s;box-shadow:0 8px 25px rgba(232,106,26,.4)"
-                        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 35px rgba(232,106,26,.55)'"
-                        onmouseout="this.style.transform='';this.style.boxShadow='0 8px 25px rgba(232,106,26,.4)'">
-                    <span class="eni">{{$setting->button_text}}</span>
+
+
+                <button
+                    class="result-cta-btn"
+                    onclick="sc('contact')"
+                    type="button">
+
+        <span class="eni">
+            {{$setting->button_text}}
+        </span>
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path d="M5 12h14"/>
+                        <path d="m13 6 6 6-6 6"/>
+                    </svg>
+
                 </button>
+
             </div>
         @endif
 

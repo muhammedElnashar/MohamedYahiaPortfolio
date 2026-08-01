@@ -1,0 +1,1143 @@
+/* =========================================================
+   WHATSAPP CLIENT MESSAGES
+========================================================= */
+
+.wa-section{
+    position:relative;
+
+    padding:80px 0 72px;
+
+    background:var(--bg);
+
+    border-top:1px solid var(--brd);
+
+    overflow:hidden;
+}
+
+
+/* Background decoration */
+
+.wa-section::before{
+    content:"";
+
+    position:absolute;
+
+    top:-320px;
+    left:50%;
+
+    width:720px;
+    height:520px;
+
+    transform:translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(18,140,126,.055),
+            transparent 70%
+        );
+
+    pointer-events:none;
+}
+
+
+.wa-container{
+    position:relative;
+    z-index:1;
+
+    width:min(100% - 40px,1180px);
+
+    margin-inline:auto;
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.wa-section-header{
+    max-width:680px;
+
+    margin:0 auto 38px;
+
+    text-align:center;
+}
+
+
+.wa-section-header .eye{
+    margin-bottom:10px;
+}
+
+
+.wa-section-header .sh{
+    margin-bottom:0;
+}
+
+
+
+/* =========================================================
+   SLIDER
+========================================================= */
+
+.wa-slider{
+    position:relative;
+
+    width:100%;
+}
+
+
+
+/* =========================================================
+   PAGE
+
+   Desktop:
+   6 cards = 3 columns × 2 rows
+========================================================= */
+
+.wa-page{
+    display:none;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:18px;
+
+    align-items:stretch;
+}
+
+
+.wa-page.active{
+    display:grid;
+}
+
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.wa-card{
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    background:var(--sur);
+
+    border:1px solid var(--brd);
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    text-align:start;
+
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.025);
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+
+.wa-card:hover{
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(18,140,126,.35);
+
+    box-shadow:
+        0 14px 36px rgba(0,0,0,.07);
+}
+
+
+
+/* =========================================================
+   WHATSAPP HEADER
+========================================================= */
+
+.wa-chat-header{
+    min-height:58px;
+
+    display:flex;
+    align-items:center;
+
+    gap:9px;
+
+    padding:9px 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #075e54,
+            #087268
+        );
+}
+
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.wa-avatar{
+    width:35px;
+    height:35px;
+
+    flex:0 0 35px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(255,255,255,.14);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius:50%;
+}
+
+
+.wa-avatar svg{
+    width:17px;
+    height:17px;
+
+    fill:none;
+
+    stroke:
+        rgba(255,255,255,.9);
+
+    stroke-width:1.8;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+
+/* =========================================================
+   CLIENT INFO
+========================================================= */
+
+.wa-client-info{
+    flex:1;
+
+    min-width:0;
+}
+
+
+.wa-client-name{
+    color:#fff;
+
+    font-size:12px;
+    line-height:1.35;
+
+    font-weight:700;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+
+.wa-client-label{
+    color:
+        rgba(255,255,255,.7);
+
+    font-size:10px;
+    font-weight:500;
+}
+
+
+.wa-online{
+    margin-top:2px;
+
+    color:
+        rgba(255,255,255,.58);
+
+    font-size:9px;
+    line-height:1.2;
+}
+
+
+
+/* =========================================================
+   WHATSAPP ICON
+========================================================= */
+
+.wa-header-icon{
+    width:28px;
+    height:28px;
+
+    flex:0 0 28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+.wa-header-icon svg{
+    width:17px;
+    height:17px;
+
+    fill:
+        rgba(255,255,255,.72);
+}
+
+
+
+/* =========================================================
+   CHAT BODY
+========================================================= */
+
+.wa-chat-body{
+    position:relative;
+
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:10px;
+
+    min-height:145px;
+
+    padding:15px 13px;
+
+    background:
+        linear-gradient(
+            rgba(10,25,15,.025),
+            rgba(10,25,15,.025)
+        ),
+        var(--sur);
+
+    overflow:hidden;
+}
+
+
+/* Subtle pattern */
+
+.wa-chat-body::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.025;
+
+    background-image:
+        radial-gradient(
+            currentColor 1px,
+            transparent 1px
+        );
+
+    background-size:
+        16px 16px;
+
+    pointer-events:none;
+}
+
+
+
+/* =========================================================
+   MESSAGE ROW
+========================================================= */
+
+.wa-message-row{
+    position:relative;
+    z-index:1;
+
+    display:flex;
+
+    width:100%;
+}
+
+
+.wa-message-client{
+    justify-content:flex-start;
+}
+
+
+.wa-message-me{
+    justify-content:flex-end;
+}
+
+
+
+/* =========================================================
+   MESSAGE BUBBLES
+========================================================= */
+
+.wa-bubble{
+    position:relative;
+
+    max-width:88%;
+
+    padding:
+        9px 11px 7px;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.07);
+}
+
+
+.wa-bubble p{
+    margin:0;
+
+    white-space:pre-line;
+
+    font-size:12px;
+    line-height:1.7;
+}
+
+
+
+/* Client message */
+
+.wa-bubble-client{
+    background:#1f3a1f;
+
+    border-radius:
+        3px 11px 11px 11px;
+}
+
+
+.wa-bubble-client p{
+    color:#d9eadc;
+}
+
+
+
+/* Client tail */
+
+.wa-bubble-client::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    inset-inline-start:-6px;
+
+    width:10px;
+    height:10px;
+
+    background:#1f3a1f;
+
+    clip-path:
+        polygon(
+            100% 0,
+            100% 100%,
+            0 0
+        );
+}
+
+
+
+/* My message */
+
+.wa-bubble-me{
+    background:var(--sur2);
+
+    border:
+        1px solid
+        var(--brd);
+
+    border-radius:
+        11px 3px 11px 11px;
+}
+
+
+.wa-bubble-me p{
+    color:var(--txt);
+}
+
+
+
+/* =========================================================
+   MESSAGE META
+========================================================= */
+
+.wa-message-meta{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    min-height:9px;
+
+    margin-top:3px;
+}
+
+
+.wa-checks{
+    color:#53bdeb;
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:9px;
+    line-height:1;
+
+    letter-spacing:-3px;
+
+    padding-inline-end:3px;
+}
+
+
+
+/* =========================================================
+   SCREENSHOT
+========================================================= */
+
+.wa-screenshot{
+    flex:1;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:145px;
+
+    padding:12px;
+
+    background:var(--sur);
+}
+
+
+.wa-screenshot img{
+    display:block;
+
+    width:100%;
+    height:auto;
+
+    max-height:360px;
+
+    object-fit:contain;
+
+    background:var(--bg);
+
+    border:
+        1px solid
+        var(--brd);
+
+    border-radius:9px;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+
+.wa-screenshot img:hover{
+    transform:scale(1.01);
+
+    border-color:
+        rgba(18,140,126,.35);
+}
+
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.wa-navigation{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:14px;
+
+    margin-top:26px;
+}
+
+
+
+/* Buttons */
+
+.wa-nav-btn{
+    width:36px;
+    height:36px;
+
+    flex:0 0 36px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+
+    background:var(--sur);
+    color:var(--txt);
+
+    border:
+        1px solid
+        var(--brd);
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+
+.wa-nav-btn span{
+    display:block;
+
+    margin-top:-2px;
+
+    font-size:22px;
+    line-height:1;
+}
+
+
+.wa-nav-btn:hover{
+    background:var(--or);
+
+    color:#fff;
+
+    border-color:var(--or);
+
+    transform:translateY(-1px);
+}
+
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.wa-dots{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+}
+
+
+.wa-dot{
+    width:8px;
+    height:8px;
+
+    flex:0 0 auto;
+
+    padding:0;
+
+    background:var(--brd);
+
+    border:0;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    transition:
+        width .22s ease,
+        background .22s ease,
+        border-radius .22s ease;
+}
+
+
+.wa-dot.active{
+    width:23px;
+
+    background:var(--or);
+
+    border-radius:5px;
+}
+
+
+
+/* =========================================================
+   MOBILE HINT
+========================================================= */
+
+.wa-mobile-hint{
+    display:none;
+}
+
+
+
+/* =========================================================
+   LARGE SCREENS
+   1440+
+========================================================= */
+
+@media(min-width:1440px){
+
+    .wa-section{
+        padding:
+            96px 0 86px;
+    }
+
+
+    .wa-container{
+        width:
+            min(
+                100% - 80px,
+                1280px
+            );
+    }
+
+
+    .wa-section-header{
+        margin-bottom:44px;
+    }
+
+
+    .wa-page{
+        gap:20px;
+    }
+
+
+    .wa-chat-header{
+        min-height:60px;
+
+        padding:
+            10px 14px;
+    }
+
+
+    .wa-chat-body{
+        min-height:155px;
+
+        padding:
+            16px 15px;
+    }
+
+
+    .wa-bubble p{
+        font-size:12.5px;
+    }
+
+
+    .wa-screenshot{
+        min-height:155px;
+
+        padding:14px;
+    }
+
+}
+
+
+
+/* =========================================================
+   TABLET
+   <= 900
+========================================================= */
+
+@media(max-width:900px){
+
+    .wa-section{
+        padding:
+            64px 0 58px;
+    }
+
+
+    .wa-container{
+        width:
+            min(
+                100% - 32px,
+                900px
+            );
+    }
+
+
+    .wa-section-header{
+        margin-bottom:32px;
+    }
+
+
+    /*
+     * 6 cards:
+     *
+     * 2 columns
+     * 3 rows
+     */
+
+    .wa-page{
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+
+        gap:14px;
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+   <= 600
+========================================================= */
+
+@media(max-width:600px){
+
+    /* Section */
+
+    .wa-section{
+        padding:
+            50px 0 46px;
+    }
+
+
+    .wa-container{
+        width:100%;
+
+        padding-inline:16px;
+    }
+
+
+
+    /* Header */
+
+    .wa-section-header{
+        margin-bottom:26px;
+    }
+
+
+    .wa-section-header .eye{
+        margin-bottom:8px;
+    }
+
+
+
+    /* =====================================================
+       CURRENT PAGE → HORIZONTAL SWIPE
+    ===================================================== */
+
+    .wa-page{
+        display:none;
+    }
+
+
+    .wa-page.active{
+        display:flex;
+
+        gap:10px;
+
+        margin-inline:-16px;
+
+        padding:
+            4px
+            16px
+            9px;
+
+        overflow-x:auto;
+        overflow-y:hidden;
+
+        scroll-snap-type:
+            x mandatory;
+
+        scroll-padding-inline:
+            16px;
+
+        scrollbar-width:none;
+
+        overscroll-behavior-inline:
+            contain;
+
+        -webkit-overflow-scrolling:
+            touch;
+    }
+
+
+    .wa-page.active::-webkit-scrollbar{
+        display:none;
+    }
+
+
+
+    /* =====================================================
+       CARD
+    ===================================================== */
+
+    .wa-card{
+        flex:
+            0 0
+            calc(100vw - 58px);
+
+        scroll-snap-align:start;
+
+        scroll-snap-stop:always;
+
+        border-radius:12px;
+
+        box-shadow:none;
+    }
+
+
+    .wa-card:hover{
+        transform:none;
+
+        box-shadow:none;
+    }
+
+
+
+    /* =====================================================
+       CHAT HEADER
+    ===================================================== */
+
+    .wa-chat-header{
+        min-height:54px;
+
+        gap:8px;
+
+        padding:
+            8px 10px;
+    }
+
+
+    .wa-avatar{
+        width:32px;
+        height:32px;
+
+        flex-basis:32px;
+    }
+
+
+    .wa-avatar svg{
+        width:15px;
+        height:15px;
+    }
+
+
+    .wa-client-name{
+        font-size:11px;
+    }
+
+
+    .wa-client-label{
+        font-size:9px;
+    }
+
+
+    .wa-online{
+        font-size:8px;
+    }
+
+
+    .wa-header-icon{
+        width:24px;
+        height:24px;
+
+        flex-basis:24px;
+    }
+
+
+    .wa-header-icon svg{
+        width:15px;
+        height:15px;
+    }
+
+
+
+    /* =====================================================
+       CHAT BODY
+    ===================================================== */
+
+    .wa-chat-body{
+        min-height:130px;
+
+        gap:8px;
+
+        padding:
+            12px 10px;
+    }
+
+
+    .wa-bubble{
+        max-width:91%;
+
+        padding:
+            8px 10px 6px;
+    }
+
+
+    .wa-bubble p{
+        font-size:11.5px;
+        line-height:1.65;
+    }
+
+
+    .wa-message-meta{
+        margin-top:2px;
+    }
+
+
+    .wa-checks{
+        font-size:8px;
+    }
+
+
+
+    /* =====================================================
+       SCREENSHOT
+    ===================================================== */
+
+    .wa-screenshot{
+        min-height:130px;
+
+        padding:9px;
+    }
+
+
+    .wa-screenshot img{
+        max-height:380px;
+
+        border-radius:8px;
+    }
+
+
+    .wa-screenshot img:hover{
+        transform:none;
+    }
+
+
+
+    /* =====================================================
+       SWIPE HINT
+    ===================================================== */
+
+    .wa-mobile-hint{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        gap:8px;
+
+        margin-top:10px;
+
+        color:var(--mu);
+
+        font-size:9.5px;
+        line-height:1;
+    }
+
+
+    .wa-hint-line{
+        width:18px;
+        height:1px;
+
+        background:var(--brd);
+    }
+
+
+
+    /* =====================================================
+       PAGE NAVIGATION
+    ===================================================== */
+
+    .wa-navigation{
+        gap:11px;
+
+        margin-top:16px;
+    }
+
+
+    .wa-nav-btn{
+        width:32px;
+        height:32px;
+
+        flex-basis:32px;
+    }
+
+
+    .wa-nav-btn span{
+        font-size:19px;
+    }
+
+
+    .wa-dot{
+        width:7px;
+        height:7px;
+    }
+
+
+    .wa-dot.active{
+        width:19px;
+    }
+
+}
+
+
+
+/* =========================================================
+   SMALL MOBILE
+   <= 380
+========================================================= */
+
+@media(max-width:380px){
+
+    .wa-container{
+        padding-inline:13px;
+    }
+
+
+    .wa-page.active{
+        margin-inline:-13px;
+
+        padding-left:13px;
+        padding-right:13px;
+
+        scroll-padding-inline:13px;
+    }
+
+
+    .wa-card{
+        flex-basis:
+            calc(100vw - 48px);
+    }
+
+
+    .wa-bubble p{
+        font-size:11px;
+    }
+
+
+    .wa-mobile-hint{
+        font-size:9px;
+    }
+
+}
+
+
+
+/* =========================================================
+   TOUCH DEVICES
+========================================================= */
+
+@media(hover:none){
+
+    .wa-card:hover{
+        transform:none;
+
+        box-shadow:
+            0 4px 18px rgba(0,0,0,.025);
+    }
+
+
+    .wa-screenshot img:hover{
+        transform:none;
+    }
+
+}

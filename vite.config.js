@@ -11,6 +11,8 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/css/sections/blogs.css',
                 'resources/css/sections/blog-page.css',
+                'resources/css/pages/home/home-main.css',
+                'resources/css/pages/services/service-main.css',
             ],
             refresh: true,
             fonts: [

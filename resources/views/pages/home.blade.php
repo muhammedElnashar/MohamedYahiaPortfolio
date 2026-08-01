@@ -1,9 +1,7 @@
 @extends('layouts.app')
-@section('schema')
-    <script type="application/ld+json">
-        {!! file_get_contents(resource_path('schema/home.json')) !!}
-    </script>
-@endsection
+@push('css')
+        @vite(['resources/css/pages/home/home-main.css'])
+@endpush
 @section('content')
 
     @include('sections.hero')

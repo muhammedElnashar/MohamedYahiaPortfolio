@@ -1,0 +1,104 @@
+/* WHY ME */
+
+.svc-why{
+    padding:3.5rem 0;
+    background:var(--sur2);
+}
+
+.svc-why .container{
+    width:100%;
+    max-width:1120px;
+    margin-inline:auto;
+    padding-inline:1.75rem;
+}
+
+.svc-why-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:.35rem .9rem;
+    margin-bottom:1rem;
+    border-radius:999px;
+    background:var(--or-pale);
+    border:1px solid var(--or-border);
+    color:var(--or);
+    font-size:.72rem;
+    font-weight:700;
+}
+
+.svc-why-badge svg{
+    width:12px;
+    height:12px;
+    stroke:currentColor;
+}
+
+.svc-why-title{
+    font-family:'Tajawal','Space Grotesk',sans-serif;
+    font-size:clamp(1.5rem,2vw,2rem);
+    font-weight:800;
+    color:var(--txt);
+    margin-bottom:1.75rem;
+}
+
+.svc-why-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:1rem;
+}
+
+.svc-why-card{
+    background:var(--sur);
+    border:1px solid var(--brd);
+    border-radius:var(--r);
+    padding:1.5rem;
+    transition:all var(--tr);
+}
+
+.svc-why-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--or-border);
+    box-shadow:var(--sh);
+}
+
+.svc-why-icon{
+    color:var(--or);
+    margin-bottom:1rem;
+}
+
+.svc-why-icon svg{
+    width:22px;
+    height:22px;
+}
+
+.svc-why-card h3{
+    font-size:1rem;
+    font-weight:700;
+    color:var(--txt);
+    margin-bottom:.6rem;
+}
+
+.svc-why-card p{
+    font-size:.9rem;
+    line-height:1.8;
+    color:var(--mu);
+}
+
+@media (max-width:768px){
+
+    .svc-why{
+        padding:64px 0;
+    }
+
+    .svc-why .container{
+        padding-inline:16px;
+    }
+
+    .svc-why-grid{
+        grid-template-columns:1fr;
+    }
+
+    .svc-why-card{
+        padding:1.25rem;
+    }
+
+}

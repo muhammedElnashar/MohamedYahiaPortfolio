@@ -1,377 +1,230 @@
 @php
-    $reviewPages = $reviews->chunk(3);
-        $heading = $sections->get(\App\Enums\HomeSectionKey::REVIEWS->value);
+    $heading = $sections->get(
+        \App\Enums\HomeSectionKey::REVIEWS->value
+    );
 @endphp
+
 
 @if($reviews->isNotEmpty())
 
-    <section id="section-reviews"
-             style="padding:4.5rem 0;border-top:1px solid var(--brd);background:var(--bg) ; text-align: center">
+    <section id="section-reviews" class="reviews-section">
 
-        <div class="si">
+        <div class="si reviews-container">
 
-            <div class="eye">
-                <span class="">{{$heading?->eyebrow}}</span>
+
+            {{-- =========================================
+                 HEADER
+            ========================================== --}}
+
+            <div class="reviews-header">
+
+                @if($heading?->eyebrow)
+
+                    <div class="eye">
+                    <span>
+                        {{ $heading->eyebrow }}
+                    </span>
+                    </div>
+
+                @endif
+
+
+                @if($heading?->title)
+
+                    <h2 class="sh">
+                        {{ $heading->title }}
+                    </h2>
+
+                @endif
+
+
+                @if($heading?->subtitle)
+
+                    <p class="reviews-intro">
+                        {{ $heading->subtitle }}
+                    </p>
+
+                @endif
+
             </div>
 
-            <h2 class="sh">
-          {{$heading?->title}}
-            </h2>
 
 
-            <p style="
-            text-align:center;
-            color:var(--mu);
-            font-size:.85rem;
-            margin-bottom:2rem;
-            max-width:520px;
-            margin-inline:auto;
-        ">
-                {{$heading?->subtitle}}
-            </p>
+            {{-- =========================================
+                 REVIEWS
+            ========================================== --}}
+
+            <div class="reviews-grid">
+
+                    @foreach($reviews as $review)
+                    <article class="review-card">
 
 
-            {{-- ============================
-                REVIEWS SLIDER
-            ============================ --}}
+                        {{-- =============================
+                             CHAT HEADER
+                        ============================== --}}
 
-            <div id="rv-slider" style="position:relative;overflow:hidden">
-
-                @foreach($reviewPages as $pageIndex => $reviewsPage)
-                    <div
-                        class="rv-page"
-                        style="
-                        display:{{ $pageIndex === 0 ? 'grid' : 'none' }};
-                        grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-                        gap:18px;
-                    "
-                    >
-
-                        @foreach($reviewsPage as $review)
-
-                            <div style="
-                            background:var(--sur);
-                            border:1px solid var(--brd);
-                            border-radius:16px;
-                            overflow:hidden;
-                        ">
-
-                                {{-- Header --}}
-                                <div style="
-                                background:#1a2e1a;
-                                padding:.6rem 1rem;
-                                display:flex;
-                                align-items:center;
-                                gap:.5rem;
-                            ">
-
-                                    {{-- Avatar --}}
-                                    <div style="
-                                    width:30px;
-                                    height:30px;
-                                    border-radius:50%;
-                                    background:#128C7E;
-                                    display:flex;
-                                    align-items:center;
-                                    justify-content:center;
-                                    font-weight:700;
-                                    color:#fff;
-                                    font-size:.8rem;
-                                    flex-shrink:0;
-                                ">
-                                        {{ $review->avatar_text }}
-                                    </div>
+                        <div class="review-chat-header">
 
 
-                                    {{-- Name + Subtitle --}}
-                                    <div style="flex:1">
+                            {{-- Avatar --}}
 
-                                        <div style="
-                                        font-size:.8rem;
-                                        font-weight:600;
-                                        color:#e8e8e8;
-                                    ">
-                                            {{ $review->client_name }}
-                                        </div>
+                            <div class="review-avatar">
+                                {{ $review->avatar_text }}
+                            </div>
 
 
-                                        @if($review->client_subtitle)
+                            {{-- Client --}}
 
-                                            <div style="
-                                            font-size:.67rem;
-                                            color:#aaa;
-                                        ">
-                                                {{ $review->client_subtitle }}
-                                            </div>
+                            <div class="review-client">
 
-                                        @endif
-
-                                    </div>
-
-
-                                    {{-- Rating --}}
-                                    @if($review->rating)
-
-                                        <div
-                                            title="{{ $review->rating }}/5"
-                                            style="
-                                            font-size:.7rem;
-                                            color:#f5b301;
-                                            white-space:nowrap;
-                                        "
-                                        >
-
-                                            @for($i = 1; $i <= 5; $i++)
-
-                                                {{ $i <= $review->rating ? '★' : '☆' }}
-
-                                            @endfor
-
-                                        </div>
-
-                                    @endif
-
+                                <div class="review-client-name">
+                                    {{ $review->client_name }}
                                 </div>
 
 
-                                {{-- Review --}}
-                                <div style="padding:.9rem 1rem">
+                                @if($review->client_subtitle)
 
-                                    <div style="
-                                    background:#1f3a1f;
-                                    border-radius:10px 10px 10px 0;
-                                    padding:.7rem .9rem;
-                                ">
-
-                                        <p style="
-                                        font-size:.84rem;
-                                        color:#d4edda;
-                                        line-height:1.75;
-                                        margin:0;
-                                    ">
-                                            {{ $review->review }}
-                                        </p>
-
-
-                                        {{-- Time --}}
-                                        @if($review->rating_time)
-
-                                            <div style="
-                                            font-size:.66rem;
-                                            color:#777;
-                                            margin-top:.35rem;
-                                            text-align:left;
-                                        ">
-                                                {{ $review->rating_time }} ✓✓
-                                            </div>
-
-                                        @endif
-
+                                    <div class="review-client-subtitle">
+                                        {{ $review->client_subtitle }}
                                     </div>
 
-                                </div>
+                                @endif
 
                             </div>
 
+
+                            {{-- Rating --}}
+
+                            @if($review->rating)
+
+                                <div
+                                    class="review-rating"
+                                    title="{{ $review->rating }}/5"
+                                    aria-label="{{ $review->rating }} out of 5"
+                                >
+
+                                    @for($i = 1; $i <= 5; $i++)
+
+                                        <span>
+                                        {{ $i <= $review->rating ? '★' : '☆' }}
+                                    </span>
+
+                                    @endfor
+
+                                </div>
+
+                            @endif
+
+
+                        </div>
+
+
+
+                        {{-- =============================
+                             MESSAGE
+                        ============================== --}}
+
+                        <div class="review-message-area">
+
+                            <div class="review-message">
+
+                                <p class="review-text">
+                                    {{ $review->review }}
+                                </p>
+
+
+                                @if($review->rating_time)
+
+                                    <div class="review-time">
+
+                                    <span>
+                                        {{ $review->rating_time }}
+                                    </span>
+
+                                        <span class="review-checks">
+                                        ✓✓
+                                    </span>
+
+                                    </div>
+
+                                @endif
+
+                            </div>
+
+                        </div>
+
+
+                    </article>
                         @endforeach
-
-                    </div>
-
-                @endforeach
-
 
 
             </div>
 
 
-            {{-- ============================
-                NAVIGATION
-            ============================ --}}
 
-            @if($reviewPages->count() > 1)
+            {{-- =========================================
+                 MOBILE SWIPE HINT
+            ========================================== --}}
 
-                <div style="
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                gap:12px;
-                margin-top:1.5rem;
-            ">
+            @if($reviews->count() > 1)
 
-                    <button
-                        type="button"
-                        onclick="rvGo(-1)"
-                        style="
-                        background:var(--sur);
-                        border:1px solid var(--brd);
-                        color:var(--txt);
-                        width:36px;
-                        height:36px;
-                        border-radius:50%;
-                        cursor:pointer;
-                        font-size:1.1rem;
-                        display:flex;
-                        align-items:center;
-                        justify-content:center;
-                    "
-                    >
-                        &#8594;
-                    </button>
+                <div class="reviews-swipe-hint">
 
+                    <span class="reviews-swipe-line"></span>
 
-                    <div id="rv-dots" style="display:flex;gap:6px">
+                    <span class="ari">
+                    اسحب لعرض المزيد
+                </span>
 
-                        @foreach($reviewPages as $index => $page)
+                    <span class="eni">
+                    Swipe to see more
+                </span>
 
-                            <span
-                                class="rvd {{ $index === 0 ? 'active' : '' }}"
-                                onclick="rvSet({{ $index }})"
-                                style="
-                                width:{{ $index === 0 ? '22px' : '8px' }};
-                                height:5px;
-                                border-radius:3px;
-                                background:{{ $index === 0 ? 'var(--or)' : 'var(--brd)' }};
-                                cursor:pointer;
-                                transition:all .3s;
-                            "
-                            ></span>
-
-                        @endforeach
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        onclick="rvGo(1)"
-                        style="
-                        background:var(--sur);
-                        border:1px solid var(--brd);
-                        color:var(--txt);
-                        width:36px;
-                        height:36px;
-                        border-radius:50%;
-                        cursor:pointer;
-                        font-size:1.1rem;
-                        display:flex;
-                        align-items:center;
-                        justify-content:center;
-                    "
-                    >
-                        &#8592;
-                    </button>
+                    <span class="reviews-swipe-line"></span>
 
                 </div>
 
             @endif
 
 
-            {{-- Mostaql Link --}}
-            <div style="text-align:center;margin-top:1.25rem">
 
-                <a
-                    href="{{$hero->portfolio_url}}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style="
-                    font-size:.82rem;
-                    color:var(--or);
-                    text-decoration:none;
-                    border-bottom:1px solid var(--or-border);
-                    padding-bottom:2px;
-                "
-                >
+            {{-- =========================================
+                 MOSTAQL
+            ========================================== --}}
 
-                <span class="ari">
-                    عرض جميع التقييمات على مستقل ←
-                </span>
+                @if($hero->portfolio_url)
+                    <div class="reviews-footer">
 
-                    <span class="eni">
-                    View all reviews on Mostaql ←
-                </span>
+                        <a
+                            href="{{ $hero->portfolio_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="reviews-all-link"
+                        >
 
-                </a>
+                    <span class="ari">
+                        عرض جميع التقييمات على مستقل
+                    </span>
 
-            </div>
+                            <span class="eni">
+                        View all reviews on Mostaql
+                    </span>
+
+                            <span class="reviews-link-arrow">
+                        ←
+                    </span>
+
+                        </a>
+
+                    </div>
+
+                @endif
+
+
 
         </div>
 
     </section>
-
-
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
-
-            const pages = document.querySelectorAll('#rv-slider .rv-page');
-            const dots  = document.querySelectorAll('#rv-dots .rvd');
-
-            let currentReviewPage = 0;
-
-
-            window.rvSet = function(index) {
-
-                if (!pages.length) {
-                    return;
-                }
-
-
-                // Loop
-                if (index < 0) {
-                    index = pages.length - 1;
-                }
-
-                if (index >= pages.length) {
-                    index = 0;
-                }
-
-
-                currentReviewPage = index;
-
-
-                // Pages
-                pages.forEach(function(page, pageIndex) {
-
-                    page.style.display =
-                        pageIndex === currentReviewPage
-                            ? 'grid'
-                            : 'none';
-
-                });
-
-
-                // Dots
-                dots.forEach(function(dot, dotIndex) {
-
-                    if (dotIndex === currentReviewPage) {
-
-                        dot.classList.add('active');
-
-                        dot.style.width = '22px';
-                        dot.style.background = 'var(--or)';
-
-                    } else {
-
-                        dot.classList.remove('active');
-
-                        dot.style.width = '8px';
-                        dot.style.background = 'var(--brd)';
-
-                    }
-
-                });
-
-            };
-
-
-            window.rvGo = function(direction) {
-
-                rvSet(currentReviewPage + direction);
-
-            };
-
-        });
-
-    </script>
 
 @endif

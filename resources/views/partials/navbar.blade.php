@@ -117,19 +117,52 @@
 
 
         {{-- Mobile Menu --}}
-        <button
-            class="hamburger"
-            id="hamburger"
-            type="button"
-            onclick="toggleMenu()"
-            aria-label="{{ __('navigation.toggle_menu') }}"
-            aria-expanded="false"
-        >
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <details class="mobile-nav">
 
+            <summary
+                class="hamburger"
+                aria-label="{{ __('navigation.toggle_menu') }}"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </summary>
+
+            <div class="mobile-menu">
+
+                <a class="mnl"
+                   href="{{ route('about', app()->currentLocale()) }}">
+                    {{ __('navigation.about') }}
+                </a>
+
+                <a class="mnl"
+                   href="{{ url('/' . app()->getLocale()) }}#services">
+                    {{ __('navigation.services') }}
+                </a>
+
+                <a class="mnl"
+                   href="{{ url('/' . app()->getLocale()) }}#cases">
+                    {{ __('navigation.results') }}
+                </a>
+
+                <a class="mnl"
+                   href="{{ url('/' . app()->getLocale()) }}#tools">
+                    {{ __('navigation.tools') }}
+                </a>
+
+                <a class="mnl"
+                   href="{{ url('/' . app()->getLocale()) }}#contact">
+                    {{ __('navigation.contact') }}
+                </a>
+
+                <a class="mnl"
+                   href="{{ route('blogs.index', app()->currentLocale()) }}">
+                    {{ __('navigation.blogs') }}
+                </a>
+
+            </div>
+
+        </details>
     </div>
 
 </nav>

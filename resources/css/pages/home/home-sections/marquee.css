@@ -1,0 +1,386 @@
+/* =====================================================
+   Skills
+===================================================== */
+.sk-tag{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.35rem;
+
+    padding:5px 14px;
+    min-height:34px;
+
+    background:var(--sur);
+    border:1px solid var(--brd);
+    border-radius:999px;
+
+    color:var(--txt);
+
+    cursor:pointer;
+    user-select:none;
+    white-space:nowrap;
+
+    transition:
+        color .2s,
+        background .2s,
+        border-color .2s,
+        transform .2s;
+}
+
+.sk-tag:hover{
+    color:var(--or);
+    background:var(--or-pale);
+    border-color:var(--or);
+}
+
+.sk-tag:focus-visible{
+    outline:2px solid var(--or);
+    outline-offset:2px;
+}
+
+.sk-tag.active{
+    background:var(--or);
+    border-color:var(--or);
+    color:#fff;
+}
+
+@media (hover:none){
+
+    .sk-tag:hover{
+        color:var(--txt);
+        background:var(--sur);
+        border-color:var(--brd);
+    }
+
+    .sk-tag.active{
+        background:var(--or);
+        color:#fff;
+        border-color:var(--or);
+    }
+
+}
+/* ===========================
+   Platforms Grid
+=========================== */
+
+.plt-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+    gap:10px;
+    margin-top:2rem;
+}
+
+.plt{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    padding:1.25rem 1rem;
+
+    background:var(--sur);
+    border:1px solid var(--brd);
+    border-radius:var(--rs);
+
+    text-align:center;
+
+    transition:
+        background var(--tr),
+        border-color var(--tr),
+        transform var(--tr),
+        box-shadow var(--tr);
+}
+
+.plt:hover{
+    background:var(--or-pale);
+    border-color:var(--or-border);
+    transform:translateY(-3px);
+    box-shadow:var(--sh);
+}
+
+.plt > svg{
+    width:22px;
+    height:22px;
+    display:block;
+    margin:0 auto 7px;
+
+    stroke:var(--or);
+    fill:none;
+}
+
+.plt-n{
+    font-size:12px;
+    font-weight:600;
+    color:var(--mu);
+    line-height:1.45;
+}
+
+
+/* ===========================
+   Tools Grid
+=========================== */
+
+.tool-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
+    margin-top:2rem;
+}
+
+.tool{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:1rem 1.25rem;
+
+    background:var(--sur);
+    border:1px solid var(--brd);
+    border-radius:var(--rs);
+
+    transition:
+        background var(--tr),
+        border-color var(--tr),
+        transform var(--tr),
+        box-shadow var(--tr);
+}
+
+.tool:hover{
+    background:var(--or-pale);
+    border-color:var(--or-border);
+    transform:translateY(-2px);
+    box-shadow:var(--sh);
+}
+
+.tool-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--or);
+    flex-shrink:0;
+}
+
+.tool-n{
+    font-size:13px;
+    font-weight:600;
+    color:var(--txt);
+    line-height:1.45;
+}
+
+
+/* =====================================================
+   PLATFORM MARQUEE
+===================================================== */
+
+.plt-marquee-wrap{
+    position:relative;
+    overflow:hidden;
+    margin:1.25rem 0 2rem;
+}
+
+.plt-marquee-wrap::before,
+.plt-marquee-wrap::after{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:80px;
+    z-index:2;
+    pointer-events:none;
+}
+
+.plt-marquee-wrap::before{
+    left:0;
+    background:linear-gradient(90deg,var(--bg2),transparent);
+}
+
+.plt-marquee-wrap::after{
+    right:0;
+    background:linear-gradient(-90deg,var(--bg2),transparent);
+}
+
+.plt-marquee-track{
+    display:flex;
+    gap:.75rem;
+    width:max-content;
+
+    will-change:transform;
+
+    animation:plt-scroll 55s linear infinite;
+}
+
+.plt-marquee-track:hover{
+    animation-play-state:paused;
+}
+
+@keyframes plt-scroll{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50%);
+    }
+
+}
+
+
+/* =====================================================
+   PLATFORM BADGES
+===================================================== */
+
+.plt-badge{
+
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+
+    padding:.45rem 1rem .45rem .65rem;
+
+    border-radius:999px;
+
+    white-space:nowrap;
+
+    text-decoration:none;
+
+    font-size:.78rem;
+    font-weight:700;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    cursor:default;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.18);
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
+}
+
+.plt-badge:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,.22);
+}
+
+.plt-badge-logo{
+    width:24px;
+    height:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.plt-badge-logo svg{
+    width:22px;
+    height:22px;
+}
+
+.plt-badge svg{
+    width:15px;
+    height:15px;
+    flex-shrink:0;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:1024px){
+
+    .plt-grid{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+
+    .tool-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:768px){
+
+    .plt-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:12px;
+    }
+
+    .tool-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+    }
+
+    .plt{
+        padding:1rem .75rem;
+    }
+
+    .tool{
+        padding:.9rem;
+    }
+
+    .plt-n{
+        font-size:11px;
+    }
+
+    .tool-n{
+        font-size:12px;
+    }
+
+    .plt-marquee-wrap::before,
+    .plt-marquee-wrap::after{
+        width:36px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width:480px){
+
+    .plt-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .tool-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* =====================================================
+   TOUCH DEVICES
+===================================================== */
+
+@media (hover:none){
+
+    .plt:hover,
+    .tool:hover,
+    .plt-badge:hover{
+
+        transform:none;
+        box-shadow:none;
+        background:var(--sur);
+        border-color:var(--brd);
+
+    }
+
+    .plt-marquee-track:hover{
+        animation-play-state:running;
+    }
+
+}
+

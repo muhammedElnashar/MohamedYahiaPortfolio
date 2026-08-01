@@ -1,0 +1,112 @@
+/* WHY SERVICE */
+
+.svc-benefits{
+    margin-top:3rem;
+}
+
+.svc-benefits-title{
+    font-family:'Tajawal','Space Grotesk',sans-serif;
+    font-size:clamp(1.5rem,2vw,2rem);
+    font-weight:900;
+    color:var(--txt);
+    margin-bottom:.75rem;
+}
+
+.svc-benefits-desc{
+    font-size:.95rem;
+    line-height:1.8;
+    color:var(--mu);
+    margin-bottom:1.75rem;
+}
+
+.svc-benefits-list{
+    display:flex;
+    flex-direction:column;
+}
+
+.svc-benefit{
+    display:flex;
+    align-items:flex-start;
+    gap:.85rem;
+    padding:1rem 0;
+    border-bottom:1px solid var(--brd);
+}
+
+.svc-benefit:last-child{
+    border-bottom:none;
+}
+
+.svc-benefit-icon{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:var(--or-pale);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.svc-benefit-icon svg{
+    width:16px;
+    height:16px;
+    stroke:var(--or);
+}
+
+.svc-benefit-content{
+    flex:1;
+    min-width:0;
+}
+
+.svc-benefit-content h3{
+    font-size:.95rem;
+    font-weight:700;
+    color:var(--txt);
+    margin-bottom:.35rem;
+}
+
+.svc-benefit-content p{
+    font-size:.9rem;
+    line-height:1.75;
+    color:var(--mu);
+}
+
+@media (max-width:768px){
+
+    .svc-benefits{
+        margin-top:2rem;
+    }
+
+    .svc-benefits-title{
+        margin-bottom:.6rem;
+    }
+
+    .svc-benefits-desc{
+        font-size:.9rem;
+        margin-bottom:1.25rem;
+    }
+
+    .svc-benefit{
+        gap:.75rem;
+        padding:.9rem 0;
+    }
+
+    .svc-benefit-icon{
+        width:30px;
+        height:30px;
+    }
+
+    .svc-benefit-icon svg{
+        width:14px;
+        height:14px;
+    }
+
+    .svc-benefit-content h3{
+        font-size:.9rem;
+    }
+
+    .svc-benefit-content p{
+        font-size:.85rem;
+    }
+
+}

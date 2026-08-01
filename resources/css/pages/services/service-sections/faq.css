@@ -1,0 +1,121 @@
+/* SERVICE FAQ */
+
+.svc-faq{
+    padding:3.5rem 0;
+    background:var(--sur);
+}
+
+.svc-faq .container{
+    width:100%;
+    max-width:1120px;
+    margin-inline:auto;
+    padding-inline:1.75rem;
+}
+
+.svc-faq-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:.35rem .9rem;
+    margin-bottom:1rem;
+    border-radius:999px;
+    background:var(--or-pale);
+    border:1px solid var(--or-border);
+    color:var(--or);
+    font-size:.72rem;
+    font-weight:700;
+}
+
+.svc-faq-badge svg{
+    width:12px;
+    height:12px;
+    stroke:currentColor;
+}
+
+.svc-faq-title{
+    font-family:'Tajawal','Space Grotesk',sans-serif;
+    font-size:clamp(1.5rem,2vw,2rem);
+    font-weight:800;
+    color:var(--txt);
+    margin-bottom:1.5rem;
+}
+
+.svc-faq-list{
+    display:flex;
+    flex-direction:column;
+    gap:.75rem;
+}
+
+.svc-faq-item{
+    border:1px solid var(--brd);
+    border-radius:var(--r);
+    overflow:hidden;
+    background:var(--bg);
+    transition:border-color var(--tr);
+}
+
+.svc-faq-item[open]{
+    border-color:var(--or-border);
+}
+
+.svc-faq-item summary{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1rem;
+    cursor:pointer;
+    list-style:none;
+    padding:1rem 1.25rem;
+    font-size:.95rem;
+    font-weight:700;
+    color:var(--txt);
+}
+
+.svc-faq-item summary::-webkit-details-marker{
+    display:none;
+}
+
+.svc-faq-item summary svg{
+    width:16px;
+    height:16px;
+    stroke:var(--or);
+    transition:.25s;
+    flex-shrink:0;
+}
+
+.svc-faq-item[open] summary svg{
+    transform:rotate(180deg);
+}
+
+.svc-faq-answer{
+    padding:0 1.25rem 1.2rem;
+    border-top:1px solid var(--brd);
+    color:var(--mu);
+    line-height:1.8;
+    font-size:.9rem;
+}
+
+@media (max-width:768px){
+
+    .svc-faq{
+        padding:64px 0;
+    }
+
+    .svc-faq .container{
+        padding-inline:16px;
+    }
+
+    .svc-faq-title{
+        margin-bottom:1.25rem;
+    }
+
+    .svc-faq-item summary{
+        padding:1rem;
+        font-size:.9rem;
+    }
+
+    .svc-faq-answer{
+        padding:0 1rem 1rem;
+    }
+
+}

@@ -1,0 +1,9 @@
+/* SPEC */
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:3rem}
+.spc{background:var(--sur);border:1px solid var(--brd);border-radius:var(--r);padding:1.75rem;transition:all var(--tr)}
+.spc:hover{border-color:var(--or-border);transform:translateY(-2px);box-shadow:var(--sh)}
+.spc-ico{width:48px;height:48px;border-radius:var(--rs);background:var(--or-pale);border:1px solid var(--or-border);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.spc-ico svg{width:20px;height:20px;stroke:var(--or);fill:none}
+.spc-name{font-size:15px;font-weight:700;color:var(--txt);margin-bottom:6px}
+.spc-desc{font-size:13px;color:var(--mu);line-height:1.75}
+.ntag{display:inline-flex;align-items:center;gap:4px;margin-top:10px;padding:3px 9px;border-radius:20px;background:var(--or-pale);border:1px solid var(--or-border);font-size:11px;font-weight:700;color:var(--or)}

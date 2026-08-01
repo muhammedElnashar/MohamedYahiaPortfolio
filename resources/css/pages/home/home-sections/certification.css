@@ -1,0 +1,991 @@
+
+
+.certs-section{
+    position:relative;
+
+    padding:80px 0 72px;
+
+    border-top:1px solid var(--brd);
+
+    text-align:center;
+
+    overflow:hidden;
+}
+
+
+/* Background glow */
+
+.certs-section::before{
+    content:"";
+
+    position:absolute;
+
+    top:-280px;
+    left:50%;
+
+    width:650px;
+    height:450px;
+
+    transform:translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(232,106,26,.07),
+            transparent 68%
+        );
+
+    pointer-events:none;
+}
+
+
+.certs-container{
+    position:relative;
+    z-index:1;
+
+    width:min(100% - 40px, 1240px);
+
+    margin-inline:auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.certs-header{
+    max-width:700px;
+
+    margin:0 auto 38px;
+}
+
+
+.certs-header .eye{
+    margin-bottom:10px;
+}
+
+
+.certs-header .sh{
+    margin-bottom:12px;
+}
+
+
+.certs-intro{
+    max-width:640px;
+
+    margin:0 auto;
+
+    color:var(--mu);
+
+    font-size:15px;
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.certs-stats{
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    max-width:900px;
+
+    margin:0 auto 40px;
+}
+
+
+.certs-stat{
+    min-width:150px;
+
+    padding:15px 22px;
+
+    background:var(--sur);
+
+    border:1px solid var(--brd);
+    border-radius:12px;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.certs-stat:hover{
+    transform:translateY(-3px);
+
+    border-color:rgba(232,106,26,.4);
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.06);
+}
+
+
+.certs-stat-value{
+    margin-bottom:5px;
+
+    color:var(--or);
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:28px;
+    line-height:1.1;
+    font-weight:900;
+}
+
+
+.certs-stat-label{
+    color:var(--mu);
+
+    font-size:12px;
+    line-height:1.45;
+    font-weight:600;
+}
+
+
+/* =========================================================
+   HIGHLIGHTS SLIDER
+========================================================= */
+
+.certs-slider-wrap{
+    position:relative;
+
+    width:100%;
+    max-width:1180px;
+
+    margin-inline:auto;
+
+    padding-inline:55px;
+}
+
+
+/* Track */
+
+.certs-track{
+    display:flex;
+
+    gap:16px;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    padding:6px 2px 12px;
+
+    scroll-behavior:smooth;
+
+    scroll-snap-type:x mandatory;
+
+    scrollbar-width:none;
+
+    overscroll-behavior-inline:contain;
+
+    -webkit-overflow-scrolling:touch;
+}
+
+
+.certs-track::-webkit-scrollbar{
+    display:none;
+}
+
+
+/* =========================================================
+   HIGHLIGHT CARD
+========================================================= */
+
+.cert-slide{
+    flex:0 0 250px;
+
+    min-width:0;
+    min-height:145px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    padding:20px;
+
+    text-align:start;
+
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+
+    background:var(--sur);
+
+    border:1px solid var(--brd);
+    border-radius:14px;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+
+.cert-slide:hover{
+    transform:translateY(-3px);
+
+    border-color:rgba(232,106,26,.42);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.07);
+}
+
+
+.cert-slide-platform{
+    margin-bottom:8px;
+
+    color:var(--or);
+
+    font-size:10px;
+    line-height:1.3;
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+}
+
+
+.cert-slide-title{
+    margin:0 0 6px;
+
+    color:var(--txt);
+
+    font-size:14px;
+    line-height:1.45;
+    font-weight:800;
+}
+
+
+.cert-slide-subtitle{
+    margin:0;
+
+    color:var(--mu);
+
+    font-size:12px;
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   SLIDER ARROWS
+========================================================= */
+
+.certs-arrow{
+    position:absolute;
+
+    top:50%;
+    z-index:5;
+
+    transform:translateY(-50%);
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+
+    background:var(--sur);
+    color:var(--txt);
+
+    border:1px solid var(--brd);
+    border-radius:50%;
+
+    font-family:inherit;
+
+    font-size:23px;
+    line-height:1;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.06);
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+
+.certs-arrow:hover{
+    background:var(--or);
+
+    color:#fff;
+
+    border-color:var(--or);
+
+    transform:
+        translateY(-50%)
+        scale(1.05);
+}
+
+
+.certs-arrow-prev{
+    inset-inline-start:0;
+}
+
+
+.certs-arrow-next{
+    inset-inline-end:0;
+}
+
+
+/* =========================================================
+   LINKEDIN CTA
+========================================================= */
+
+.certs-linkedin-wrap{
+    display:flex;
+    justify-content:center;
+
+    margin-top:28px;
+}
+
+
+.certs-linkedin{
+    min-height:42px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:9px;
+
+    padding:9px 20px;
+
+    background:#0A66C2;
+    color:#fff;
+
+    border-radius:9px;
+
+    font-size:13px;
+    line-height:1.2;
+    font-weight:700;
+
+    text-decoration:none;
+
+    box-shadow:
+        0 7px 20px rgba(10,102,194,.16);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+}
+
+
+.certs-linkedin svg{
+    width:16px;
+    height:16px;
+
+    flex:0 0 16px;
+
+    fill:currentColor;
+}
+
+
+.certs-linkedin:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 26px rgba(10,102,194,.23);
+}
+
+
+/* =========================================================
+   CERTIFICATE IMAGE GALLERY
+========================================================= */
+
+.cert-gallery{
+    position:relative;
+
+    margin-top:42px;
+}
+
+
+.cert-imgs-track{
+    display:flex;
+
+    gap:14px;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    padding:5px 2px 10px;
+
+    scroll-behavior:smooth;
+
+    scroll-snap-type:x mandatory;
+
+    scrollbar-width:none;
+
+    overscroll-behavior-inline:contain;
+
+    -webkit-overflow-scrolling:touch;
+}
+
+
+.cert-imgs-track::-webkit-scrollbar{
+    display:none;
+}
+
+
+.cert-img-slide{
+    flex:0 0 350px;
+
+    min-width:0;
+
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+}
+
+
+.cert-img-slide img{
+    display:block;
+
+    width:100%;
+
+    aspect-ratio:1.45 / 1;
+
+    object-fit:contain;
+
+    padding:8px;
+
+    background:var(--sur);
+
+    border:1px solid var(--brd);
+    border-radius:13px;
+
+    cursor:zoom-in;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+
+.cert-img-slide img:hover{
+    transform:translateY(-3px);
+
+    border-color:rgba(232,106,26,.4);
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.07);
+}
+
+
+/* =========================================================
+   GALLERY CONTROLS
+========================================================= */
+
+.cert-gallery-controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:11px;
+
+    margin-top:14px;
+}
+
+
+.cert-gallery-arrow{
+    width:34px;
+    height:34px;
+
+    flex:0 0 34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+
+    background:var(--or);
+    color:#fff;
+
+    border:0;
+    border-radius:50%;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+
+.cert-gallery-arrow:hover{
+    transform:scale(1.07);
+
+    opacity:.9;
+}
+
+
+.cert-gallery-hint{
+    max-width:400px;
+
+    color:var(--mu);
+
+    font-size:12px;
+    line-height:1.45;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media(min-width:1440px){
+
+    .certs-section{
+        padding:92px 0 82px;
+    }
+
+
+    .certs-container{
+        width:min(100% - 80px, 1380px);
+    }
+
+
+    .certs-header{
+        max-width:760px;
+    }
+
+
+    .certs-intro{
+        font-size:16px;
+    }
+
+
+    .certs-slider-wrap{
+        max-width:1320px;
+    }
+
+
+    .cert-slide{
+        flex-basis:270px;
+
+        min-height:155px;
+
+        padding:23px 22px;
+    }
+
+
+    .cert-slide-title{
+        font-size:15px;
+    }
+
+
+    .cert-slide-subtitle{
+        font-size:12.5px;
+    }
+
+
+    .cert-img-slide{
+        flex-basis:390px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:900px){
+
+    .certs-section{
+        padding:64px 0 58px;
+    }
+
+
+    .certs-container{
+        width:min(100% - 32px, 900px);
+    }
+
+
+    .certs-header{
+        margin-bottom:32px;
+    }
+
+
+    .certs-stats{
+        margin-bottom:32px;
+    }
+
+
+    .certs-slider-wrap{
+        padding-inline:48px;
+    }
+
+
+    .cert-slide{
+        flex-basis:230px;
+
+        min-height:140px;
+    }
+
+
+    .cert-img-slide{
+        flex-basis:320px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    /* Section */
+
+    .certs-section{
+        padding:50px 0 46px;
+    }
+
+
+    .certs-container{
+        width:100%;
+
+        padding-inline:16px;
+    }
+
+
+    /* =====================================
+       HEADER
+    ===================================== */
+
+    .certs-header{
+        margin-bottom:26px;
+    }
+
+
+    .certs-header .eye{
+        margin-bottom:8px;
+    }
+
+
+    .certs-header .sh{
+        margin-bottom:9px;
+    }
+
+
+    .certs-intro{
+        max-width:100%;
+
+        font-size:12.5px;
+        line-height:1.7;
+    }
+
+
+    /* =====================================
+       STATS
+       2 CARDS PER ROW
+    ===================================== */
+
+    .certs-stats{
+        display:grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap:8px;
+
+        width:100%;
+
+        margin-bottom:28px;
+    }
+
+
+    .certs-stat{
+        min-width:0;
+
+        padding:13px 8px;
+
+        border-radius:10px;
+    }
+
+
+    .certs-stat-value{
+        font-size:22px;
+
+        margin-bottom:4px;
+    }
+
+
+    .certs-stat-label{
+        font-size:10px;
+        line-height:1.4;
+    }
+
+
+    /* Disable hover movement */
+
+    .certs-stat:hover{
+        transform:none;
+
+        box-shadow:none;
+    }
+
+
+    /* =====================================
+       HIGHLIGHT SLIDER
+    ===================================== */
+
+    .certs-slider-wrap{
+        width:auto;
+
+        margin-inline:-16px;
+
+        padding-inline:0;
+    }
+
+
+    .certs-track{
+        gap:10px;
+
+        padding:
+            5px
+            16px
+            10px;
+
+        scroll-padding-inline:16px;
+    }
+
+
+    /*
+       One large card + small preview
+       of next card.
+    */
+
+    .cert-slide{
+        flex:
+            0 0
+            calc(100vw - 64px);
+
+        min-height:135px;
+
+        padding:17px 16px;
+
+        border-radius:12px;
+    }
+
+
+    .cert-slide:hover{
+        transform:none;
+
+        box-shadow:none;
+    }
+
+
+    .cert-slide-platform{
+        margin-bottom:7px;
+
+        font-size:9px;
+    }
+
+
+    .cert-slide-title{
+        margin-bottom:5px;
+
+        font-size:13px;
+        line-height:1.45;
+    }
+
+
+    .cert-slide-subtitle{
+        font-size:11px;
+        line-height:1.55;
+    }
+
+
+    /*
+       Mobile uses swipe.
+       No arrows needed.
+    */
+
+    .certs-arrow{
+        display:none;
+    }
+
+
+    /* =====================================
+       LINKEDIN
+    ===================================== */
+
+    .certs-linkedin-wrap{
+        margin-top:22px;
+    }
+
+
+    .certs-linkedin{
+        min-height:40px;
+
+        padding:8px 17px;
+
+        border-radius:8px;
+
+        font-size:12px;
+    }
+
+
+    .certs-linkedin:hover{
+        transform:none;
+    }
+
+
+    /* =====================================
+       CERTIFICATE GALLERY
+    ===================================== */
+
+    .cert-gallery{
+        margin-top:30px;
+
+        margin-left:-16px;
+        margin-right:-16px;
+    }
+
+
+    .cert-imgs-track{
+        gap:10px;
+
+        padding:
+            4px
+            16px
+            8px;
+
+        scroll-padding-inline:16px;
+    }
+
+
+    .cert-img-slide{
+        /*
+           Almost full width.
+           Small part of next image visible.
+        */
+
+        flex:
+            0 0
+            calc(100vw - 50px);
+    }
+
+
+    .cert-img-slide img{
+        width:100%;
+
+        aspect-ratio:1.45 / 1;
+
+        padding:6px;
+
+        border-radius:11px;
+    }
+
+
+    .cert-img-slide img:hover{
+        transform:none;
+
+        box-shadow:none;
+    }
+
+
+    /* Gallery controls */
+
+    .cert-gallery-controls{
+        gap:9px;
+
+        padding-inline:16px;
+
+        margin-top:12px;
+    }
+
+
+    /*
+       Swipe already works,
+       so hide arrows on mobile.
+    */
+
+    .cert-gallery-arrow{
+        display:none;
+    }
+
+
+    .cert-gallery-hint{
+        max-width:280px;
+
+        font-size:10.5px;
+        line-height:1.45;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width:380px){
+
+    .certs-container{
+        padding-inline:13px;
+    }
+
+
+    .certs-stat-value{
+        font-size:20px;
+    }
+
+
+    .certs-stat-label{
+        font-size:9.5px;
+    }
+
+
+    .certs-slider-wrap{
+        margin-inline:-13px;
+    }
+
+
+    .certs-track{
+        padding-left:13px;
+        padding-right:13px;
+    }
+
+
+    .cert-slide{
+        flex-basis:
+            calc(100vw - 54px);
+    }
+
+
+    .cert-gallery{
+        margin-left:-13px;
+        margin-right:-13px;
+    }
+
+
+    .cert-imgs-track{
+        padding-left:13px;
+        padding-right:13px;
+    }
+
+}

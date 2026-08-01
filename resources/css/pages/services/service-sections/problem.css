@@ -1,0 +1,102 @@
+/* SERVICE PROBLEMS */
+
+.svc-problems{
+    padding:3.5rem 0;
+    background:var(--sur);
+}
+
+.svc-problems .container{
+    width:100%;
+    max-width:1120px;
+    margin-inline:auto;
+    padding-inline:1.75rem;
+}
+
+.svc-problems-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:.35rem .9rem;
+    margin-bottom:1rem;
+    border-radius:999px;
+    background:var(--or-pale);
+    border:1px solid var(--or-border);
+    color:var(--or);
+    font-size:.72rem;
+    font-weight:700;
+}
+
+.svc-problems-badge svg{
+    width:12px;
+    height:12px;
+    stroke:currentColor;
+}
+
+.svc-problems-title{
+    font-family:'Tajawal','Space Grotesk',sans-serif;
+    font-size:clamp(1.5rem,2vw,2rem);
+    font-weight:800;
+    color:var(--txt);
+    margin-bottom:1.5rem;
+}
+
+.svc-problems-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1rem;
+}
+
+.svc-problem{
+    display:flex;
+    align-items:flex-start;
+    gap:.85rem;
+    padding:1rem 1.1rem;
+    background:var(--sur2);
+    border:1px solid var(--brd);
+    border-radius:var(--r);
+    transition:all var(--tr);
+}
+
+.svc-problem:hover{
+    border-color:var(--or-border);
+    transform:translateY(-2px);
+}
+
+.svc-problem svg{
+    width:18px;
+    height:18px;
+    stroke:var(--or);
+    flex-shrink:0;
+    margin-top:2px;
+}
+
+.svc-problem span{
+    font-size:.92rem;
+    line-height:1.7;
+    color:var(--txt);
+}
+
+@media (max-width:768px){
+
+    .svc-problems{
+        padding:64px 0;
+    }
+
+    .svc-problems .container{
+        padding-inline:16px;
+    }
+
+    .svc-problems-grid{
+        grid-template-columns:1fr;
+        gap:.85rem;
+    }
+
+    .svc-problem{
+        padding:.9rem 1rem;
+    }
+
+    .svc-problem span{
+        font-size:.88rem;
+    }
+
+}

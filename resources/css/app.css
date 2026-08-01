@@ -1,21 +1,10 @@
 @import './layout/global.css';
 @import './layout/navbar.css';
 @import './layout/footer.css';
-@import './sections/hero.css';
-@import './sections/stats.css';
-@import './sections/facts.css';
-@import './sections/specialties.css';
-@import './sections/services.css';
 @import './sections/skill-page.css';
-@import './sections/service-page.css';
-@import './sections/case-studies.css';
 @import './sections/platform-page.css';
-@import './sections/tools.css';
-@import './sections/faq.css';
-@import './sections/contact.css';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
-
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';

@@ -1,0 +1,737 @@
+/* =========================================================
+   REVIEWS SECTION
+========================================================= */
+
+.reviews-section{
+    position:relative;
+
+    padding:80px 0 72px;
+
+    background:var(--bg);
+
+    border-top:1px solid var(--brd);
+
+    text-align:center;
+
+    overflow:hidden;
+}
+
+
+/* Background glow */
+
+.reviews-section::before{
+    content:"";
+
+    position:absolute;
+
+    width:650px;
+    height:450px;
+
+    top:-300px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(232,106,26,.06),
+            transparent 70%
+        );
+
+    pointer-events:none;
+}
+
+
+.reviews-container{
+    position:relative;
+    z-index:1;
+
+    width:min(100% - 40px, 1180px);
+
+    margin-inline:auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.reviews-header{
+    max-width:650px;
+
+    margin:0 auto 36px;
+}
+
+
+.reviews-header .eye{
+    margin-bottom:10px;
+}
+
+
+.reviews-header .sh{
+    margin-bottom:12px;
+}
+
+
+.reviews-intro{
+    max-width:540px;
+
+    margin:0 auto;
+
+    color:var(--mu);
+
+    font-size:13.5px;
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.reviews-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:18px;
+
+    align-items:stretch;
+}
+
+
+/* =========================================================
+   REVIEW CARD
+========================================================= */
+
+.review-card{
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    background:var(--sur);
+
+    border:1px solid var(--brd);
+    border-radius:14px;
+
+    overflow:hidden;
+
+    text-align:start;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+
+.review-card:hover{
+    transform:translateY(-4px);
+
+    border-color:rgba(232,106,26,.32);
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.07);
+}
+
+
+/* =========================================================
+   CHAT HEADER
+========================================================= */
+
+.review-chat-header{
+    min-height:55px;
+
+    display:flex;
+    align-items:center;
+
+    gap:9px;
+
+    padding:9px 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172c1c,
+            #1c3421
+        );
+}
+
+
+/* Avatar */
+
+.review-avatar{
+    width:34px;
+    height:34px;
+
+    flex:0 0 34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#128C7E;
+
+    color:#fff;
+
+    border-radius:50%;
+
+    font-size:11px;
+    line-height:1;
+    font-weight:800;
+
+    box-shadow:
+        0 3px 10px rgba(18,140,126,.22);
+}
+
+
+/* Client */
+
+.review-client{
+    flex:1;
+
+    min-width:0;
+}
+
+
+.review-client-name{
+    color:#f1f1f1;
+
+    font-size:12px;
+    line-height:1.35;
+    font-weight:700;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+
+.review-client-subtitle{
+    margin-top:2px;
+
+    color:#9fa8a0;
+
+    font-size:10px;
+    line-height:1.35;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+
+/* Rating */
+
+.review-rating{
+    flex-shrink:0;
+
+    display:flex;
+
+    gap:1px;
+
+    color:#f5b301;
+
+    font-size:10px;
+    line-height:1;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   MESSAGE AREA
+========================================================= */
+
+.review-message-area{
+    flex:1;
+
+    display:flex;
+
+    padding:14px 13px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(31,58,31,.08),
+            transparent
+        );
+}
+
+
+/* Message */
+
+.review-message{
+    position:relative;
+
+    width:100%;
+
+    padding:12px 13px 9px;
+
+    background:#1f3a1f;
+
+    border-radius:
+        11px
+        11px
+        11px
+        3px;
+
+    align-self:flex-start;
+}
+
+
+/* small chat tail */
+
+.review-message::before{
+    content:"";
+
+    position:absolute;
+
+    bottom:0;
+    inset-inline-start:-6px;
+
+    width:12px;
+    height:12px;
+
+    background:#1f3a1f;
+
+    clip-path:
+        polygon(
+            100% 0,
+            100% 100%,
+            0 100%
+        );
+}
+
+
+/* Review text */
+
+.review-text{
+    margin:0;
+
+    color:#d8eadc;
+
+    font-size:12.5px;
+    line-height:1.75;
+}
+
+
+/* =========================================================
+   TIME
+========================================================= */
+
+.review-time{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    gap:4px;
+
+    margin-top:6px;
+
+    color:#859087;
+
+    font-family:'Space Grotesk',sans-serif;
+
+    font-size:9px;
+    line-height:1;
+}
+
+
+.review-checks{
+    color:#53bdeb;
+
+    font-size:9px;
+
+    letter-spacing:-3px;
+
+    padding-inline-end:3px;
+}
+
+
+/* =========================================================
+   SWIPE HINT
+   Desktop hidden
+========================================================= */
+
+.reviews-swipe-hint{
+    display:none;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.reviews-footer{
+    display:flex;
+    justify-content:center;
+
+    margin-top:26px;
+}
+
+
+.reviews-all-link{
+    display:inline-flex;
+    align-items:center;
+
+    gap:7px;
+
+    padding-bottom:3px;
+
+    color:var(--or);
+
+    border-bottom:
+        1px solid
+        rgba(232,106,26,.30);
+
+    font-size:12px;
+    line-height:1.4;
+    font-weight:700;
+
+    text-decoration:none;
+
+    transition:
+        gap .2s ease,
+        border-color .2s ease,
+        opacity .2s ease;
+}
+
+
+.reviews-all-link:hover{
+    gap:11px;
+
+    border-color:var(--or);
+}
+
+
+.reviews-link-arrow{
+    font-size:15px;
+
+    transition:transform .2s ease;
+}
+
+
+/* RTL/LTR arrow */
+
+html[dir="ltr"] .reviews-link-arrow{
+    transform:rotate(180deg);
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media(min-width:1440px){
+
+    .reviews-section{
+        padding:96px 0 84px;
+    }
+
+
+    .reviews-container{
+        width:min(100% - 80px, 1280px);
+    }
+
+
+    .reviews-header{
+        margin-bottom:42px;
+    }
+
+
+    .reviews-intro{
+        font-size:14px;
+    }
+
+
+    .reviews-grid{
+        gap:20px;
+    }
+
+
+    .review-chat-header{
+        padding:10px 14px;
+    }
+
+
+    .review-message-area{
+        padding:15px;
+    }
+
+
+    .review-text{
+        font-size:13px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:900px){
+
+    .reviews-section{
+        padding:64px 0 58px;
+    }
+
+
+    .reviews-container{
+        width:min(100% - 32px,900px);
+    }
+
+
+    .reviews-grid{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    /* Section */
+
+    .reviews-section{
+        padding:50px 0 46px;
+    }
+
+
+    .reviews-container{
+        width:100%;
+
+        padding-inline:16px;
+    }
+
+
+    /* Header */
+
+    .reviews-header{
+        margin-bottom:26px;
+    }
+
+
+    .reviews-header .eye{
+        margin-bottom:8px;
+    }
+
+
+    .reviews-header .sh{
+        margin-bottom:9px;
+    }
+
+
+    .reviews-intro{
+        max-width:100%;
+
+        font-size:12px;
+        line-height:1.7;
+    }
+
+
+    /* =====================================
+       REVIEWS → SWIPE SLIDER
+    ===================================== */
+
+    .reviews-grid{
+        display:flex;
+
+        gap:10px;
+
+        margin-inline:-16px;
+
+        padding:
+            4px
+            16px
+            8px;
+
+        overflow-x:auto;
+        overflow-y:hidden;
+
+        scroll-snap-type:x mandatory;
+
+        scroll-padding-inline:16px;
+
+        scrollbar-width:none;
+
+        overscroll-behavior-inline:contain;
+
+        -webkit-overflow-scrolling:touch;
+    }
+
+
+    .reviews-grid::-webkit-scrollbar{
+        display:none;
+    }
+
+
+    /* Card */
+
+    .review-card{
+        flex:
+            0 0
+            calc(100vw - 62px);
+
+        scroll-snap-align:start;
+        scroll-snap-stop:always;
+
+        border-radius:12px;
+    }
+
+
+    .review-card:hover{
+        transform:none;
+
+        box-shadow:none;
+    }
+
+
+    /* Header */
+
+    .review-chat-header{
+        min-height:52px;
+
+        gap:8px;
+
+        padding:8px 10px;
+    }
+
+
+    .review-avatar{
+        width:31px;
+        height:31px;
+
+        flex-basis:31px;
+
+        font-size:10px;
+    }
+
+
+    .review-client-name{
+        font-size:11px;
+    }
+
+
+    .review-client-subtitle{
+        font-size:9px;
+    }
+
+
+    .review-rating{
+        font-size:9px;
+    }
+
+
+    /* Message */
+
+    .review-message-area{
+        padding:11px 10px;
+    }
+
+
+    .review-message{
+        padding:10px 11px 8px;
+
+        border-radius:
+            10px
+            10px
+            10px
+            3px;
+    }
+
+
+    .review-text{
+        font-size:11.5px;
+        line-height:1.7;
+    }
+
+
+    .review-time{
+        margin-top:5px;
+
+        font-size:8.5px;
+    }
+
+
+    /* =====================================
+       SWIPE HINT
+    ===================================== */
+
+    .reviews-swipe-hint{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        gap:8px;
+
+        margin-top:11px;
+
+        color:var(--mu);
+
+        font-size:9.5px;
+        line-height:1;
+    }
+
+
+    .reviews-swipe-line{
+        width:18px;
+        height:1px;
+
+        background:var(--brd);
+    }
+
+
+    /* Footer */
+
+    .reviews-footer{
+        margin-top:20px;
+    }
+
+
+    .reviews-all-link{
+        font-size:11px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width:380px){
+
+    .reviews-container{
+        padding-inline:13px;
+    }
+
+
+    .reviews-grid{
+        margin-inline:-13px;
+
+        padding-left:13px;
+        padding-right:13px;
+    }
+
+
+    .review-card{
+        flex-basis:
+            calc(100vw - 52px);
+    }
+
+
+    .review-text{
+        font-size:11px;
+    }
+
+}

@@ -1,0 +1,116 @@
+/* SERVICE COMPARISON */
+
+.svc-comparison{
+    padding:3.5rem 0;
+    background:var(--sur);
+}
+
+.svc-comparison .container{
+    width:100%;
+    max-width:1120px;
+    margin-inline:auto;
+    padding-inline:1.75rem;
+}
+
+.svc-comparison-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:.35rem .9rem;
+    margin-bottom:1rem;
+    border-radius:999px;
+    background:var(--or-pale);
+    border:1px solid var(--or-border);
+    color:var(--or);
+    font-size:.72rem;
+    font-weight:700;
+}
+
+.svc-comparison-badge svg{
+    width:12px;
+    height:12px;
+    stroke:currentColor;
+}
+
+.svc-comparison-title{
+    font-family:'Tajawal','Space Grotesk',sans-serif;
+    font-size:clamp(1.5rem,2vw,2rem);
+    font-weight:800;
+    color:var(--txt);
+    margin-bottom:1.5rem;
+}
+
+.svc-comparison-table{
+    overflow-x:auto;
+    border:1px solid var(--brd);
+    border-radius:var(--r);
+}
+
+.svc-comparison-table table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+}
+
+.svc-comparison-table thead{
+    background:var(--sur2);
+}
+
+.svc-comparison-table th{
+    padding:.9rem 1rem;
+    border-bottom:2px solid var(--brd);
+    font-size:.9rem;
+    font-weight:700;
+    color:var(--txt);
+}
+
+.svc-comparison-table th:first-child{
+    text-align:start;
+}
+
+.svc-comparison-table th:nth-child(2){
+    text-align:center;
+    color:var(--or);
+    white-space:nowrap;
+}
+
+.svc-comparison-table th:last-child{
+    text-align:center;
+    color:var(--mu);
+    white-space:nowrap;
+}
+
+.svc-comparison-table td{
+    padding:.85rem 1rem;
+    border-bottom:1px solid var(--brd);
+}
+
+.svc-comparison-table tbody tr:last-child td{
+    border-bottom:none;
+}
+
+.svc-comparison-table td:first-child{
+    color:var(--txt);
+    font-weight:600;
+}
+
+.svc-comparison-table td:nth-child(2),
+.svc-comparison-table td:nth-child(3){
+    text-align:center;
+}
+
+.svc-comparison-table svg{
+    vertical-align:middle;
+}
+
+@media (max-width:768px){
+
+    .svc-comparison{
+        padding:64px 0;
+    }
+
+    .svc-comparison .container{
+        padding-inline:16px;
+    }
+
+}

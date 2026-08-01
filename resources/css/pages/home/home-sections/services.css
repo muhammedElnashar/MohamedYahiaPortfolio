@@ -1,0 +1,447 @@
+/* =====================================================
+   HOME SERVICES
+===================================================== */
+
+.svc-bg{
+    background:var(--bg2);
+}
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.svc-filter{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:2rem 0;
+}
+
+.sf-btn{
+    padding:6px 14px;
+    border:1.5px solid var(--brd);
+    border-radius:999px;
+    background:transparent;
+    color:var(--mu);
+    font:600 12px "Cairo","Space Grotesk",sans-serif;
+    cursor:pointer;
+    transition:
+        background var(--tr),
+        color var(--tr),
+        border-color var(--tr);
+}
+
+.sf-btn:hover{
+    color:var(--or);
+    border-color:var(--or);
+}
+
+.sf-btn.on{
+    background:var(--or);
+    border-color:var(--or);
+    color:#fff;
+}
+
+/* =====================================================
+   PROCESS BAR
+===================================================== */
+
+.proc-bar{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:1px;
+
+    margin:2.5rem 0;
+
+    border:1px solid var(--brd);
+    border-radius:var(--r);
+
+    overflow:hidden;
+
+    background:var(--brd);
+}
+
+.pb-step{
+
+    background:var(--sur);
+
+    padding:1.1rem;
+
+    text-align:center;
+
+    transition:background var(--tr);
+
+}
+
+.pb-step:hover{
+
+    background:var(--or-pale);
+
+}
+
+.pb-num{
+
+    display:block;
+
+    margin-bottom:4px;
+
+    font:700 22px "Space Grotesk",sans-serif;
+
+    color:var(--or);
+
+    line-height:1;
+
+}
+
+.pb-label{
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:var(--mu);
+
+}
+
+/* =====================================================
+   SERVICES GRID
+===================================================== */
+
+.svc-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,minmax(0,1fr));
+
+    gap:1px;
+
+    border:1px solid var(--or-border);
+
+    border-radius:var(--r);
+
+    overflow:hidden;
+
+    background:var(--or-border);
+
+}
+
+.svc-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    padding:2rem 1.75rem;
+
+    background:var(--cbg);
+
+    transition:
+        background var(--tr),
+        transform var(--tr);
+
+}
+
+.svc-card:hover{
+
+    background:var(--sur2);
+
+}
+
+.svc-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset-inline:0;
+
+    bottom:0;
+
+    height:3px;
+
+    background:var(--or-gradient);
+
+    transform:scaleX(0);
+
+    transform-origin:right;
+
+    transition:transform var(--tr);
+
+}
+
+.svc-card:hover::after{
+
+    transform:scaleX(1);
+
+}
+
+/* =====================================================
+   BADGE
+===================================================== */
+
+.svc-badge{
+
+    position:absolute;
+
+    top:.875rem;
+
+    inset-inline-start:.875rem;
+
+    padding:2px 8px;
+
+    border-radius:10px;
+
+    background:var(--or);
+
+    color:#fff;
+
+    font-size:10px;
+
+    font-weight:700;
+
+}
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.svc-ico{
+
+    width:52px;
+
+    height:52px;
+
+    margin-bottom:1.25rem;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:var(--rs);
+
+    background:var(--or-pale);
+
+    border:1px solid var(--or-border);
+
+}
+
+.svc-ico svg{
+
+    width:22px;
+
+    height:22px;
+
+    stroke:var(--or);
+
+    fill:none;
+
+}
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.svc-n{
+
+    margin-bottom:8px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:var(--txt);
+
+}
+
+.svc-d{
+
+    margin-bottom:1rem;
+
+    font-size:13px;
+
+    line-height:1.75;
+
+    color:var(--mu);
+
+}
+
+.svc-tags{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:5px;
+
+    margin-bottom:1rem;
+
+}
+
+.svc-tag{
+
+    padding:3px 9px;
+
+    border-radius:999px;
+
+    border:1px solid var(--or-border);
+
+    background:var(--or-pale);
+
+    color:var(--or);
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+/* =====================================================
+   LINK
+===================================================== */
+
+.svc-link{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:var(--or);
+
+}
+
+.svc-link svg{
+
+    width:13px;
+
+    height:13px;
+
+    stroke:var(--or);
+
+    fill:none;
+
+    transition:transform var(--tr);
+
+}
+
+html[lang="ar"] .svc-card:hover .svc-link svg{
+
+    transform:translateX(-4px);
+
+}
+
+html[lang="en"] .svc-card:hover .svc-link svg{
+
+    transform:translateX(4px);
+
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:1024px){
+
+    .svc-grid{
+
+        grid-template-columns:repeat(2,minmax(0,1fr));
+
+    }
+
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:768px){
+
+    .svc-filter{
+
+        justify-content:center;
+
+    }
+
+    .sf-btn{
+
+        font-size:11px;
+
+        padding:6px 12px;
+
+    }
+
+    .proc-bar{
+
+        grid-template-columns:repeat(3,minmax(0,1fr));
+
+    }
+
+    .pb-step:nth-child(4),
+    .pb-step:nth-child(5){
+
+        display:none;
+
+    }
+
+    .svc-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .svc-card{
+
+        padding:1.5rem;
+
+    }
+
+    .svc-n{
+
+        font-size:15px;
+
+    }
+
+    .svc-d{
+
+        font-size:12px;
+
+    }
+
+}
+
+/* =====================================================
+   TOUCH DEVICES
+===================================================== */
+
+@media (hover:none){
+
+    .svc-card:hover{
+
+        background:var(--cbg);
+
+        transform:none;
+
+    }
+
+    .svc-card:hover::after{
+
+        transform:none;
+
+    }
+
+    .svc-card:hover .svc-link svg{
+
+        transform:none;
+
+    }
+
+}

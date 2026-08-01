@@ -1,0 +1,88 @@
+/* METHODOLOGY */
+
+.svc-methodology{
+    margin-top:3rem;
+}
+
+.svc-methodology-title{
+    font-family:'Tajawal','Space Grotesk',sans-serif;
+    font-size:clamp(1.5rem,2vw,2rem);
+    font-weight:900;
+    color:var(--txt);
+    margin-bottom:1.5rem;
+}
+
+.svc-methodology-list{
+    display:flex;
+    flex-direction:column;
+    gap:1.25rem;
+}
+
+.svc-methodology-item{
+    display:flex;
+    align-items:flex-start;
+    gap:1rem;
+}
+
+.svc-methodology-number{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:var(--or);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.9rem;
+    font-weight:700;
+    flex-shrink:0;
+}
+
+.svc-methodology-content{
+    flex:1;
+    min-width:0;
+}
+
+.svc-methodology-content h3{
+    font-size:1rem;
+    font-weight:700;
+    color:var(--txt);
+    margin-bottom:.35rem;
+}
+
+.svc-methodology-content p{
+    font-size:.9rem;
+    color:var(--mu);
+    line-height:1.8;
+}
+
+@media (max-width:768px){
+
+    .svc-methodology{
+        margin-top:2rem;
+    }
+
+    .svc-methodology-title{
+        margin-bottom:1.25rem;
+    }
+
+    .svc-methodology-item{
+        gap:.75rem;
+    }
+
+    .svc-methodology-number{
+        width:32px;
+        height:32px;
+        font-size:.8rem;
+    }
+
+    .svc-methodology-content h3{
+        font-size:.95rem;
+    }
+
+    .svc-methodology-content p{
+        font-size:.85rem;
+    }
+
+}

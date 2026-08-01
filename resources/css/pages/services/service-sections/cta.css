@@ -1,0 +1,197 @@
+
+
+/* ==========================================
+   CTA
+========================================== */
+
+.svc-cta-block{
+    overflow:hidden;
+    border-radius:var(--r);
+}
+
+.cta-inner{
+
+    position:relative;
+    overflow:hidden;
+
+    padding:3rem 2rem;
+
+    text-align:center;
+
+    border:1px solid var(--or-border);
+    border-radius:var(--r);
+
+    background:linear-gradient(
+        135deg,
+        var(--sur),
+        var(--sur2)
+    );
+
+}
+
+.cta-glow{
+
+    position:absolute;
+
+    inset:50% auto auto 50%;
+
+    transform:translate(-50%,-50%);
+
+    width:600px;
+    height:600px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(232,106,26,.08),
+            transparent 65%
+        );
+
+    pointer-events:none;
+
+}
+
+.cta-icon{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:1rem;
+}
+
+.cta-icon svg{
+    width:48px;
+    height:48px;
+    stroke:var(--or);
+}
+
+.cta-h{
+
+    position:relative;
+    z-index:2;
+
+    margin-bottom:.75rem;
+
+    color:var(--txt);
+
+    font-family:
+        "Tajawal",
+        "Space Grotesk",
+        sans-serif;
+
+    font-size:clamp(24px,3vw,34px);
+    font-weight:900;
+
+}
+
+.cta-h .or{
+    color:var(--or);
+}
+
+.cta-sub{
+
+    position:relative;
+    z-index:2;
+
+    max-width:620px;
+    margin:0 auto 2rem;
+
+    color:var(--mu);
+
+    font-size:15px;
+    line-height:1.85;
+
+}
+
+.cta-btns{
+
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+
+    margin-bottom:1.75rem;
+
+}
+
+.cta-trust{
+
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    justify-content:center;
+    gap:1.5rem;
+    flex-wrap:wrap;
+
+}
+
+.cta-trust span{
+
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    color:var(--mu);
+
+    font-size:12px;
+    font-weight:600;
+
+}
+
+.cta-trust svg{
+
+    width:14px;
+    height:14px;
+
+    stroke:var(--or);
+    fill:none;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+
+
+    .cta-inner{
+
+        padding:2rem 1.25rem;
+
+    }
+
+    .cta-btns{
+
+        flex-direction:column;
+
+    }
+
+    .cta-btns>*{
+
+        width:100%;
+
+    }
+
+    .cta-trust{
+
+        flex-direction:column;
+        gap:.75rem;
+
+    }
+
+}
+
+@media(hover:none){
+
+    .cta-btns a:hover{
+
+        transform:none;
+
+    }
+
+}

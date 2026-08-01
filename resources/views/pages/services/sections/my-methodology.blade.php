@@ -2,35 +2,43 @@
     $headingSection = $service->contentSection('my_methodology');
     $section = $service->section('my_methodology');
 @endphp
+
 @if($headingSection && $section)
 
+    <div class="svc-methodology">
 
-<div>
+        <div class="eye">
+            {{ $headingSection->eyebrow }}
+        </div>
 
-    <div class="eye" style="margin-bottom:.75rem"><span class="">{{$headingSection->eyebrow}}</span>
-    </div>
-    <h2 style="font-size:1.5rem;font-weight:900;color:var(--txt);margin-bottom:1.25rem"><span
-            class="">{{$headingSection->title}}</span></h2>
-        <div style="display:flex;flex-direction:column;gap:1.25rem">
+        <h2 class="svc-methodology-title">
+            {{ $headingSection->title }}
+        </h2>
+
+        <div class="svc-methodology-list">
+
             @foreach($section->processSteps as $methProcess1)
-                <div style="display:flex;gap:1rem;align-items:flex-start">
-                    <div
-                        style="width:32px;height:32px;border-radius:50%;background:var(--or);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0">
-                        {{$methProcess1->number}}
+
+                <div class="svc-methodology-item">
+
+                    <div class="svc-methodology-number">
+                        {{ $methProcess1->number }}
                     </div>
-                    <div>
-                        <div
-                            style="font-size:.9rem;font-weight:700;color:var(--txt);margin-bottom:.2rem">
-                            <span class="">{{$methProcess1->title}}</span>
-                        </div>
-                        <div style="font-size:.82rem;color:var(--mu)"><span
-                                class="">{{$methProcess1->description}}</span>
-                        </div>
+
+                    <div class="svc-methodology-content">
+
+                        <h3>{{ $methProcess1->title }}</h3>
+
+                        <p>{{ $methProcess1->description }}</p>
+
                     </div>
+
                 </div>
 
             @endforeach
+
         </div>
 
-</div>
+    </div>
+
 @endif
