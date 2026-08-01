@@ -98,31 +98,55 @@
     line-height:1.9;
 }
 
+/* ==========================
+   HERO STATS
+========================== */
+
 .spage-stats{
     display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:12px;
-    max-width:620px;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    max-width:720px;
 }
 
 .sps{
-    padding:1rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:110px;
+    padding:1.2rem 1rem;
     text-align:center;
     background:var(--sur);
     border:1px solid var(--brd);
     border-radius:var(--r);
+    transition:all .3s ease;
+}
+
+.sps:hover{
+    border-color:var(--or-border);
+    transform:translateY(-3px);
 }
 
 .spsn{
-    font:700 24px "Space Grotesk",sans-serif;
+    font-family:"Space Grotesk",sans-serif;
+    font-size:28px;
+    font-weight:700;
     color:var(--or);
+    line-height:1;
 }
 
 .spsl{
-    margin-top:3px;
-    font-size:11px;
+    margin-top:8px;
+    font-size:12px;
+    line-height:1.45;
     color:var(--mu);
+    text-align:center;
 }
+
+/* ==========================
+   BODY
+========================== */
 
 .spage-body{
     padding:60px 1.75rem;
@@ -183,7 +207,9 @@
     flex-shrink:0;
 }
 
-
+/* ==========================
+   RESPONSIVE
+========================== */
 
 @media(max-width:768px){
 
@@ -204,17 +230,49 @@
     }
 
     .spage-stats{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+        max-width:100%;
     }
 
+    .sps{
+        min-height:100px;
+        padding:1rem .75rem;
+    }
 
+    .spsn{
+        font-size:24px;
+    }
 
+    .spsl{
+        font-size:11px;
+    }
 }
 
 @media(max-width:480px){
 
-    .spage-stats{
-        grid-template-columns:2;
+    .spage-title{
+        line-height:1.3;
     }
 
+    .spage-desc{
+        line-height:1.8;
+    }
+    .spage-stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .sps{
+        min-height:90px;
+        padding:.85rem .6rem;
+    }
+
+    .spsn{
+        font-size:22px;
+    }
+
+    .spsl{
+        font-size:10px;
+    }
 }
