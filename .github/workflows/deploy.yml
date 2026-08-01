@@ -32,13 +32,19 @@ jobs:
           SSH_HOST: ${{ secrets.HOSTINGER_HOST }}
           SSH_PORT: ${{ secrets.HOSTINGER_PORT }}
         run: |
+          set -e
+
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
 
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/hostinger
+          printf "%s" "$SSH_PRIVATE_KEY" > ~/.ssh/hostinger
           chmod 600 ~/.ssh/hostinger
 
-          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          for i in 1 2 3; do
+            ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts && break
+            echo "Retry ssh-keyscan ($i)..."
+            sleep 3
+          done
 
       - name: Deploy files to Hostinger
         env:
@@ -46,15 +52,24 @@ jobs:
           SSH_PORT: ${{ secrets.HOSTINGER_PORT }}
           SSH_USER: ${{ secrets.HOSTINGER_USER }}
         run: |
-          rsync -az \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='.env' \
-            --exclude='node_modules/' \
-            --exclude='vendor/' \
-            --exclude='storage/' \
-            -e "ssh -i ~/.ssh/hostinger -p $SSH_PORT" \
-            ./ "$SSH_USER@$SSH_HOST:/home/u684683991/domains/mohamedyahiaseo.com/public_html/"
+
+          for i in 1 2 3; do
+
+            rsync -az \
+              --delay-updates \
+              --exclude='.git/' \
+              --exclude='.github/' \
+              --exclude='.env' \
+              --exclude='node_modules/' \
+              --exclude='vendor/' \
+              --exclude='storage/' \
+              -e "ssh -i ~/.ssh/hostinger -p $SSH_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=15" \
+              ./ "$SSH_USER@$SSH_HOST:/home/u684683991/domains/mohamedyahiaseo.com/public_html/" && break
+
+            echo "Retry rsync ($i)..."
+            sleep 5
+
+          done
 
       - name: Run Laravel deployment commands
         env:
@@ -62,20 +77,41 @@ jobs:
           SSH_PORT: ${{ secrets.HOSTINGER_PORT }}
           SSH_USER: ${{ secrets.HOSTINGER_USER }}
         run: |
-          ssh -i ~/.ssh/hostinger -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" << 'EOF'
-            set -e
 
-            cd /home/u684683991/domains/mohamedyahiaseo.com/public_html
+          ssh \
+            -i ~/.ssh/hostinger \
+            -p "$SSH_PORT" \
+            -o StrictHostKeyChecking=no \
+            -o ConnectTimeout=15 \
+            "$SSH_USER@$SSH_HOST" << 'EOF'
 
-            composer install \
-              --no-dev \
-              --prefer-dist \
-              --no-interaction \
-              --optimize-autoloader
+          set -e
 
-            php artisan migrate --force
+          cd /home/u684683991/domains/mohamedyahiaseo.com/public_html
 
-            php artisan optimize:clear
-            php artisan config:cache
-            php artisan view:cache
+          until [ -f composer.json ]; do
+            echo "Waiting for composer.json..."
+            sleep 2
+          done
+
+          composer install \
+            --no-dev \
+            --prefer-dist \
+            --no-interaction \
+            --optimize-autoloader
+
+          php artisan migrate --force
+
+          php artisan storage:link || true
+
+          chmod -R 775 storage bootstrap/cache || true
+
+          php artisan optimize:clear
+
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+
+          php artisan queue:restart || true
+
           EOF
