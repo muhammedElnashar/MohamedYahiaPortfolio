@@ -45,7 +45,7 @@ class TechnicalSeoSeeder extends Seeder
                 'ar' => 'أعالج مشاكل الأرشفة، وSchema Markup، وCanonical، وCrawl Budget، وCore Web Vitals لجميع المنصات والمواقع المبرمجة بأي لغة.',
             ],
 
-            'meta_title' => [
+         /*   'meta_title' => [
                 'en' => 'Technical SEO Services',
                 'ar' => 'خدمات السيو التقني',
             ],
@@ -53,7 +53,7 @@ class TechnicalSeoSeeder extends Seeder
             'meta_description' => [
                 'en' => 'Technical SEO services to fix crawling, indexing, Core Web Vitals, Schema Markup and website performance.',
                 'ar' => 'خدمات السيو التقني لتحسين الأرشفة، والزحف، وCore Web Vitals، وSchema Markup، وأداء الموقع.',
-            ],
+            ],*/
         ]);
 
         $hero = $service->statisticsSections()->create([
@@ -778,7 +778,7 @@ Core Web Vitals are now an official ranking signal — improving LCP, CLS, and I
             [
                 'number' => 2,
                 'title' => [
-                    'en' => 'Review and fix robots.txt, Sitemap and Canonical tags',
+                    'en' => 'Review and fix robots-old.txt, Sitemap and Canonical tags',
                     'ar' => 'مراجعة وإصلاح Robots.txt وSitemap وCanonical',
                 ],
                 'sort_order' => 2,

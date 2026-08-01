@@ -13,6 +13,7 @@ export default defineConfig({
                 'resources/css/sections/blog-page.css',
                 'resources/css/pages/home/home-main.css',
                 'resources/css/pages/services/service-main.css',
+                'resources/css/pages/about/main.css',
             ],
             refresh: true,
             fonts: [

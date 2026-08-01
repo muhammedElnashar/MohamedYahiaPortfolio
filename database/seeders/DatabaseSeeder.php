@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
             ServiceProcessSeeder::class,
             BlogSeeder::class,
             ProfilePageSeeder::class,
+            SeoDataPageSeeder::class,
         ]);
     }
 }

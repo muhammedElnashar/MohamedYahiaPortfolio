@@ -31,6 +31,7 @@ class ServiceController extends Controller
         $schemas = $schemaService->service(
             $service
         );
+        seo()->set($service->seo);
         return view('pages.services.show', compact('service','schemas'));
     }
 

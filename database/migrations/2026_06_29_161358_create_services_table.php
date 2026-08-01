@@ -30,9 +30,6 @@ return new class extends Migration {
 
             $table->json('hero_description');
 
-            $table->json('meta_title')->nullable();
-            $table->json('meta_description')->nullable();
-            $table->string('canonical_url')->nullable();
 
             $table->integer('sort_order')->default(0);
 

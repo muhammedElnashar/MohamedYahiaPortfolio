@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\Translatable\HasTranslations;
 
 class Skill extends Model
@@ -49,5 +50,9 @@ class Skill extends Model
     public function page()
     {
         return $this->hasOne(SkillPageData::class);
+    }
+    public function seo(): MorphOne
+    {
+        return $this->morphOne(SeoMeta::class, 'seoable');
     }
 }

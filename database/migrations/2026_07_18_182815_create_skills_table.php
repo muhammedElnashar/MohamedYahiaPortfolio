@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->boolean('has_page')->default(false);
             $table->unsignedInteger('sort_order');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

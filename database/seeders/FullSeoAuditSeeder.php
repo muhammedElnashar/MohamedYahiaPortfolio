@@ -35,14 +35,14 @@ class FullSeoAuditSeeder extends Seeder
                 'en' => 'Complete analysis: technical errors, structure, keywords, competitors, with a clear action plan to dominate search results.',
                 'ar' => 'تحليل شامل: الأخطاء التقنية، البنية، الكلمات المفتاحية، والمنافسين، مع خطة عمل واضحة للسيطرة على نتائج البحث.',
             ],
-            'meta_title' => [
+/*            'meta_title' => [
                 'en' => 'Full SEO Audit Service',
                 'ar' => 'خدمة تدقيق SEO الشامل',
             ],
             'meta_description' => [
                 'en' => 'Complete SEO audit for technical issues, content, keywords and competitors.',
                 'ar' => 'تدقيق SEO شامل للمشاكل التقنية، المحتوى، الكلمات المفتاحية والمنافسين.',
-            ],
+            ],*/
         ]);
 
         $hero = $service->statisticsSections()->create([

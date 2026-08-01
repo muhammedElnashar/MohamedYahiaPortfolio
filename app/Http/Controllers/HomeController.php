@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PageListEnum;
 use App\Models\HeroSkill;
 use App\Models\ProfilePage;
+use App\Models\SeoDataPage;
 use App\Models\Skill;
 use App\Services\HomePageService;
 
@@ -15,6 +17,9 @@ class HomeController extends Controller
 
     public function index()
     {
+        seo()->set(
+            SeoDataPage::where('key', PageListEnum::HOME->value)->first()
+        );
 
         return view(
             'pages.home',
@@ -33,6 +38,9 @@ class HomeController extends Controller
             'methodologyItems',
         ])->first();
         $skills = HeroSkill::all();
+        seo()->set(
+            SeoDataPage::where('key', PageListEnum::ABOUT->value)->first()
+        );
         return view('pages.about', compact('profilePage','skills'));
     }
 }

@@ -23,6 +23,7 @@ class SkillController extends Controller
         $schemas = $schemaService->skill(
             $skill
         );
+        seo()->set($skill->seo);
         return view('pages.skills.show', compact('skill', 'schemas'));
     }
 }

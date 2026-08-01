@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ProfilePages\Schemas;
 
+use App\Filament\Forms\Components\SeoForm;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -61,15 +62,6 @@ class ProfilePageForm
                     ->columns(2)
                     ->columnSpanFull(),
 
-                Section::make('SEO')
-                    ->schema([
-                        Translation::text('meta_title', 'Meta Title',required: true)->columnSpanFull(),
-                        Translation::textarea('meta_description', 'Meta Description',required: true)->columnSpanFull(),
-                        TextInput::make('canonical_url')->url()->required(),
-
-                    ])
-                    ->columns(2)
-                    ->columnSpanFull(),
 
                 Section::make('Settings')
                     ->schema([

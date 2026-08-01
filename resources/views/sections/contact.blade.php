@@ -198,6 +198,7 @@
 
                         {{-- Location --}}
 
+{{--
                         @if($info->location)
 
                             <div class="citem">
@@ -222,6 +223,7 @@
                             </div>
 
                         @endif
+--}}
 
                     </div>
 

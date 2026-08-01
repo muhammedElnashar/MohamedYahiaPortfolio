@@ -1,10 +1,10 @@
     /*theme*/
     :root {
-        --or: #E86A1A;
+        --or: #ea700a;
         --or2: #FF7C2A;
         --or-gradient: linear-gradient(135deg,var(--or),var(--or2));
 
-        --or-pale: rgba(232, 106, 26, .1);
+        --or-pale: rgb(255 107 6 / 0.1);
         --or-border: rgba(232, 106, 26, .22);
         --r: 14px;
         --rs: 9px;
@@ -30,7 +30,7 @@
     [data-theme="light"] {
         --bg: #F7F5F1;
         --bg2: #EEECEA;
-        --bg3: #E5E3DF;
+        --bg3: #47110c;
         --sur: #FFF;
         --sur2: #F2F0EC;
         --txt: #18161A;

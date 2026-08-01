@@ -30,9 +30,6 @@ return new class extends Migration
 
             $table->timestamp('published_at')->nullable();
 
-            $table->json('meta_title')->nullable();
-            $table->json('meta_description')->nullable();
-            $table->string('canonical_url')->nullable();
             // Status
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);

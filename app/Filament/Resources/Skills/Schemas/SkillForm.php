@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Skills\Schemas;
 
+use App\Filament\Forms\Components\SeoForm;
 use App\Models\Skill;
 use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
@@ -38,22 +39,20 @@ class SkillForm
 
                        SortOrder::make(Skill::class)
                     ]),
-                Section::make('Seo Data')
-
-                    ->visible(
-                        fn (Get $get): bool =>
-                        (bool) $get('has_page')
-                    )
+                Section::make('Page Data')
+                    ->visible(fn (Get $get) => (bool) $get('has_page'))
                     ->schema([
+
                         Group::make()
                             ->relationship('page')
                             ->schema([
-                                Translation::text('meta_title', 'Meta Title',required: true)->columnSpanFull(),
-                                Translation::textarea('meta_description', 'Meta Description',required: true)->columnSpanFull(),
-                                TextInput::make('canonical_url')->url()->required(),
-
-
+                                // Hero
+                                // CTA
+                                // Features
                             ]),
+
+                        SeoForm::make(),
+
                     ]),
                 Section::make('Page Data')
 

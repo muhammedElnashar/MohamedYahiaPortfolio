@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PageListEnum;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\SeoDataPage;
 use App\Services\BlogTableOfContents;
 use App\Services\SchemaService;
 use DOMDocument;
@@ -64,7 +66,9 @@ class BlogController extends Controller
         $schemas = $schemaService->blogIndex(
             $blogs->getCollection()
         );
-
+        seo()->set(
+            SeoDataPage::where('key', PageListEnum::BLOGS->value)->first()
+        );
         return view('pages.blogs.index', compact(
             'blogs',
             'categories',
@@ -142,7 +146,7 @@ class BlogController extends Controller
             ->take(3)
             ->get();
 
-
+        seo()->set($blog->seo);
         return view('pages.blogs.show', compact(
             'blog',
             'content',

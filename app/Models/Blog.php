@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\Translatable\HasTranslations;
 
 class Blog extends Model
@@ -26,9 +27,6 @@ class Blog extends Model
         'reading_time',
         'published_at',
 
-        'meta_title',
-        'meta_description',
-        'canonical_url',
 
         'is_featured',
         'is_active',
@@ -38,8 +36,6 @@ class Blog extends Model
         'title',
         'excerpt',
         'content',
-        'meta_title',
-        'meta_description',
 
     ];
 
@@ -70,5 +66,9 @@ class Blog extends Model
     {
         return $this->hasMany(BlogFaq::class)
             ->orderBy('sort_order');
+    }
+    public function seo(): MorphOne
+    {
+        return $this->morphOne(SeoMeta::class, 'seoable');
     }
 }

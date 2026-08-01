@@ -549,15 +549,7 @@ HTML,
 
                 'reading_time' => 12,
 
-                'meta_title' => [
-                    'ar' => 'الدليل الشامل لتحسين محركات البحث SEO',
-                    'en' => 'The Complete SEO Guide',
-                ],
 
-                'meta_description' => [
-                    'ar' => 'دليل شامل لفهم SEO والتحسين التقني والكلمات المفتاحية والمحتوى وبناء استراتيجية متكاملة لتحسين ظهور الموقع في نتائج البحث.',
-                    'en' => 'Learn SEO from technical optimization and keyword research to content, internal linking, measurement, and building a complete search strategy.',
-                ],
 
 
                 /*

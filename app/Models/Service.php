@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,9 +23,7 @@ class Service extends Model
         'hero_title',
         'hero_description',
 
-        'meta_title',
-        'meta_description',
-        'canonical_url',
+
 
         'schema',
         'badge',
@@ -41,8 +40,6 @@ class Service extends Model
         'short_description',
         'hero_title',
         'hero_description',
-        'meta_title',
-        'meta_description',
 
     ];
     public function getRouteKeyName(): string
@@ -174,4 +171,10 @@ class Service extends Model
     {
         return $this->ctas->firstWhere('section_key', $key);
     }
+
+    public function seo(): MorphOne
+    {
+        return $this->morphOne(SeoMeta::class, 'seoable');
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Blogs\Schemas;
 
+use App\Filament\Forms\Components\SeoForm;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -131,9 +132,7 @@ class BlogForm
 
                 Section::make('SEO')
                     ->schema([
-                        Translation::text('meta_title', 'Meta Title',required: true)->columnSpanFull(),
-                        Translation::textarea('meta_description', 'Meta Description',required: true)->columnSpanFull(),
-                        TextInput::make('canonical_url')->url()->required(),
+                  SeoForm::make(),
 
                     ])
                     ->columns(2)

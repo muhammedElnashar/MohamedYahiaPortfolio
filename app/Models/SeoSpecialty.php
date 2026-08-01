@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\Translatable\HasTranslations;
 
 class SeoSpecialty extends Model
@@ -55,9 +56,6 @@ class SeoSpecialty extends Model
         'cta_button',
         'cta_url',
 
-        'meta_title',
-        'meta_description',
-        'canonical_url',
 
         'sort_order',
         'is_active',
@@ -105,8 +103,6 @@ class SeoSpecialty extends Model
         'cta_description',
         'cta_button',
 
-        'meta_title',
-        'meta_description',
     ];
 
     public function challenges(): HasMany
@@ -165,5 +161,9 @@ class SeoSpecialty extends Model
     {
         return $this->hasMany(SeoSpecialtyPhilosophy::class)
             ->orderBy('sort_order');
+    }
+    public function seo(): MorphOne
+    {
+        return $this->morphOne(SeoMeta::class, 'seoable');
     }
 }

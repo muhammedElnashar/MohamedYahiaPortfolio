@@ -6,13 +6,13 @@
         class="logo"
         aria-label="Mohamed Yahia"
     >
-        <div class="logo-ring">
-            <i data-lucide="trending-up"></i>
-        </div>
+            <div class="logo-ring">
+                <i data-lucide="trending-up"></i>
+            </div>
 
-        <div class="logo-name">
-            Mohamed <em>Yahia</em>
-        </div>
+            <div class="logo-name">
+                Mohamed <em>Yahia</em>
+            </div>
     </a>
 
 

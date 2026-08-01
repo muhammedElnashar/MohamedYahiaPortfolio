@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Services\Schemas\Tabs;
 
+use App\Filament\Forms\Components\SeoForm;
 use App\Support\Translation\Translation;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -97,9 +98,7 @@ class GeneralTab
                         ->collapsible()
                         ->collapsed()
                         ->schema([
-                            Translation::text('meta_title', 'Meta Title',required: true)->columnSpanFull(),
-                            Translation::textarea('meta_description', 'Meta Description',required: true)->columnSpanFull(),
-                            TextInput::make('canonical_url')->url()->required(),
+                           SeoForm::make(),
 
 
                         ]),

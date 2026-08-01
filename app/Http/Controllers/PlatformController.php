@@ -24,6 +24,7 @@ class PlatformController extends Controller
         $schemas = $schemaService->platform(
             $platform
         );
+        seo()->set($platform->seo);
         return view('pages.platform.show', compact('platform','schemas'));
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\Seo\SeoManager;
+
 if (! function_exists('switchLocaleUrl')) {
 
     function switchLocaleUrl(string $locale): string
@@ -16,5 +18,12 @@ if (! function_exists('switchLocaleUrl')) {
         }
 
         return url(implode('/', $segments));
+    }
+}
+if (! function_exists('seo')) {
+
+    function seo(): SeoManager
+    {
+        return app(SeoManager::class);
     }
 }

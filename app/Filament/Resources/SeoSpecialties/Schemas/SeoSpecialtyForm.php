@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SeoSpecialties\Schemas;
 
+use App\Filament\Forms\Components\SeoForm;
 use App\Models\SeoSpecialty;
 use App\Support\Filament\SortOrder;
 use App\Support\Translation\Translation;
@@ -219,14 +220,12 @@ class SeoSpecialtyForm
                 Section::make('SEO')
                     ->description('Search engine metadata.')
                     ->schema([
-                        Translation::text('meta_title', 'Meta Title',required: true)->columnSpanFull(),
-                        Translation::textarea('meta_description', 'Meta Description',required: true)->columnSpanFull(),
-                        TextInput::make('canonical_url')->url()->required(),
+                   SeoForm::make(),
 
 
 
                     ])
-                    ->columns(2)
+                    ->columnSpanFull()
                     ->collapsed(),
             ]);
     }

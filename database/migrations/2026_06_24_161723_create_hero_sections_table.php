@@ -33,9 +33,7 @@ return new class extends Migration
             $table->unsignedInteger('completion_count');
             $table->decimal('rating_count', 3, 1);
             $table->json('mostaql_projects');
-            $table->json('meta_title')->nullable();
-            $table->json('meta_description')->nullable();
-            $table->string('canonical_url')->nullable();
+
 
 
             $table->timestamps();

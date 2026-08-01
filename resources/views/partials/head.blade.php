@@ -1,100 +1,114 @@
 <head>
 
-    <title>
-        @yield('title', config('app.name'))
-    </title>
-
-    {{-- Fonts --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
-    {{-- Basic --}}
+    {{-- Charset --}}
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    {{-- Viewport --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    {{-- Title --}}
+    <title>{{ seo()->get('meta_title', config('app.name')) }}</title>
+    {{-- Favicon --}}
+    <link rel="icon" href="{{ asset('assets/icons/favicon.ico') }}" sizes="any">
 
-    {{-- Description --}}
-    @hasSection('meta_description')
-        <meta
-            name="description"
-            content="@yield('meta_description')"
-        >
-    @endif
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="{{ asset('assets/icons/favicon-32x32.png') }}">
 
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="{{ asset('assets/icons/favicon-16x16.png') }}">
 
-    {{-- Keywords --}}
-    @hasSection('meta_keywords')
-        <meta
-            name="keywords"
-            content="@yield('meta_keywords')"
-        >
-    @endif
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="{{ asset('assets/icons/apple-touch-icon.png') }}">
 
+    <link rel="manifest"
+          href="{{ asset('assets/icons/site.webmanifest') }}">
 
-    {{-- Author --}}
-    @hasSection('meta_author')
-        <meta
-            name="author"
-            content="@yield('meta_author')"
-        >
-    @endif
-
-
-    {{-- Robots --}}
-    <meta
-        name="robots"
-        content="@yield('robots', 'index, follow')"
-    >
-
+    {{-- Theme --}}
+    <meta name="theme-color" content="#0F172A">
+    <meta name="color-scheme" content="light dark">
 
     {{-- Canonical --}}
-    @hasSection('canonical')
-        <link
-            rel="canonical"
-            href="@yield('canonical')"
-        >
-    @endif
+    <link rel="canonical"
+          href="{{ seo()->get('canonical_url', url()->current()) }}">
 
+    {{-- Description --}}
+    <meta name="description"
+          content="{{ seo()->get('meta_description', '') }}">
 
-    {{-- Open Graph Title --}}
-    @hasSection('og_title')
-        <meta
-            property="og:title"
-            content="@yield('og_title')"
-        >
-    @endif
+    {{-- Keywords --}}
+    <meta name="keywords"
+          content="{{ seo()->get('meta_keywords', '') }}">
 
+    {{-- Author --}}
+    <meta name="author"
+          content="{{ seo()->get('meta_author', config('app.name')) }}">
 
-    {{-- Open Graph Description --}}
-    @hasSection('og_description')
-        <meta
-            property="og:description"
-            content="@yield('og_description')"
-        >
-    @endif
+    {{-- Robots --}}
+    <meta name="robots"
+          content="{{ seo()->get('robots', 'index,follow') }}">
 
+    {{-- Open Graph --}}
+    <meta property="og:type"
+          content="{{ seo()->get('og_type', 'website') }}">
 
-    {{-- Global Assets --}}
+    <meta property="og:url"
+          content="{{ url()->current() }}">
+
+    <meta property="og:site_name"
+          content="{{ config('app.name') }}">
+
+    <meta property="og:locale"
+          content="{{ app()->getLocale() === 'ar' ? 'ar_EG' : 'en_US' }}">
+
+    <meta property="og:title"
+          content="{{ seo()->get('og_title', seo()->get('meta_title', config('app.name'))) }}">
+
+    <meta property="og:description"
+          content="{{ seo()->get('og_description', seo()->get('meta_description', '')) }}">
+
+    <meta property="og:image"
+          content="{{ seo()->get('og_image', asset('assets/images/og-default.webp')) }}">
+
+    {{-- Twitter --}}
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="{{ seo()->get('twitter_title', seo()->get('meta_title', config('app.name'))) }}">
+
+    <meta name="twitter:description"
+          content="{{ seo()->get('twitter_description', seo()->get('meta_description', '')) }}">
+    <meta name="twitter:image"
+          content="{{ seo()->get('twitter_image', seo()->get('og_image', asset('assets/images/og-default.webp'))) }}">
+
+    {{-- Fonts --}}
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    {{-- Assets --}}
     @vite([
         'resources/css/app.css',
-        'resources/js/app.js'
+        'resources/js/app.js',
     ])
 
+    {{-- Structured Data --}}
+    @include('components.schema-partial', [
+        'schemas' => $schemas ?? [],
+    ])
 
-    {{-- Schema --}}
-    @stack('schema')
-
-
-    {{-- Page CSS --}}
+    {{-- Page Styles --}}
     @stack('css')
 
 </head>

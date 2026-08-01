@@ -2,6 +2,9 @@
 @push('css')
         @vite(['resources/css/pages/home/home-main.css'])
 @endpush
+@push('schema')
+
+@endpush
 @section('content')
 
     @include('sections.hero')

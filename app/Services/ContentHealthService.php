@@ -2,7 +2,11 @@
 
 namespace App\Services;
 
+use App\Enums\PageListEnum;
 use App\Models\Blog;
+use App\Models\HeroSection;
+use App\Models\ProfilePage;
+use App\Models\SeoDataPage;
 use App\Models\SeoSpecialty;
 use App\Models\Service;
 use App\Models\Skill;
@@ -25,6 +29,91 @@ class ContentHealthService
             ->values();
     }
 
+/*    private function pageIssues(): Collection
+    {
+        $seoPages = SeoDataPage::query()
+            ->whereIn('key', [
+                PageListEnum::HOME->value,
+                PageListEnum::ABOUT->value,
+                PageListEnum::BLOGS->value,
+            ])
+            ->get()
+            ->keyBy('key');
+        $pages = [
+            [
+                'type' => PageListEnum::HOME->label(),
+                'model' => $seoPages->get(PageListEnum::HOME->value),
+            ],
+            [
+                'type' => PageListEnum::ABOUT->label(),
+                'model' => $seoPages->get(PageListEnum::ABOUT->value),
+            ],
+            [
+                'type' => PageListEnum::BLOGS->label(),
+                'model' => $seoPages->get(PageListEnum::BLOGS->value),
+            ],
+        ];
+
+        return collect($pages)
+            ->map(function ($page) {
+
+                if (! $page['model']) {
+
+                    return [
+                        'type' => $page['type'],
+                        'id' => null,
+                        'title' => $page['type'],
+                        'slug' => null,
+
+                        'issues' => [
+                            [
+                                'category' => 'seo',
+                                'field' => 'seo_data_page',
+                                'locale' => null,
+                                'label' => 'SEO Data Missing',
+                                ],
+                        ],
+
+                        'issues_count' => 1,
+                        'seo_count' => 1,
+                        'translation_count' => 0,
+                        'media_count' => 0,
+                        'content_count' => 0,
+                    ];
+                }
+
+                $issues = [];
+
+
+                $this->checkTranslation(
+                    $page['model'],
+                    'meta_title',
+                    'Meta Title',
+                    'seo',
+                    $issues
+                );
+
+                $this->checkTranslation(
+                    $page['model'],
+                    'meta_description',
+                    'Meta Description',
+                    'seo',
+                    $issues
+                );
+
+                return $this->makeResult(
+                    type: $page['type'],
+                    model: $page['model'],
+                    issues: $issues,
+                );
+            })
+            ->filter()
+            ->values();
+    }*/
+
+
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -35,35 +124,51 @@ class ContentHealthService
     private function blogIssues(): Collection
     {
         return Blog::query()
+            ->with('seo')
             ->get()
             ->map(function (Blog $blog) {
 
                 $issues = [];
 
                 /*
-                 * SEO
-                 */
+                |--------------------------------------------------------------------------
+                | SEO
+                |--------------------------------------------------------------------------
+                */
 
-                $this->checkTranslation(
-                    $blog,
-                    'meta_title',
-                    'Meta Title',
-                    'seo',
-                    $issues
-                );
+                if (! $blog->seo) {
 
-                $this->checkTranslation(
-                    $blog,
-                    'meta_description',
-                    'Meta Description',
-                    'seo',
-                    $issues
-                );
+                    $issues[] = [
+                        'category' => 'seo',
+                        'field' => 'seo',
+                        'locale' => null,
+                        'label' => 'SEO Data Missing',
+                    ];
 
+                } else {
+
+                    $this->checkTranslation(
+                        $blog->seo,
+                        'meta_title',
+                        'Meta Title',
+                        'seo',
+                        $issues
+                    );
+
+                    $this->checkTranslation(
+                        $blog->seo,
+                        'meta_description',
+                        'Meta Description',
+                        'seo',
+                        $issues
+                    );
+                }
 
                 /*
-                 * Content / Translation
-                 */
+                |--------------------------------------------------------------------------
+                | Content / Translation
+                |--------------------------------------------------------------------------
+                */
 
                 $this->checkTranslation(
                     $blog,
@@ -89,10 +194,11 @@ class ContentHealthService
                     $issues
                 );
 
-
                 /*
-                 * Media
-                 */
+                |--------------------------------------------------------------------------
+                | Media
+                |--------------------------------------------------------------------------
+                */
 
                 if (blank($blog->featured_image)) {
 
@@ -104,17 +210,16 @@ class ContentHealthService
                     ];
                 }
 
-
                 return $this->makeResult(
                     type: 'Blog',
                     model: $blog,
                     issues: $issues,
                 );
+
             })
             ->filter()
             ->values();
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -125,35 +230,51 @@ class ContentHealthService
     private function serviceIssues(): Collection
     {
         return Service::query()
+            ->with('seo')
             ->get()
             ->map(function (Service $service) {
 
                 $issues = [];
 
                 /*
-                 * SEO
-                 */
+                |--------------------------------------------------------------------------
+                | SEO
+                |--------------------------------------------------------------------------
+                */
 
-                $this->checkTranslation(
-                    $service,
-                    'meta_title',
-                    'Meta Title',
-                    'seo',
-                    $issues
-                );
+                if (! $service->seo) {
 
-                $this->checkTranslation(
-                    $service,
-                    'meta_description',
-                    'Meta Description',
-                    'seo',
-                    $issues
-                );
+                    $issues[] = [
+                        'category' => 'seo',
+                        'field' => 'seo',
+                        'locale' => null,
+                        'label' => 'SEO Data Missing',
+                    ];
 
+                } else {
+
+                    $this->checkTranslation(
+                        $service->seo,
+                        'meta_title',
+                        'Meta Title',
+                        'seo',
+                        $issues
+                    );
+
+                    $this->checkTranslation(
+                        $service->seo,
+                        'meta_description',
+                        'Meta Description',
+                        'seo',
+                        $issues
+                    );
+                }
 
                 /*
-                 * Content / Translation
-                 */
+                |--------------------------------------------------------------------------
+                | Content / Translation
+                |--------------------------------------------------------------------------
+                */
 
                 $this->checkTranslation(
                     $service,
@@ -187,17 +308,16 @@ class ContentHealthService
                     $issues
                 );
 
-
                 return $this->makeResult(
                     type: 'Service',
                     model: $service,
                     issues: $issues,
                 );
+
             })
             ->filter()
             ->values();
     }
-
     /*
     |--------------------------------------------------------------------------
     | Skills
@@ -208,10 +328,10 @@ class ContentHealthService
     {
         return Skill::query()
 
-            // نفحص فقط Skills التي لها صفحة فعلية
             ->where('has_page', true)
 
             ->with([
+                'seo',
                 'page',
                 'features',
                 'metrics',
@@ -223,7 +343,6 @@ class ContentHealthService
             ->map(function (Skill $skill) {
 
                 $issues = [];
-
 
                 /*
                 |--------------------------------------------------------------------------
@@ -239,6 +358,39 @@ class ContentHealthService
                     $issues
                 );
 
+                /*
+                |--------------------------------------------------------------------------
+                | SEO
+                |--------------------------------------------------------------------------
+                */
+
+                if (! $skill->seo) {
+
+                    $issues[] = [
+                        'category' => 'seo',
+                        'field' => 'seo',
+                        'locale' => null,
+                        'label' => 'SEO Data Missing',
+                    ];
+
+                } else {
+
+                    $this->checkTranslation(
+                        $skill->seo,
+                        'meta_title',
+                        'Meta Title',
+                        'seo',
+                        $issues
+                    );
+
+                    $this->checkTranslation(
+                        $skill->seo,
+                        'meta_description',
+                        'Meta Description',
+                        'seo',
+                        $issues
+                    );
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -279,7 +431,6 @@ class ContentHealthService
                         $issues
                     );
 
-
                     /*
                     |--------------------------------------------------------------------------
                     | Section Titles
@@ -301,7 +452,6 @@ class ContentHealthService
                         'translation',
                         $issues
                     );
-
 
                     /*
                     |--------------------------------------------------------------------------
@@ -334,7 +484,6 @@ class ContentHealthService
                     );
                 }
 
-
                 /*
                 |--------------------------------------------------------------------------
                 | Relations
@@ -351,7 +500,6 @@ class ContentHealthService
                     ];
                 }
 
-
                 if ($skill->metrics->isEmpty()) {
 
                     $issues[] = [
@@ -361,7 +509,6 @@ class ContentHealthService
                         'label' => 'No Metrics',
                     ];
                 }
-
 
                 if ($skill->tools->isEmpty()) {
 
@@ -373,12 +520,12 @@ class ContentHealthService
                     ];
                 }
 
-
                 return $this->makeResult(
                     type: 'Skill',
                     model: $skill,
                     issues: $issues,
                 );
+
             })
 
             ->filter()
@@ -393,35 +540,51 @@ class ContentHealthService
     private function platformIssues(): Collection
     {
         return SeoSpecialty::query()
+            ->with('seo')
             ->get()
             ->map(function (SeoSpecialty $platform) {
 
                 $issues = [];
 
                 /*
-                 * SEO
-                 */
+                |--------------------------------------------------------------------------
+                | SEO
+                |--------------------------------------------------------------------------
+                */
 
-                $this->checkTranslation(
-                    $platform,
-                    'meta_title',
-                    'Meta Title',
-                    'seo',
-                    $issues
-                );
+                if (! $platform->seo) {
 
-                $this->checkTranslation(
-                    $platform,
-                    'meta_description',
-                    'Meta Description',
-                    'seo',
-                    $issues
-                );
+                    $issues[] = [
+                        'category' => 'seo',
+                        'field' => 'seo',
+                        'locale' => null,
+                        'label' => 'SEO Data Missing',
+                    ];
 
+                } else {
+
+                    $this->checkTranslation(
+                        $platform->seo,
+                        'meta_title',
+                        'Meta Title',
+                        'seo',
+                        $issues
+                    );
+
+                    $this->checkTranslation(
+                        $platform->seo,
+                        'meta_description',
+                        'Meta Description',
+                        'seo',
+                        $issues
+                    );
+                }
 
                 /*
-                 * Content / Translation
-                 */
+                |--------------------------------------------------------------------------
+                | Content / Translation
+                |--------------------------------------------------------------------------
+                */
 
                 $this->checkTranslation(
                     $platform,
@@ -439,17 +602,16 @@ class ContentHealthService
                     $issues
                 );
 
-
                 return $this->makeResult(
                     type: 'Platform',
                     model: $platform,
                     issues: $issues,
                 );
+
             })
             ->filter()
             ->values();
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -513,8 +675,9 @@ class ContentHealthService
 
             'title' => $this->getTitle($model),
 
-            'slug' => $model->slug ?? null,
-
+            'slug' => $model instanceof SeoDataPage
+                ? $model->key
+                : ($model->slug ?? null),
             'issues' => $issues,
 
             'issues_count' => count($issues),
@@ -545,32 +708,24 @@ class ContentHealthService
 
     private function getTitle(Model $model): string
     {
+        if ($model instanceof SeoDataPage) {
+            return PageListEnum::from($model->key)->label();
+        }
         foreach (['title', 'name'] as $field) {
 
-            if (! array_key_exists(
-                $field,
-                $model->getAttributes()
-            )) {
+            if (! array_key_exists($field, $model->getAttributes())) {
                 continue;
             }
 
             if (method_exists($model, 'getTranslation')) {
 
-                $value = $model->getTranslation(
-                    $field,
-                    'en',
-                    false
-                );
+                $value = $model->getTranslation($field, 'en', false);
 
                 if (filled($value)) {
                     return $value;
                 }
 
-                $value = $model->getTranslation(
-                    $field,
-                    'ar',
-                    false
-                );
+                $value = $model->getTranslation($field, 'ar', false);
 
                 if (filled($value)) {
                     return $value;
@@ -582,10 +737,8 @@ class ContentHealthService
             }
         }
 
-        return $model->slug
-            ?? '#'.$model->getKey();
+        return $model->slug ?? '#' . $model->getKey();
     }
-
 
     /*
     |--------------------------------------------------------------------------

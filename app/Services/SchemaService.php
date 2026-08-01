@@ -7,9 +7,147 @@ use App\Models\SeoSpecialty;
 use App\Models\Service;
 use App\Models\Skill;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class SchemaService
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Organization (المرجع الأساسي لكل الصفحات)
+    |--------------------------------------------------------------------------
+    */
+
+    public function organization(): array
+    {
+        $org = config('schema.organization');
+        $locale = app()->getLocale();
+
+        return $this->clean([
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+
+            '@id' => url('/') . '#organization',
+
+            'name' => $org['name'][$locale] ?? $org['name']['en'],
+
+            'legalName' => $org['legal_name'] ?? null,
+
+            'url' => url('/'),
+
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => asset($org['logo']),
+            ],
+
+            'image' => asset($org['logo']),
+
+            'sameAs' => array_values(array_filter($org['same_as'] ?? [])),
+
+            'contactPoint' => $this->clean([
+                '@type' => 'ContactPoint',
+                'telephone' => $org['phone'] ?? null,
+                'email' => $org['email'] ?? null,
+                'contactType' => 'customer service',
+                'availableLanguage' => ['ar', 'en'],
+            ]),
+        ]);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | WebSite (لصفحة الهوم بس - بيفعّل Sitelinks Search Box)
+    |--------------------------------------------------------------------------
+    */
+
+    public function website(): array
+    {
+        $locale = app()->getLocale();
+        $org = config('schema.organization');
+
+        return $this->clean([
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+
+            '@id' => url('/') . '#website',
+
+            'url' => url('/'),
+
+            'name' => $org['name'][$locale] ?? $org['name']['en'],
+
+            'inLanguage' => $locale,
+
+            'publisher' => [
+                '@id' => url('/') . '#organization',
+            ],
+
+            'potentialAction' => [
+                '@type' => 'SearchAction',
+                'target' => [
+                    '@type' => 'EntryPoint',
+                    'urlTemplate' => route('blogs.index', ['locale' => $locale]) . '?search={search_term_string}',
+                ],
+                'query-input' => 'required name=search_term_string',
+            ],
+        ]);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Home Page
+    |--------------------------------------------------------------------------
+    */
+
+    public function home($homePage = null): array
+    {
+        // homePage: أي موديل عندك (Setting / HomePage / ...) لو محمّل معاه faqs
+        $version = $homePage?->updated_at ?? now()->addHour();
+
+        return $this->remember('home', $version, function () use ($homePage) {
+            $schemas = [
+                $this->organization(),
+                $this->website(),
+            ];
+
+            return $this->withFaqs($homePage, $schemas);
+        });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | About Page
+    |--------------------------------------------------------------------------
+    */
+
+    public function about(): array
+    {
+        $locale = app()->getLocale();
+        $url = route('about', ['locale' => $locale]);
+
+        return $this->remember('about', now()->addHour(), function () use ($url, $locale) {
+            return [
+                $this->clean([
+                    '@context' => 'https://schema.org',
+                    '@type' => 'AboutPage',
+
+                    '@id' => $url . '#webpage',
+
+                    'url' => $url,
+
+                    'isPartOf' => ['@id' => url('/') . '#website'],
+
+                    'about' => ['@id' => url('/') . '#organization'],
+
+                    'inLanguage' => $locale,
+                ]),
+
+                $this->breadcrumb([
+                    ['name' => $this->homeLabel(), 'url' => $this->homeUrl()],
+                    ['name' => $this->aboutLabel(), 'url' => $url],
+                ]),
+            ];
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Skill
@@ -25,42 +163,37 @@ class SchemaService
             'skill' => $skill,
         ]);
 
-        $page = $skill->page;
+        return $this->remember("skill.{$skill->id}", $skill->updated_at, function () use ($skill, $url, $locale) {
 
-        $webPage = $this->clean([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
+            $page = $skill->page;
 
-            '@id' => $url . '#webpage',
+            $webPage = $this->clean([
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
 
-            'url' => $url,
+                '@id' => $url . '#webpage',
 
-            'name' =>
-                $page?->hero_title
-                    ?: $skill->title,
+                'url' => $url,
 
-            'description' =>
-                $page?->hero_description,
+                'name' => $this->text($page?->hero_title ?: $skill->title),
 
-            'inLanguage' => $locale,
-        ]);
+                'description' => $this->text($page?->hero_description),
 
-        return [
-            $webPage,
+                'isPartOf' => ['@id' => url('/') . '#website'],
 
-            $this->breadcrumb([
-                [
-                    'name' => $this->homeLabel(),
-                    'url' => $this->homeUrl(),
-                ],
-                [
-                    'name' => $skill->title,
-                    'url' => $url,
-                ],
-            ]),
-        ];
+                'inLanguage' => $locale,
+            ]);
+
+            return [
+                $webPage,
+
+                $this->breadcrumb([
+                    ['name' => $this->homeLabel(), 'url' => $this->homeUrl()],
+                    ['name' => $skill->title, 'url' => $url],
+                ]),
+            ];
+        });
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -77,61 +210,45 @@ class SchemaService
             'service' => $service,
         ]);
 
-        $serviceSchema = $this->clean([
-            '@context' => 'https://schema.org',
-            '@type' => 'Service',
+        return $this->remember("service.{$service->id}", $service->updated_at, function () use ($service, $url, $locale) {
 
-            '@id' => $url . '#service',
+            $serviceSchema = $this->clean([
+                '@context' => 'https://schema.org',
+                '@type' => 'Service',
 
-            'url' => $url,
+                '@id' => $url . '#service',
 
-            'name' => $service->title,
+                'url' => $url,
 
-            'description' =>
-                $service->meta_description
-                    ?: $service->hero_description
-                    ?: $service->short_description,
+                'name' => $this->text($service->title),
 
-            'serviceType' =>
-                $service->category?->name,
+                'description' => $this->text(
+                    $service->meta_description
+                        ?: $service->hero_description
+                        ?: $service->short_description
+                ),
 
-            'inLanguage' => $locale,
-        ]);
+                'serviceType' => $service->category?->name,
 
-        $schemas = [
-            $serviceSchema,
+                'provider' => ['@id' => url('/') . '#organization'],
 
-            $this->breadcrumb([
-                [
-                    'name' => $this->homeLabel(),
-                    'url' => $this->homeUrl(),
-                ],
-                [
-                    'name' => $service->title,
-                    'url' => $url,
-                ],
-            ]),
-        ];
+                'areaServed' => $service->area_served ?? null,
 
+                'inLanguage' => $locale,
+            ]);
 
-        /*
-        |--------------------------------------------------------------------------
-        | FAQ
-        |--------------------------------------------------------------------------
-        */
+            $schemas = [
+                $serviceSchema,
 
-        if (
-            $service->relationLoaded('faqs')
-            && $service->faqs->isNotEmpty()
-        ) {
-            $schemas[] = $this->faq(
-                $service->faqs
-            );
-        }
+                $this->breadcrumb([
+                    ['name' => $this->homeLabel(), 'url' => $this->homeUrl()],
+                    ['name' => $service->title, 'url' => $url],
+                ]),
+            ];
 
-        return $schemas;
+            return $this->withFaqs($service, $schemas);
+        });
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -148,61 +265,43 @@ class SchemaService
             'platform' => $platform->slug,
         ]);
 
-        $webPage = $this->clean([
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
+        return $this->remember("platform.{$platform->id}", $platform->updated_at, function () use ($platform, $url, $locale) {
 
-            '@id' => $url . '#webpage',
+            $webPage = $this->clean([
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
 
-            'url' => $url,
+                '@id' => $url . '#webpage',
 
-            'name' =>
-                $platform->meta_title
-                    ?: $platform->title
-                    ?: $platform->name,
+                'url' => $url,
 
-            'description' =>
-                $platform->meta_description
-                    ?: $platform->description
-                    ?: $platform->card_description,
+                'name' => $this->text($platform->meta_title ?: $platform->title ?: $platform->name),
 
-            'inLanguage' => $locale,
-        ]);
+                'description' => $this->text(
+                    $platform->meta_description
+                        ?: $platform->description
+                        ?: $platform->card_description
+                ),
 
-        $schemas = [
-            $webPage,
+                'about' => ['@id' => url('/') . '#organization'],
 
-            $this->breadcrumb([
-                [
-                    'name' => $this->homeLabel(),
-                    'url' => $this->homeUrl(),
-                ],
-                [
-                    'name' => $platform->name,
-                    'url' => $url,
-                ],
-            ]),
-        ];
+                'isPartOf' => ['@id' => url('/') . '#website'],
 
+                'inLanguage' => $locale,
+            ]);
 
-        /*
-        |--------------------------------------------------------------------------
-        | FAQ
-        |--------------------------------------------------------------------------
-        */
+            $schemas = [
+                $webPage,
 
-        if (
-            $platform->relationLoaded('faqs')
-            && $platform->faqs->isNotEmpty()
-        ) {
-            $schemas[] = $this->faq(
-                $platform->faqs
-            );
-        }
+                $this->breadcrumb([
+                    ['name' => $this->homeLabel(), 'url' => $this->homeUrl()],
+                    ['name' => $platform->name, 'url' => $url],
+                ]),
+            ];
 
-        return $schemas;
+            return $this->withFaqs($platform, $schemas);
+        });
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -214,160 +313,84 @@ class SchemaService
     {
         $locale = app()->getLocale();
 
-        $url = route('blogs.show', [
-            'locale' => $locale,
-            'slug' => $blog->slug,
-        ]);
+        $url = route('blogs.show', ['locale' => $locale, 'slug' => $blog->slug]);
+        $blogUrl = route('blogs.index', ['locale' => $locale]);
 
-        $blogUrl = route('blogs.index', [
-            'locale' => $locale,
-        ]);
+        return $this->remember("blog.{$blog->id}", $blog->updated_at, function () use ($blog, $url, $blogUrl, $locale) {
 
+            $article = [
+                '@context' => 'https://schema.org',
+                '@type' => 'BlogPosting',
 
-        /*
-        |--------------------------------------------------------------------------
-        | BlogPosting
-        |--------------------------------------------------------------------------
-        */
+                '@id' => $url . '#article',
 
-        $article = [
-            '@context' => 'https://schema.org',
-            '@type' => 'BlogPosting',
+                'url' => $url,
 
-            '@id' => $url . '#article',
+                'headline' => $this->text($blog->title, 110), // Google بيهمل الزيادة عن 110 حرف تقريبًا
 
-            'url' => $url,
+                'description' => $this->text($blog->meta_description ?: $blog->excerpt),
 
-            'headline' => $blog->title,
+                'datePublished' => $blog->published_at?->toIso8601String(),
 
-            'description' =>
-                $blog->meta_description
-                    ?: $blog->excerpt,
+                'dateModified' => $blog->updated_at?->toIso8601String(),
 
-            'datePublished' =>
-                $blog->published_at?->toIso8601String(),
+                'inLanguage' => $locale,
 
-            'dateModified' =>
-                $blog->updated_at?->toIso8601String(),
+                'isPartOf' => ['@id' => url('/') . '#website'],
 
-            'inLanguage' => $locale,
+                'publisher' => ['@id' => url('/') . '#organization'],
 
-            'mainEntityOfPage' => [
-                '@type' => 'WebPage',
-                '@id' => $url,
-            ],
-        ];
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Author
-        |--------------------------------------------------------------------------
-        */
-
-        if ($blog->author_name) {
-            $article['author'] = [
-                '@type' => 'Person',
-                'name' => $blog->author_name,
+                'mainEntityOfPage' => [
+                    '@type' => 'WebPage',
+                    '@id' => $url,
+                ],
             ];
-        }
 
+            if ($blog->author_name) {
+                $article['author'] = [
+                    '@type' => 'Person',
+                    'name' => $blog->author_name,
+                ];
+            } else {
+                // مفيش مؤلف محدد؟ ارجع لصاحب الموقع بدل ما تسيبها فاضية (مطلوب من جوجل)
+                $article['author'] = ['@id' => url('/') . '#organization'];
+            }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Image
-        |--------------------------------------------------------------------------
-        */
+            if ($blog->featured_image) {
+                $article['image'] = [
+                    '@type' => 'ImageObject',
+                    'url' => asset('storage/' . $blog->featured_image),
+                ];
+            }
 
-        if ($blog->featured_image) {
-            $article['image'] = asset(
-                'storage/' . $blog->featured_image
-            );
-        }
+            if ($blog->category) {
+                $article['articleSection'] = $blog->category->name;
+            }
 
+            if ($blog->relationLoaded('tags') && $blog->tags->isNotEmpty()) {
+                $article['keywords'] = $blog->tags->pluck('name')->implode(', ');
+            }
 
-        /*
-        |--------------------------------------------------------------------------
-        | Category
-        |--------------------------------------------------------------------------
-        */
+            $schemas = [
+                $this->clean($article),
 
-        if ($blog->category) {
-            $article['articleSection'] =
-                $blog->category->name;
-        }
+                $this->breadcrumb([
+                    ['name' => $this->homeLabel(), 'url' => $this->homeUrl()],
+                    ['name' => $this->blogLabel(), 'url' => $blogUrl],
+                    ['name' => $blog->title, 'url' => $url],
+                ]),
+            ];
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Keywords from Tags
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $blog->relationLoaded('tags')
-            && $blog->tags->isNotEmpty()
-        ) {
-            $article['keywords'] = $blog->tags
-                ->pluck('name')
-                ->implode(', ');
-        }
-
-
-        $schemas = [
-            $this->clean($article),
-
-            $this->breadcrumb([
-                [
-                    'name' => $this->homeLabel(),
-                    'url' => $this->homeUrl(),
-                ],
-                [
-                    'name' => $this->blogLabel(),
-                    'url' => $blogUrl,
-                ],
-                [
-                    'name' => $blog->title,
-                    'url' => $url,
-                ],
-            ]),
-        ];
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | FAQ
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            $blog->relationLoaded('faqs')
-            && $blog->faqs->isNotEmpty()
-        ) {
-            $schemas[] = $this->faq(
-                $blog->faqs
-            );
-        }
-
-
-        return $schemas;
+            return $this->withFaqs($blog, $schemas);
+        });
     }
 
-    public function blogIndex($blogs): array
+    public function blogIndex(Collection $blogs): array
     {
         $locale = app()->getLocale();
+        $url = route('blogs.index', ['locale' => $locale]);
 
-        $url = route('blogs.index', [
-            'locale' => $locale,
-        ]);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Collection Page
-        |--------------------------------------------------------------------------
-        */
-
-        $collectionPage = [
+        $collectionPage = $this->clean([
             '@context' => 'https://schema.org',
             '@type' => 'CollectionPage',
 
@@ -375,23 +398,16 @@ class SchemaService
 
             'url' => $url,
 
-            'name' => $locale === 'ar'
-                ? 'المدونة'
-                : 'Blog',
+            'name' => $locale === 'ar' ? 'المدونة' : 'Blog',
 
             'description' => $locale === 'ar'
                 ? 'استكشف أحدث المقالات والأدلة والنصائح المتخصصة.'
                 : 'Explore the latest articles, guides, and expert insights.',
 
+            'isPartOf' => ['@id' => url('/') . '#website'],
+
             'inLanguage' => $locale,
-        ];
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Articles List
-        |--------------------------------------------------------------------------
-        */
+        ]);
 
         $itemList = [
             '@context' => 'https://schema.org',
@@ -401,56 +417,41 @@ class SchemaService
 
             'numberOfItems' => $blogs->count(),
 
-            'itemListElement' => $blogs
-                ->values()
-                ->map(function ($blog, $index) use ($locale) {
-
-                    return [
-                        '@type' => 'ListItem',
-
-                        'position' => $index + 1,
-
-                        'url' => route('blogs.show', [
-                            'locale' => $locale,
-                            'slug' => $blog->slug,
-                        ]),
-
-                        'name' => $blog->title,
-                    ];
-
-                })
-                ->all(),
+            'itemListElement' => $blogs->values()->map(function ($blog, $index) use ($locale) {
+                return [
+                    '@type' => 'ListItem',
+                    'position' => $index + 1,
+                    'url' => route('blogs.show', ['locale' => $locale, 'slug' => $blog->slug]),
+                    'name' => $blog->title,
+                ];
+            })->all(),
         ];
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Breadcrumb
-        |--------------------------------------------------------------------------
-        */
 
         $breadcrumb = $this->breadcrumb([
-            [
-                'name' => $this->homeLabel(),
-                'url' => $this->homeUrl(),
-            ],
-
-            [
-                'name' => $locale === 'ar'
-                    ? 'المدونة'
-                    : 'Blog',
-
-                'url' => $url,
-            ],
+            ['name' => $this->homeLabel(), 'url' => $this->homeUrl()],
+            ['name' => $locale === 'ar' ? 'المدونة' : 'Blog', 'url' => $url],
         ]);
 
-
-        return [
-            $collectionPage,
-            $itemList,
-            $breadcrumb,
-        ];
+        // ملحوظة: قائمة المدونة نفسها بتتغير كل ما مقال جديد ينزل، فمش هنكاشها زي باقي الصفحات
+        return [$collectionPage, $itemList, $breadcrumb];
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | إضافة FAQ لأي array من الـ schemas لو الموديل عنده faqs محمّلة
+    |--------------------------------------------------------------------------
+    | استخدمها بدل ما تكرر نفس الـ if في كل method (service/skill/platform/home)
+    */
+
+    private function withFaqs($model, array $schemas): array
+    {
+        if ($model && $model->relationLoaded('faqs') && $model->faqs->isNotEmpty()) {
+            $schemas[] = $this->faq($model->faqs);
+        }
+
+        return $schemas;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | FAQ Schema
@@ -463,29 +464,18 @@ class SchemaService
             '@context' => 'https://schema.org',
             '@type' => 'FAQPage',
 
-            'mainEntity' => $faqs
-                ->map(function ($faq) {
-                    return [
-                        '@type' => 'Question',
-
-                        'name' => strip_tags(
-                            (string) $faq->question
-                        ),
-
-                        'acceptedAnswer' => [
-                            '@type' => 'Answer',
-
-                            'text' => strip_tags(
-                                (string) $faq->answer
-                            ),
-                        ],
-                    ];
-                })
-                ->values()
-                ->all(),
+            'mainEntity' => $faqs->map(function ($faq) {
+                return [
+                    '@type' => 'Question',
+                    'name' => $this->text($faq->question),
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $this->text($faq->answer),
+                    ],
+                ];
+            })->values()->all(),
         ];
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -499,41 +489,82 @@ class SchemaService
             '@context' => 'https://schema.org',
             '@type' => 'BreadcrumbList',
 
-            'itemListElement' => collect($items)
-                ->values()
-                ->map(function ($item, $index) {
-                    return [
-                        '@type' => 'ListItem',
-
-                        'position' => $index + 1,
-
-                        'name' => $item['name'],
-
-                        'item' => $item['url'],
-                    ];
-                })
-                ->all(),
+            'itemListElement' => collect($items)->values()->map(function ($item, $index) {
+                return [
+                    '@type' => 'ListItem',
+                    'position' => $index + 1,
+                    'name' => $item['name'],
+                    'item' => $item['url'],
+                ];
+            })->all(),
         ];
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Caching (نفس فكرة الـ Sitemap - مفتاح مرتبط بآخر تحديث للريكورد)
+    |--------------------------------------------------------------------------
+    */
+
+    private function remember(string $key, $ttlOrTimestamp, \Closure $callback): array
+    {
+        $locale = app()->getLocale();
+
+        // لو استخدمنا updated_at كـ "مفتاح تحديث" بدل TTL ثابت، الكاش هيتجدد تلقائي
+        // أي وقت الـ record يتغير، من غير ما تحتاج تعمل Cache::forget يدوي
+        $version = $ttlOrTimestamp instanceof \Carbon\Carbon
+            ? $ttlOrTimestamp->timestamp
+            : 'ttl';
+
+        $cacheKey = "schema.{$key}.{$locale}.{$version}";
+
+        $ttl = $ttlOrTimestamp instanceof \Carbon\Carbon
+            ? now()->addDay()
+            : $ttlOrTimestamp;
+
+        return Cache::remember($cacheKey, $ttl, $callback);
+    }
 
     /*
     |--------------------------------------------------------------------------
-    | Remove null / empty values
+    | Text sanitization (تنضيف موحّد لأي نص هيتحط في الـ schema)
+    |--------------------------------------------------------------------------
+    */
+
+    private function text(?string $value, ?int $limit = null): ?string
+    {
+        if (blank($value)) {
+            return null;
+        }
+
+        $clean = trim(strip_tags($value));
+
+        if ($limit && mb_strlen($clean) > $limit) {
+            $clean = mb_substr($clean, 0, $limit - 1) . '…';
+        }
+
+        return $clean ?: null;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Remove null / empty values (recursive)
     |--------------------------------------------------------------------------
     */
 
     private function clean(array $data): array
     {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = $this->clean($value);
+            }
+        }
+
         return array_filter(
             $data,
-            static fn ($value) =>
-                $value !== null
-                && $value !== ''
-                && $value !== []
+            static fn ($value) => $value !== null && $value !== '' && $value !== []
         );
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -543,24 +574,21 @@ class SchemaService
 
     private function homeUrl(): string
     {
-        return route('home', [
-            'locale' => app()->getLocale(),
-        ]);
+        return route('home', ['locale' => app()->getLocale()]);
     }
-
 
     private function homeLabel(): string
     {
-        return app()->isLocale('ar')
-            ? 'الرئيسية'
-            : 'Home';
+        return app()->isLocale('ar') ? 'الرئيسية' : 'Home';
     }
-
 
     private function blogLabel(): string
     {
-        return app()->isLocale('ar')
-            ? 'المدونة'
-            : 'Blog';
+        return app()->isLocale('ar') ? 'المدونة' : 'Blog';
+    }
+
+    private function aboutLabel(): string
+    {
+        return app()->isLocale('ar') ? 'من نحن' : 'About';
     }
 }

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@push('css')
+    @vite(['resources/css/pages/about/main.css'])
+@endpush
 @section('content')
     <div id="page-about" class="">
         <div class="spage">
@@ -133,15 +136,55 @@
                         </div>
                     </div>
                     @endif
-                    <div style="background:linear-gradient(135deg,var(--or-pale),var(--bg3));border:1px solid var(--or-border);border-radius:var(--r);padding:2.5rem;text-align:center">
-                        <div style="font-family:'Tajawal','Space Grotesk',sans-serif;font-size:24px;font-weight:900;color:var(--txt);margin-bottom:.75rem">
-                            <span class="">{{$profilePage?->cta_title}}</span>
+                    <div style="
+    background:linear-gradient(135deg,var(--or-pale),var(--bg3));
+    border:1px solid var(--or-border);
+    border-radius:18px;
+    padding:3rem 2rem;
+    text-align:center;
+    box-shadow:0 12px 35px rgba(15,23,42,.06);
+">
+                        <div style="
+        font-family:'Tajawal','Space Grotesk',sans-serif;
+        font-size:30px;
+        font-weight:900;
+        color:var(--txt);
+        margin-bottom:1rem;
+        line-height:1.35;
+    ">
+                            <span>{{ $profilePage?->cta_title }}</span>
                         </div>
-                        <p style="font-size:14px;color:var(--mu);max-width:500px;margin:0 auto 1.5rem">
-                            <span class="">{{$profilePage?->cta_description}}</span>
+
+                        <p style="
+        font-size:16px;
+        color:var(--mu);
+        max-width:650px;
+        margin:0 auto 2rem;
+        line-height:1.9;
+    ">
+                            <span>{{ $profilePage?->cta_description }}</span>
                         </p>
-                        <a class="btn-pr" href="{{$profilePage?->cta_url}}" target="_blank" style="display:inline-flex;text-decoration:none"><i data-lucide="message-circle"></i>
-                            <span class="">{{$profilePage?->cta_button}}</span></a>
+
+                        <a class="btn-pr"
+                           href="{{ $profilePage?->cta_url }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           style="
+            display:inline-flex;
+            align-items:center;
+            gap:.7rem;
+            text-decoration:none;
+            background:linear-gradient(135deg,var(--or),#7b3922);
+            color:#fff;
+            padding:15px 28px;
+            border-radius:14px;
+            font-weight:700;
+            box-shadow:0 8px 20px rgba(212,175,55,.35);
+            transition:.3s;
+       ">
+                            <i data-lucide="message-circle"></i>
+                            <span>{{ $profilePage?->cta_button }}</span>
+                        </a>
                     </div>
 
                 </div>
