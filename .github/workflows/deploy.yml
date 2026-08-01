@@ -6,9 +6,14 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       - name: Checkout repository
@@ -33,18 +38,35 @@ jobs:
           SSH_PORT: ${{ secrets.HOSTINGER_PORT }}
         run: |
           set -e
-
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-
-          printf "%s" "$SSH_PRIVATE_KEY" > ~/.ssh/hostinger
+          printf "%s\n" "$SSH_PRIVATE_KEY" > ~/.ssh/hostinger
           chmod 600 ~/.ssh/hostinger
 
+          success=0
           for i in 1 2 3; do
-            ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts && break
+            if ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null; then
+              success=1
+              break
+            fi
             echo "Retry ssh-keyscan ($i)..."
             sleep 3
           done
+
+          if [ "$success" -ne 1 ]; then
+            echo "::error::Failed to fetch SSH host key after 3 attempts"
+            exit 1
+          fi
+
+      - name: Enable maintenance mode
+        env:
+          SSH_HOST: ${{ secrets.HOSTINGER_HOST }}
+          SSH_PORT: ${{ secrets.HOSTINGER_PORT }}
+          SSH_USER: ${{ secrets.HOSTINGER_USER }}
+        run: |
+          ssh -i ~/.ssh/hostinger -p "$SSH_PORT" -o ConnectTimeout=15 \
+            "$SSH_USER@$SSH_HOST" \
+            "cd /home/u684683991/domains/mohamedyahiaseo.com/public_html && php artisan down --render='errors::503' --retry=60 || true"
 
       - name: Deploy files to Hostinger
         env:
@@ -52,10 +74,10 @@ jobs:
           SSH_PORT: ${{ secrets.HOSTINGER_PORT }}
           SSH_USER: ${{ secrets.HOSTINGER_USER }}
         run: |
-
+          success=0
           for i in 1 2 3; do
-
-            rsync -az \
+            if rsync -az \
+              --delete \
               --delay-updates \
               --exclude='.git/' \
               --exclude='.github/' \
@@ -63,13 +85,20 @@ jobs:
               --exclude='node_modules/' \
               --exclude='vendor/' \
               --exclude='storage/' \
-              -e "ssh -i ~/.ssh/hostinger -p $SSH_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=15" \
-              ./ "$SSH_USER@$SSH_HOST:/home/u684683991/domains/mohamedyahiaseo.com/public_html/" && break
-
+              --exclude='public/hot' \
+              -e "ssh -i ~/.ssh/hostinger -p $SSH_PORT -o ConnectTimeout=15" \
+              ./ "$SSH_USER@$SSH_HOST:/home/u684683991/domains/mohamedyahiaseo.com/public_html/"; then
+              success=1
+              break
+            fi
             echo "Retry rsync ($i)..."
             sleep 5
-
           done
+
+          if [ "$success" -ne 1 ]; then
+            echo "::error::rsync failed after 3 attempts"
+            exit 1
+          fi
 
       - name: Run Laravel deployment commands
         env:
@@ -77,22 +106,25 @@ jobs:
           SSH_PORT: ${{ secrets.HOSTINGER_PORT }}
           SSH_USER: ${{ secrets.HOSTINGER_USER }}
         run: |
-
           ssh \
             -i ~/.ssh/hostinger \
             -p "$SSH_PORT" \
-            -o StrictHostKeyChecking=no \
             -o ConnectTimeout=15 \
             "$SSH_USER@$SSH_HOST" << 'EOF'
-
           set -e
-
           cd /home/u684683991/domains/mohamedyahiaseo.com/public_html
 
-          until [ -f composer.json ]; do
-            echo "Waiting for composer.json..."
+          tries=0
+          until [ -f composer.json ] || [ "$tries" -ge 10 ]; do
+            echo "Waiting for composer.json... ($tries)"
             sleep 2
+            tries=$((tries + 1))
           done
+
+          if [ ! -f composer.json ]; then
+            echo "composer.json not found after waiting, aborting."
+            exit 1
+          fi
 
           composer install \
             --no-dev \
@@ -100,18 +132,29 @@ jobs:
             --no-interaction \
             --optimize-autoloader
 
+          # نضّف الكاش الأول قبل أي حاجة عشان الـ migration ما تشتغلش بإعدادات قديمة متخزنة
+          php artisan optimize:clear
+
           php artisan migrate --force
 
           php artisan storage:link || true
-
           chmod -R 775 storage bootstrap/cache || true
-
-          php artisan optimize:clear
 
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
+          php artisan event:cache || true
 
           php artisan queue:restart || true
-
           EOF
+
+      - name: Disable maintenance mode
+        if: always()
+        env:
+          SSH_HOST: ${{ secrets.HOSTINGER_HOST }}
+          SSH_PORT: ${{ secrets.HOSTINGER_PORT }}
+          SSH_USER: ${{ secrets.HOSTINGER_USER }}
+        run: |
+          ssh -i ~/.ssh/hostinger -p "$SSH_PORT" -o ConnectTimeout=15 \
+            "$SSH_USER@$SSH_HOST" \
+            "cd /home/u684683991/domains/mohamedyahiaseo.com/public_html && php artisan up || true"
