@@ -36,7 +36,9 @@ class CertificatesRelationManager extends RelationManager
                     ->required()->columnSpanFull(),
 
 
-
+                SortOrder::relationship(
+                    fn () => $this->getOwnerRecord()->certificates()
+                ),
 
                 Toggle::make('is_active')
                     ->label('Active')
@@ -49,6 +51,8 @@ class CertificatesRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('image')
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
 
                 ImageColumn::make('image')
@@ -56,12 +60,19 @@ class CertificatesRelationManager extends RelationManager
                     ->disk('public')
                     ->height(70),
 
+
+
+                TextColumn::make('sort_order')
+                    ->label('Order')
+                    ->sortable(),
+
                 IconColumn::make('is_active')
                     ->label('Active')
                     ->boolean(),
 
             ])
 
+            ->defaultSort('sort_order')
 
             ->headerActions([
                 CreateAction::make(),

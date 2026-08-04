@@ -18,6 +18,8 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
             $table->string('image');
+            $table->unsignedInteger('sort_order')->default(0);
+
             $table->boolean('is_active')->default(true);
 
             $table->timestamps();
