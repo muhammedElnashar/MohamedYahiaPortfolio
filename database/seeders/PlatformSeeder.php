@@ -76,7 +76,7 @@ class PlatformSeeder extends Seeder
 
             [
                 'name' => ['ar' => 'Magento', 'en' => 'Magento'],
-                'icon' => 'megento',
+                'icon' => 'magento',
                 'background_color' => '#F46F25',
                 'text_color' => '#ffffff',
             ],

@@ -40,6 +40,13 @@ class SeoMeta extends Model
     ];
     protected $casts = [
         'is_in_sitemap' => 'boolean',
+        'meta_title' => 'array',
+        'meta_description' => 'array',
+        'meta_keywords' => 'array',
+        'og_title' => 'array',
+        'og_description' => 'array',
+        'twitter_title' => 'array',
+        'twitter_description' => 'array',
     ];
 
     public function seoable(): MorphTo

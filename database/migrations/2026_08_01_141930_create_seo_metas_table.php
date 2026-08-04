@@ -26,11 +26,11 @@ return new class extends Migration
             |--------------------------------------------------------------------------
             */
 
-            $table->json('meta_title', 70)->nullable();
+            $table->json('meta_title')->nullable();
 
             $table->json('meta_description')->nullable();
 
-            $table->text('meta_keywords')->nullable();
+            $table->json('meta_keywords')->nullable();
 
             /*
             |--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ return new class extends Migration
             |--------------------------------------------------------------------------
             */
 
-            $table->json('og_title', 70)->nullable();
+            $table->json('og_title')->nullable();
 
             $table->json('og_description')->nullable();
 
@@ -58,7 +58,7 @@ return new class extends Migration
             |--------------------------------------------------------------------------
             */
 
-            $table->json('twitter_title', 70)->nullable();
+            $table->json('twitter_title')->nullable();
 
             $table->json('twitter_description')->nullable();
 
