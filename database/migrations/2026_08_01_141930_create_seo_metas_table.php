@@ -46,9 +46,9 @@ return new class extends Migration
             |--------------------------------------------------------------------------
             */
 
-            $table->string('og_title', 70)->nullable();
+            $table->json('og_title', 70)->nullable();
 
-            $table->text('og_description')->nullable();
+            $table->json('og_description')->nullable();
 
             $table->string('og_image')->nullable();
 
@@ -58,9 +58,9 @@ return new class extends Migration
             |--------------------------------------------------------------------------
             */
 
-            $table->string('twitter_title', 70)->nullable();
+            $table->json('twitter_title', 70)->nullable();
 
-            $table->text('twitter_description')->nullable();
+            $table->json('twitter_description')->nullable();
 
             $table->string('twitter_image')->nullable();
 
@@ -72,7 +72,7 @@ return new class extends Migration
             */
             $table->string('robots')->default('index,follow');
 
-            $table->string('focus_keyword')->nullable();
+            $table->json('focus_keyword')->nullable();
             $table->boolean('is_in_sitemap')->default(true);
 
             $table->timestamps();
