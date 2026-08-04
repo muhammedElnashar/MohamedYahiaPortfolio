@@ -26,7 +26,7 @@ class HomeFactItemSeeder extends Seeder
             ],
 
             [
-                'icon' => 'cursor-click',
+                'icon' => 'mouse-pointer-click',
                 'value' => '27%',
                 'label' => [
                     'en' => "click-through rate for Google's first result",
@@ -40,7 +40,7 @@ class HomeFactItemSeeder extends Seeder
             ],
 
             [
-                'icon' => 'currency-dollar',
+                'icon' => 'dollar-sign',
                 'value' => '14.6%',
                 'label' => [
                     'en'=> 'organic traffic conversion rate',
@@ -54,7 +54,7 @@ class HomeFactItemSeeder extends Seeder
             ],
 
             [
-                'icon' => 'brain',
+                'icon' => 'brain-circuit',
                 'value' => '40%',
                 'label' =>[
                      'en'=>'of AI Overview citations come from Top 3 results',
@@ -82,7 +82,7 @@ class HomeFactItemSeeder extends Seeder
             ],
 
             [
-                'icon' => 'chart-bar-2',
+                'icon' => 'bar-chart-2',
                 'value' => '53%',
                 'label' =>[
                     'en'=> 'of web traffic comes from organic search',
@@ -96,7 +96,7 @@ class HomeFactItemSeeder extends Seeder
             ],
 
             [
-                'icon' => 'refresh',
+                'icon' => 'repeat-2',
                 'value' => '5x',
                 'label' =>[
                     'en'=> 'higher deal close rate from SEO',
@@ -110,7 +110,7 @@ class HomeFactItemSeeder extends Seeder
             ],
 
             [
-                'icon' => 'globe',
+                'icon' => 'globe-2',
                 'value' => '9B+',
                 'label' =>[
                     'en'=> 'monthly searches on non-Google engines',

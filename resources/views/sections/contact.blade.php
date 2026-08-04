@@ -131,8 +131,7 @@
                             <div class="citem">
 
                                 <div class="citem-ico">
-                                    <i data-lucide="linkedin"></i>
-                                </div>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>                                </div>
 
                                 <div class="citem-content">
 
@@ -294,8 +293,7 @@
                                 rel="noopener noreferrer"
                                 aria-label="LinkedIn"
                             >
-                                <i data-lucide="linkedin"></i>
-                            </a>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>                            </a>
 
                         @endif
 
@@ -349,11 +347,9 @@
 
                             <div class="cform-title">
 
-                                <span class="ari">
-                                    أرسل رسالة مباشرة
-                                </span>
 
-                                <span class="eni">
+
+                                <span class="">
                                     Send a Direct Message
                                 </span>
 
@@ -361,11 +357,7 @@
 
                             <p class="cform-subtitle">
 
-                                <span class="ari">
-                                    أخبرني عن مشروعك وسأتواصل معك.
-                                </span>
-
-                                <span class="eni">
+                                <span class="">
                                     Tell me about your project and I'll get back to you.
                                 </span>
 
@@ -410,11 +402,9 @@
 
                             <label for="f-name">
 
-                                <span class="ari">
-                                    الاسم
-                                </span>
 
-                                <span class="eni">
+
+                                <span class="">
                                     Your Name
                                 </span>
 
@@ -450,11 +440,9 @@
 
                             <label for="f-email">
 
-                                <span class="ari">
-                                    البريد الإلكتروني
-                                </span>
 
-                                <span class="eni">
+
+                                <span class="">
                                     Email
                                 </span>
 
@@ -487,11 +475,8 @@
 
                             <label for="f-phone">
 
-                                <span class="ari">
-                                    رقم الهاتف
-                                </span>
 
-                                <span class="eni">
+                                <span class="">
                                     Phone
                                 </span>
 
@@ -524,11 +509,9 @@
 
                             <label for="f-site">
 
-                                <span class="ari">
-                                    الموقع الإلكتروني
-                                </span>
 
-                                <span class="eni">
+
+                                <span class="">
                                     Your Website
                                 </span>
 
@@ -561,11 +544,8 @@
 
                             <label for="f-svc">
 
-                                <span class="ari">
-                                    الخدمة
-                                </span>
 
-                                <span class="eni">
+                                <span class="">
                                     Service
                                 </span>
 
@@ -613,11 +593,9 @@
 
                             <label for="f-msg">
 
-                                <span class="ari">
-                                    الرسالة
-                                </span>
 
-                                <span class="eni">
+
+                                <span class="">
                                     Message
                                 </span>
 
@@ -655,11 +633,8 @@
 
                                 <i data-lucide="send"></i>
 
-                                <span class="ari">
-                                    إرسال الرسالة
-                                </span>
 
-                                <span class="eni">
+                                <span class="">
                                     Send Message
                                 </span>
 
