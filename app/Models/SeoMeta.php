@@ -37,6 +37,7 @@ class SeoMeta extends Model
         'og_description',
         'twitter_title',
         'twitter_description',
+        'focus_keyword',
     ];
     protected $casts = [
         'is_in_sitemap' => 'boolean',
@@ -47,6 +48,7 @@ class SeoMeta extends Model
         'og_description' => 'array',
         'twitter_title' => 'array',
         'twitter_description' => 'array',
+        'focus_keyword' => 'array',
     ];
 
     public function seoable(): MorphTo
